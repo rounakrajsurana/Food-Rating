@@ -7,10 +7,12 @@
     n[:articles].each do |a|
 	title = a.children[1].search('span').children[0]
 	url = a.children[1].search('span')[0].parent.attr('href')
-
 %>
-<%= title %><br>
-<%= url %><br>
+
+	<br>
+
+	<a href="https://news.google.com/?hl=en-US&gl=US&ceid=US:eni<%= url %>"><%= title%></a>
+	<br>
 <% end %>
 	<br>
 ===================================================================
