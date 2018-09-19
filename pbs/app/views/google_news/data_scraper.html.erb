@@ -1,0 +1,21 @@
+<% @news.each do |n| %>
+	<img src="<%= n[:figure].search('img').attr('src') %>"></img>
+<br>
+----------
+<br>
+<% 
+    n[:articles].each do |a|
+	title = a.children[1].search('span').children[0]
+	url = a.children[1].search('span')[0].parent.attr('href')
+%>
+
+	<br>
+
+	<a href="https://news.google.com/?hl=en-US&gl=US&ceid=US:eni<%= url %>"><%= title%></a>
+	<br>
+<% end %>
+	<br>
+===================================================================
+<br>
+<% end %>
+
