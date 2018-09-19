@@ -1,0 +1,118 @@
+<!-- searching -->
+<div align="center">
+ <%= form_tag("", method: "get") do %>
+   <div class="search_form_row">
+	  	<label><h2>Search for a keyword</h2></label>  
+	   	<%= text_field_tag :keyword, params[:keyword], placeholder: 'Search for a key word', type: :search %>
+	     
+	   	<%= submit_tag 'Search' %>	
+	   	<%= submit_tag 'clear' %>
+
+	   	<% end %>     	
+    </div>
+</div>
+
+
+<!-- printing the quotations -->
+<h2>Quotations</h2>
+      	 
+<ul>
+
+	<% for quotation in @quotations %>
+	<li><%= h quotation.author_name %>: <%= h quotation.quote %> -- <%= h quotation.category %>
+		<button>
+		<%= link_to 'Kill', :action => "killed",  :newvar => quotation.id  %>
+		</button>
+		
+	</li>    
+	<% end %>
+
+	<br/>
+	<button>
+	<% if params[:sort_by] == "date" %>
+		<%= link_to "Sort by category", :action => :quotations, :sort_by => :category %>
+	<% else %>
+		<%= link_to "Sort by date", :action => :quotations, :sort_by => :date %>
+	<% end %>
+	</button>
+</ul>
+
+<!-- sorting  -->
+
+
+<!-- to delete cookies -->
+	<center>
+		<button>
+			<%= link_to 'Erase my Personalization', :action => "killed", :del => 'yes' %> 
+		</button>
+	</center>
+<hr/>
+
+<!-- exporting quotes to xml and json  -->
+<h3>Export to xml and json </h3>
+	<button>
+	<%= link_to 'JSON export', export_json_path, :target => :_blank %>
+    </button>
+    <button>
+    <%= link_to 'XML export', export_xml_path, :target => :_blank %>
+    </button>
+<hr/>
+<br/>
+
+ 
+
+<h2>New quotation</h2>
+	<%= form_for @quotation, :url => { :action => :quotations } do |form| %>
+	
+
+	<fieldset>
+		<legend>Enter details</legend>
+
+			<div class="form_row">
+				<%= form.label :author_name %>
+				<%= form.text_field :author_name, :size => 20, :maxlength => 40 %>
+			</div>
+<!-- text field for drop down -->
+			<div class="form-control">
+				<%= form.label :category %>
+				<%= form.text_field :category, list: 'cate-gory' %>
+				<datalist id="cate-gory">
+					<% for cat in @categories %>
+					<option value="<%= cat %>"></option>
+					<% end %>
+				</datalist>
+			</div>
+
+			<div class="form_row">
+				<%= form.label :quote %>
+				<%= form.text_area :quote, :rows => 2, :cols => 40, :maxlength => 500 %>
+			</div>	
+			
+			<p>
+				<div class="actions">
+					<%= form.submit 'Create' %>
+				</div>
+			</p>
+			<% end %>
+
+	</fieldset>
+	
+	<br>
+
+
+	
+	<!--importing quotes from differnt servers  -->
+	<h2>Import Quotations from other server</h2>
+	<%= form_tag({action: :import_quotations}, multipart: true ) do %>
+	  <fieldset>
+	    <legend>Import Quotations</legend>
+	    <div class="import_form_row">
+	     
+	      <%= file_field_tag 'upload' %>
+	      <%= submit_tag("Import XML") %>
+	    </div>
+	  </fieldset>
+	<% end %>
+
+
+

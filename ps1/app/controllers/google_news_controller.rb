@@ -5,6 +5,7 @@ def data_scraper
 	require 'open-uri'
 	#require 'pry'
 	head = Nokogiri::HTML(open('https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen', proxy: URI.parse("http://192.41.170.23:3128") ) )
+	# head = Nokogiri::HTML(open('https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen', proxy: URI.parse("http://192.41.170.23:3128") ) )
 	@main = head.search('main')
 	@fig = @main[0].search('figure')
 	@news = []
