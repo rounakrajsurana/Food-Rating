@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+<style>
+.w3-table td, .w3-table th {
+    padding: 8px 8px;
+    padding-left: 8px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 180px; 
+    #margin: 0px auto;	
+#margin-left: auto;
+#margin-right: auto;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+</style>
+ 
+ <h2>Problem Set II Basics</h2>
+<!--<h2> <a href="https://validator.w3.org.">Html Validator</a>
+</h2>-->
+
+<table class="w3-table">
+	<tr>
+		<th>Problems</th>
+		<th>Solutions</th>
+	</tr>
+	<tr>
+		<td>
+	<h3>
+	<%= link_to 'Quotations ', quotations_path %>
+	</h3>
+	
+		</td>
+		<td>
+                        <%= link_to 'Go to solution', solnp21_path %>
+                </td>
+	</tr>
+	<tr>
+		<td>
+			<h3>
+				<a href='/ps2_db_session.txt'>Open Logfile</a>
+			</h3>
+		</td>
+		<td>
+			<%= link_to 'Go to solution', solnp22_path %>
+		</td>
+		<h3><span style="background-color: #87CEFA">
+                  <%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc=http%3A%2F%2Fweb5.cs.ait.ac.th%2F") %>
+	</tr>
+</table>
+
+<br>
+
+

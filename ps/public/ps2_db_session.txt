@@ -1,0 +1,321 @@
+********* QUERY **********
+DROP VIEW stocks_i_like;
+**************************
+
+DROP VIEW
+********* QUERY **********
+DROP TABLE my_stocks CASCADE;
+**************************
+
+DROP TABLE
+********* QUERY **********
+DROP TABLE stock_prices CASCADE;
+**************************
+
+DROP TABLE
+********* QUERY **********
+DROP TABLE newly_acquired_stocks CASCADE;
+**************************
+
+DROP TABLE
+********* QUERY **********
+create table my_stocks (
+symbol varchar(20) not null,
+n_shares integer not null,
+date_acquired date not null
+);
+**************************
+
+CREATE TABLE
+********* QUERY **********
+COPY my_stocks FROM '/home/web05/ae/ps2_myFavStock_imp.txt' (FORMAT TEXT, DELIMITER E'\x9');
+**************************
+
+COPY 5
+********* QUERY **********
+select * from my_stocks;
+**************************
+
+ symbol | n_shares | date_acquired 
+--------+----------+---------------
+ AMAT   |     5000 | 2018-06-09
+ ALXN   |     6000 | 2018-07-09
+ FDC    |     7000 | 2018-08-09
+ STZ    |     8000 | 2018-09-09
+ OC     |     9000 | 2018-10-09
+(5 rows)
+
+********* QUERY **********
+create table stock_prices (
+symbol varchar(20) not null,
+quote_date date not null,
+price integer not null
+);
+**************************
+
+CREATE TABLE
+********* QUERY **********
+INSERT INTO stock_prices
+select symbol, NOW() as quote_date, 31.415 as price from my_stocks;
+**************************
+
+INSERT 0 5
+********* QUERY **********
+select * from stock_prices;
+**************************
+
+ symbol | quote_date | price 
+--------+------------+-------
+ AMAT   | 2018-09-14 |    31
+ ALXN   | 2018-09-14 |    31
+ FDC    | 2018-09-14 |    31
+ STZ    | 2018-09-14 |    31
+ OC     | 2018-09-14 |    31
+(5 rows)
+
+********* QUERY **********
+create table newly_acquired_stocks (
+symbol varchar(20) not null,
+n_shares integer not null,
+date_acquired date not null
+);
+**************************
+
+CREATE TABLE
+********* QUERY **********
+INSERT INTO newly_acquired_stocks
+select symbol, n_shares, date_acquired from my_stocks WHERE symbol NOT LIKE 'A%';
+**************************
+
+INSERT 0 3
+********* QUERY **********
+select * from newly_acquired_stocks;
+**************************
+
+ symbol | n_shares | date_acquired 
+--------+----------+---------------
+ FDC    |     7000 | 2018-08-09
+ STZ    |     8000 | 2018-09-09
+ OC     |     9000 | 2018-10-09
+(3 rows)
+
+********* QUERY **********
+select * from my_stocks NATURAL JOIN stock_prices;
+**************************
+
+ symbol | n_shares | date_acquired | quote_date | price 
+--------+----------+---------------+------------+-------
+ AMAT   |     5000 | 2018-06-09    | 2018-09-14 |    31
+ ALXN   |     6000 | 2018-07-09    | 2018-09-14 |    31
+ FDC    |     7000 | 2018-08-09    | 2018-09-14 |    31
+ STZ    |     8000 | 2018-09-09    | 2018-09-14 |    31
+ OC     |     9000 | 2018-10-09    | 2018-09-14 |    31
+(5 rows)
+
+********* QUERY **********
+INSERT INTO my_stocks values ('SDIVX', 1000, '11/09/2018');
+**************************
+
+INSERT 0 1
+********* QUERY **********
+SELECT * FROM my_stocks NATURAL LEFT OUTER JOIN stock_prices;
+**************************
+
+ symbol | n_shares | date_acquired | quote_date | price 
+--------+----------+---------------+------------+-------
+ AMAT   |     5000 | 2018-06-09    | 2018-09-14 |    31
+ ALXN   |     6000 | 2018-07-09    | 2018-09-14 |    31
+ FDC    |     7000 | 2018-08-09    | 2018-09-14 |    31
+ STZ    |     8000 | 2018-09-09    | 2018-09-14 |    31
+ OC     |     9000 | 2018-10-09    | 2018-09-14 |    31
+ SDIVX  |     1000 | 2018-11-09    |            |      
+(6 rows)
+
+********* QUERY **********
+CREATE OR REPLACE FUNCTION trade_cal(in_str VARCHAR)
+RETURNS NUMERIC
+AS $$
+DECLARE
+out_str NUMERIC DEFAULT 0;
+stk_cal NUMERIC DEFAULT 0;
+BEGIN
+out_str :=0;
+FOR i IN 1..LENGTH(in_str) LOOP
+stk_cal := ASCII(SUBSTR(in_str,i,1));
+out_str := out_str + stk_cal;
+END LOOP;
+RETURN out_str;
+END;
+$$ LANGUAGE plpgsql;
+**************************
+
+CREATE FUNCTION
+********* QUERY **********
+select trade_cal('IBM');
+**************************
+
+ trade_cal 
+-----------
+       216
+(1 row)
+
+********* QUERY **********
+UPDATE stock_prices SET price = trade_cal(symbol);
+**************************
+
+UPDATE 5
+********* QUERY **********
+SELECT * FROM stock_prices;
+**************************
+
+ symbol | quote_date | price 
+--------+------------+-------
+ AMAT   | 2018-09-14 |   291
+ ALXN   | 2018-09-14 |   307
+ FDC    | 2018-09-14 |   205
+ STZ    | 2018-09-14 |   257
+ OC     | 2018-09-14 |   146
+(5 rows)
+
+********* QUERY **********
+CREATE OR REPLACE Function portfolio_value ()
+RETURNS NUMERIC
+AS $$
+DECLARE
+c1 CURSOR FOR SELECT * FROM my_stocks NATURAL LEFT OUTER JOIN stock_prices;
+total_val NUMERIC DEFAULT 0;
+stk_val NUMERIC DEFAULT 0;
+stk RECORD;
+BEGIN
+OPEN c1;
+LOOP
+FETCH c1 INTO stk;
+IF stk IS NOT NULL THEN
+IF stk.price>0 THEN
+stk_val := (stk.n_shares * stk.price);
+total_val := total_val + stk_val;
+ELSE
+stk_val := 0;
+END IF;
+RAISE NOTICE 'Value of: % = %', stk.symbol,stk_val;
+END IF;
+EXIT WHEN NOT FOUND;
+END LOOP;
+CLOSE c1;
+RETURN total_val;
+END;
+$$ LANGUAGE plpgsql;
+**************************
+
+CREATE FUNCTION
+********* QUERY **********
+select portfolio_value ();
+**************************
+
+ portfolio_value 
+-----------------
+         8102000
+(1 row)
+
+********* QUERY **********
+SELECT AVG(price) FROM stock_prices ;
+**************************
+
+         avg          
+----------------------
+ 241.2000000000000000
+(1 row)
+
+********* QUERY **********
+SELECT symbol, n_shares, NOW() from my_stocks NATURAL JOIN stock_prices, (SELECT AVG(price) as avgp FROM stock_prices) as avg_price WHERE stock_prices.price > avg_price.avgp;
+**************************
+
+ symbol | n_shares |              now              
+--------+----------+-------------------------------
+ AMAT   |     5000 | 2018-09-14 16:15:15.816394+00
+ ALXN   |     6000 | 2018-09-14 16:15:15.816394+00
+ STZ    |     8000 | 2018-09-14 16:15:15.816394+00
+(3 rows)
+
+********* QUERY **********
+INSERT INTO my_stocks
+select symbol, n_shares, NOW() from my_stocks NATURAL JOIN stock_prices, (SELECT AVG(price) as avgp FROM stock_prices) as avg_price WHERE stock_prices.price > avg_price.avgp;
+**************************
+
+INSERT 0 3
+********* QUERY **********
+select * FROM my_stocks ;
+**************************
+
+ symbol | n_shares | date_acquired 
+--------+----------+---------------
+ AMAT   |     5000 | 2018-06-09
+ ALXN   |     6000 | 2018-07-09
+ FDC    |     7000 | 2018-08-09
+ STZ    |     8000 | 2018-09-09
+ OC     |     9000 | 2018-10-09
+ SDIVX  |     1000 | 2018-11-09
+ AMAT   |     5000 | 2018-09-14
+ ALXN   |     6000 | 2018-09-14
+ STZ    |     8000 | 2018-09-14
+(9 rows)
+
+********* QUERY **********
+SELECT * FROM my_stocks NATURAL LEFT OUTER JOIN stock_prices;
+**************************
+
+ symbol | n_shares | date_acquired | quote_date | price 
+--------+----------+---------------+------------+-------
+ AMAT   |     5000 | 2018-06-09    | 2018-09-14 |   291
+ ALXN   |     6000 | 2018-07-09    | 2018-09-14 |   307
+ FDC    |     7000 | 2018-08-09    | 2018-09-14 |   205
+ STZ    |     8000 | 2018-09-09    | 2018-09-14 |   257
+ OC     |     9000 | 2018-10-09    | 2018-09-14 |   146
+ SDIVX  |     1000 | 2018-11-09    |            |      
+ AMAT   |     5000 | 2018-09-14    | 2018-09-14 |   291
+ ALXN   |     6000 | 2018-09-14    | 2018-09-14 |   307
+ STZ    |     8000 | 2018-09-14    | 2018-09-14 |   257
+(9 rows)
+
+********* QUERY **********
+SELECT my_stocks.symbol, SUM(n_shares) total_shares_held, MAX(date_acquired) last_acquired from my_stocks group by my_stocks.symbol;
+**************************
+
+ symbol | total_shares_held | last_acquired 
+--------+-------------------+---------------
+ STZ    |             16000 | 2018-09-14
+ OC     |              9000 | 2018-10-09
+ FDC    |              7000 | 2018-08-09
+ AMAT   |             10000 | 2018-09-14
+ SDIVX  |              1000 | 2018-11-09
+ ALXN   |             12000 | 2018-09-14
+(6 rows)
+
+********* QUERY **********
+SELECT my_stocks.symbol, SUM(n_shares) total_shares_held, MAX(date_acquired) last_acquired, stock_prices.price, (SUM(n_shares)*stock_prices.price) total_value_held FROM my_stocks NATURAL LEFT OUTER JOIN stock_prices group by my_stocks.symbol, stock_prices.price having COUNT(symbol) > 1;
+**************************
+
+ symbol | total_shares_held | last_acquired | price | total_value_held 
+--------+-------------------+---------------+-------+------------------
+ STZ    |             16000 | 2018-09-14    |   257 |          4112000
+ ALXN   |             12000 | 2018-09-14    |   307 |          3684000
+ AMAT   |             10000 | 2018-09-14    |   291 |          2910000
+(3 rows)
+
+********* QUERY **********
+CREATE VIEW stocks_i_like AS
+SELECT my_stocks.symbol, SUM(n_shares) total_shares_held, MAX(date_acquired) last_acquired, stock_prices.price, (SUM(n_shares)*stock_prices.price) total_value_held FROM my_stocks NATURAL LEFT OUTER JOIN stock_prices group by my_stocks.symbol, stock_prices.price having COUNT(symbol) > 1;
+**************************
+
+CREATE VIEW
+********* QUERY **********
+select * from stocks_i_like;
+**************************
+
+ symbol | total_shares_held | last_acquired | price | total_value_held 
+--------+-------------------+---------------+-------+------------------
+ STZ    |             16000 | 2018-09-14    |   257 |          4112000
+ ALXN   |             12000 | 2018-09-14    |   307 |          3684000
+ AMAT   |             10000 | 2018-09-14    |   291 |          2910000
+(3 rows)
+

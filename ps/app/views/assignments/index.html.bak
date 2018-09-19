@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Group 5 </h1>
+<h2>Assignment 1 </h2>
+<a href="https://validator.w3.org.">Html Validator</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.name %></td>
+        <td><%= link_to 'Show', assignment %></td>
+        <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
+        <td><%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Assignment', new_assignment_path %>

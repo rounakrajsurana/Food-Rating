@@ -1,0 +1,80 @@
+<p>
+<br>7.
+<br>Enter to database with keeping all session traces into a logfile
+<br>psql ps2 -L ps2_db_session.txt
+<br>Create table my_stocks
+<br>Import data from a file to PostgreSQL
+<br>COPY my_stocks FROM '/home/st120546/ps2/myFavStock_imp.txt' (FORMAT TEXT, DELIMITER E'\x9')
+<br><br>References:
+<br>https://stackoverflow.com/questions/21368502/logging-a-postgresql-session-in-text-file
+<br>https://www.cnbc.com/2017/12/27/here-are-5-top-stock-picks-from-wall-street-analysts-heading-into-2018.html
+<br>https://www.postgresql.org/docs/current/static/sql-copy.html
+<br>https://dba.stackexchange.com/questions/36444/postgres-copy-data-with-xyy-as-plain-string-instead-of-interpreting-as-encoded
+<br>http://www.asciitable.com/
+<br>https://stackoverflow.com/questions/2987433/how-to-import-csv-file-data-into-a-postgresql-table
+<br>https://stackoverflow.com/questions/28568747/using-ascii-31-field-separator-character-as-postgresql-copy-delimiter
+</p>
+<p>
+<br>8.
+<br>Create table stock_prices
+<br>create table newly_acquired_stocks and fill data using WHERE filtering from my_stocks 
+<br><br>References:
+<br>https://cis.ait.ac.th/course_offerings/1/lap-companion
+</p>
+<p>
+<br>9.
+<br>prepare data by using NATURAL JOIN
+<br><br>References:
+<br>https://www.postgresql.org/docs/10/static/queries-table-expressions.html
+</p>
+<p>
+<br>10.
+<br>INSERT new Stock symbol INTO my_stocks
+<br>Prepare data by using NATURAL LEFT OUTER JOIN
+</p>
+<p>
+<br>11.
+<br>CREATE plpgsql FUNCTION for calcucate stock values by summary the ASCII value of each characters which get stock symbol as only 1 argument
+<br>CREATE plpgsql FUNCTION for aggregate of whole portfolio value (get no argument) by using CURSOR LOOP ON the table from NATURAL OUTER JOIN<br><br>References:  
+<br>https://www.techonthenet.com/oracle/loops/cursor_for.php
+<br>http://www.dba-oracle.com/t_adv_plsql_explicit_for_loop.htm
+<br>https://stackoverflow.com/questions/24375773/replace-each-letter-with-its-ascii-code-in-a-string-in-pl-sql
+<br>http://www.postgresqltutorial.com/plpgsql-cursor/
+<br>https://stackoverflow.com/questions/22339628/cursor-based-records-in-postgresql
+<br>http://www.postgresonline.com/journal/archives/33-New-Features-for-PostgreSQL-Stored-Functions.html
+<br>http://etutorials.org/SQL/Postgresql/Part+II+Programming+with+PostgreSQL/Chapter+7.+PLpgSQL/Cursors/
+</p>
+<p>
+<br>12.
+<br>Double stock data which has price more than average price INTO my_stocks;
+<br>Query a report using GROUP BY to show total shares held and total value of each stock symbol
+<br>Filter report using HAVING to show only the stock which have been doubled earlier
+</p>
+<p>
+<br>13.
+<br>Use the CREATE VIEW command to show report name stocks_i_like;
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

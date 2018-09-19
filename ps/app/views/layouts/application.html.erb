@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PS web05</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!-- <center> -->
+    <h1><font color='#4169E1'><center> GROUP WEB05</center></font></h1>
+    <br>  <br>
+            <%= yield %>
+            <br>
+  	  
+  		  </span>
+     
+    <!-- </center> -->
+	  <%= #link_to "RSS feed", params.merge(:format => :rss), :class => "feed_link" 
+  %>
+  </body>
+</html>
