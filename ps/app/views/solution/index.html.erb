@@ -1,42 +1,15 @@
 <p id="notice"><%= notice %></p>
-<style>
-.w3-table td, .w3-table th {
-    padding: 8px 8px;
-    padding-left: 8px;
-    display: table-cell;
-    text-align: left;
-    vertical-align: top;
-    border: 1px solid black;
-}
-
-table {
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 180px; 
-    #margin: 0px auto;	
-#margin-left: auto;
-#margin-right: auto;
-}
-
-table, td, th {
-    border: 1px solid black;
-}
-</style>
- 
- <h2>Problem Set 1. Basics</h2>
-<!--<h2> <a href="https://validator.w3.org.">Html Validator</a>
-</h2>-->
-
-<table class="w3-table">
+<h1>PROBLEM SET1 Basics</h1>
+<table id='itable'>
 	<tr>
 		<th>Problems</th>
 		<th>Solutions</th>
 	</tr>
 	<tr>
 		<td>
-	<h3>
+	<b>
 	<%= link_to 'Divided by Zero', zero_exception_path %>
-	</h3>
+	</b>
 		</td>
 		<td>
                         <%= link_to 'Go to solution', soln1_path %>
@@ -44,19 +17,15 @@ table, td, th {
 	</tr>
 	<tr>
 		<td>
-			<h3>
+			<b>
 			<%= link_to 'Google News', googlenews_path %>
-			</h3>
+			</b>
 		</td>
 		<td>
 			<%= link_to 'Go to solution', soln2_path %>
 		</td>
-		<h3><span style="background-color: #87CEFA">
-                  <%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc=http%3A%2F%2Fweb5.cs.ait.ac.th%2F") %>
 	</tr>
 </table>
 
-<%= #link_to "RSS feed", params.merge(:format => :rss), :class => "feed_link"
-  %>
 <br>
 
