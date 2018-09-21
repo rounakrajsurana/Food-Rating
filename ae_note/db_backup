@@ -1,0 +1,3 @@
+# m  h  dom mon dow user     command
+  30 3  *   *   *   web05 pg_dump ps1_development > /home/web05/ps/public/last_db_dump.sql
+
