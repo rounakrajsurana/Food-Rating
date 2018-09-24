@@ -1,0 +1,1181 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
+CREATE ROLE web05;
+ALTER ROLE web05 WITH SUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS;
+
+
+
+
+
+
+--
+-- Database creation
+--
+
+CREATE DATABASE ps1_development WITH TEMPLATE = template0 OWNER = web05;
+CREATE DATABASE ps1_production WITH TEMPLATE = template0 OWNER = web05;
+CREATE DATABASE ps1_test WITH TEMPLATE = template0 OWNER = web05;
+REVOKE CONNECT,TEMPORARY ON DATABASE template1 FROM PUBLIC;
+GRANT CONNECT ON DATABASE template1 TO PUBLIC;
+CREATE DATABASE testing_development WITH TEMPLATE = template0 OWNER = web05;
+CREATE DATABASE testing_test WITH TEMPLATE = template0 OWNER = web05;
+
+
+\connect postgres
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect ps1_development
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: portfolio_value(); Type: FUNCTION; Schema: public; Owner: web05
+--
+
+CREATE FUNCTION public.portfolio_value() RETURNS numeric
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+c1 CURSOR FOR SELECT * FROM my_stocks NATURAL LEFT OUTER JOIN stock_prices;
+total_val NUMERIC DEFAULT 0;
+stk_val NUMERIC DEFAULT 0;
+stk RECORD;
+BEGIN
+OPEN c1;
+LOOP
+FETCH c1 INTO stk;
+IF stk IS NOT NULL THEN
+IF stk.price>0 THEN
+stk_val := (stk.n_shares * stk.price);
+total_val := total_val + stk_val;
+ELSE
+stk_val := 0;
+END IF;
+RAISE NOTICE 'Value of: % = %', stk.symbol,stk_val;
+END IF;
+EXIT WHEN NOT FOUND;
+END LOOP;
+CLOSE c1;
+RETURN total_val;
+END;
+$$;
+
+
+ALTER FUNCTION public.portfolio_value() OWNER TO web05;
+
+--
+-- Name: trade_cal(character varying); Type: FUNCTION; Schema: public; Owner: web05
+--
+
+CREATE FUNCTION public.trade_cal(in_str character varying) RETURNS numeric
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+out_str NUMERIC DEFAULT 0;
+stk_cal NUMERIC DEFAULT 0;
+BEGIN
+out_str :=0;
+FOR i IN 1..LENGTH(in_str) LOOP
+stk_cal := ASCII(SUBSTR(in_str,i,1));
+out_str := out_str + stk_cal;
+END LOOP;
+RETURN out_str;
+END;
+$$;
+
+
+ALTER FUNCTION public.trade_cal(in_str character varying) OWNER TO web05;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO web05;
+
+--
+-- Name: assignments; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.assignments (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.assignments OWNER TO web05;
+
+--
+-- Name: assignments_id_seq; Type: SEQUENCE; Schema: public; Owner: web05
+--
+
+CREATE SEQUENCE public.assignments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.assignments_id_seq OWNER TO web05;
+
+--
+-- Name: assignments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: web05
+--
+
+ALTER SEQUENCE public.assignments_id_seq OWNED BY public.assignments.id;
+
+
+--
+-- Name: my_stocks; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.my_stocks (
+    symbol character varying(20) NOT NULL,
+    n_shares integer NOT NULL,
+    date_acquired date NOT NULL
+);
+
+
+ALTER TABLE public.my_stocks OWNER TO web05;
+
+--
+-- Name: newly_acquired_stocks; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.newly_acquired_stocks (
+    symbol character varying(20) NOT NULL,
+    n_shares integer NOT NULL,
+    date_acquired date NOT NULL
+);
+
+
+ALTER TABLE public.newly_acquired_stocks OWNER TO web05;
+
+--
+-- Name: quotations; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.quotations (
+    id bigint NOT NULL,
+    author_name character varying,
+    category character varying,
+    quote text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.quotations OWNER TO web05;
+
+--
+-- Name: quotations_id_seq; Type: SEQUENCE; Schema: public; Owner: web05
+--
+
+CREATE SEQUENCE public.quotations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.quotations_id_seq OWNER TO web05;
+
+--
+-- Name: quotations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: web05
+--
+
+ALTER SEQUENCE public.quotations_id_seq OWNED BY public.quotations.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO web05;
+
+--
+-- Name: stock_prices; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.stock_prices (
+    symbol character varying(20) NOT NULL,
+    quote_date date NOT NULL,
+    price integer NOT NULL
+);
+
+
+ALTER TABLE public.stock_prices OWNER TO web05;
+
+--
+-- Name: stocks_i_like; Type: VIEW; Schema: public; Owner: web05
+--
+
+CREATE VIEW public.stocks_i_like AS
+ SELECT my_stocks.symbol,
+    sum(my_stocks.n_shares) AS total_shares_held,
+    max(my_stocks.date_acquired) AS last_acquired,
+    stock_prices.price,
+    (sum(my_stocks.n_shares) * stock_prices.price) AS total_value_held
+   FROM (public.my_stocks
+     LEFT JOIN public.stock_prices USING (symbol))
+  GROUP BY my_stocks.symbol, stock_prices.price
+ HAVING (count(my_stocks.symbol) > 1);
+
+
+ALTER TABLE public.stocks_i_like OWNER TO web05;
+
+--
+-- Name: assignments id; Type: DEFAULT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.assignments ALTER COLUMN id SET DEFAULT nextval('public.assignments_id_seq'::regclass);
+
+
+--
+-- Name: quotations id; Type: DEFAULT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.quotations ALTER COLUMN id SET DEFAULT nextval('public.quotations_id_seq'::regclass);
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2018-08-30 09:19:42.205824	2018-08-30 09:19:42.205824
+\.
+
+
+--
+-- Data for Name: assignments; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.assignments (id, name, created_at, updated_at) FROM stdin;
+1		2018-08-30 09:40:38.86527	2018-08-30 09:40:38.86527
+2		2018-08-30 09:40:53.244483	2018-08-30 09:40:53.244483
+3	ram	2018-08-30 10:46:23.829553	2018-08-30 10:46:23.829553
+4	raghuram	2018-08-30 10:46:53.035036	2018-08-30 10:46:53.035036
+5	rounak	2018-08-30 10:47:07.406351	2018-08-30 10:47:07.406351
+\.
+
+
+--
+-- Data for Name: my_stocks; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.my_stocks (symbol, n_shares, date_acquired) FROM stdin;
+AMAT	5000	2018-06-09
+ALXN	6000	2018-07-09
+FDC	7000	2018-08-09
+STZ	8000	2018-09-09
+OC	9000	2018-10-09
+SDIVX	1000	2018-11-09
+AMAT	5000	2018-09-14
+ALXN	6000	2018-09-14
+STZ	8000	2018-09-14
+\.
+
+
+--
+-- Data for Name: newly_acquired_stocks; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.newly_acquired_stocks (symbol, n_shares, date_acquired) FROM stdin;
+FDC	7000	2018-08-09
+STZ	8000	2018-09-09
+OC	9000	2018-10-09
+\.
+
+
+--
+-- Data for Name: quotations; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.quotations (id, author_name, category, quote, created_at, updated_at) FROM stdin;
+1	Ted Turner	Book	I feel like those Jewish people in Germany in 1942.	2018-09-14 13:46:23.764177	2018-09-14 13:46:23.764177
+2	Unknown Heroine	Movie	Men are like a fine wine. They all start out like grapes, and it’s our job to stomp on them and\r\nkeep them in the dark where they will mature into something you’d want to have dinner with.	2018-09-14 13:47:17.235908	2018-09-14 13:47:17.235908
+3	Anne Slater	Movie	A woman needs four animals in her life. A mink in the closet. A jaguar in the garage. A tiger\r\nin bed. And an ass to pay for it all.	2018-09-14 13:48:02.023865	2018-09-14 13:48:02.023865
+4	Starks	TV Series 	Winter is coming	2018-09-14 13:49:40.05688	2018-09-14 13:49:40.05688
+5	Abraham Lincoln 	Books	Nearly all men can stand adversity, but if you want to test a man's character, give him power.	2018-09-14 13:51:35.580257	2018-09-14 13:51:35.580257
+6	Abraham Lincoln 	Books	Always bear in mind that your own resolution to succeed is more important than any other.	2018-09-14 13:52:40.802085	2018-09-14 13:52:40.802085
+7	APJ Abdul Kalam	Books	you have to dream before your dreams come true	2018-09-14 13:58:37.428891	2018-09-14 13:58:37.428891
+8	Unknown 	Movie	I feel like those Jewish people in Germany in 1942.	2018-09-11 07:51:56	2018-09-11 07:51:56
+9	Rounak	Comic	If a man speaks in the forest and there is no woman there to hear him, is he still wrong?	2018-09-11 07:52:46	2018-09-11 07:52:46
+10	Raj	TV Series 	Men are like a fine wine. They all start out like grapes, and it’s our job to stomp on them and\nkeep them in the dark where they will mature into something you’d want to have dinner with.	2018-09-11 07:55:50	2018-09-11 07:55:50
+11	Gene Fowler	Books	An editor should have a pimp for a brother, so he’d have someone to look up to.	2018-09-11 20:19:03	2018-09-11 20:19:03
+12	Rounak	mo	raj naam toh sunna he hoga 	2018-09-12 06:58:40	2018-09-12 06:58:40
+13	deku	Anime 	plus ultra	2018-09-12 09:04:12	2018-09-12 09:04:12
+14	Nuchjanee	Movie	hello i am Ae.	2018-09-12 10:45:33	2018-09-12 10:45:33
+15	Nuchjanee	Songs	sorry 	2018-09-12 10:46:34	2018-09-12 10:46:34
+16	sagar	Comic	boku no hero acadmia	2018-09-13 11:04:58	2018-09-13 11:04:58
+17	ae	Songs	Why not	2018-09-14 16:47:31.324105	2018-09-14 16:47:31.324105
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20180829192007
+20180910081221
+\.
+
+
+--
+-- Data for Name: stock_prices; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.stock_prices (symbol, quote_date, price) FROM stdin;
+AMAT	2018-09-14	291
+ALXN	2018-09-14	307
+FDC	2018-09-14	205
+STZ	2018-09-14	257
+OC	2018-09-14	146
+\.
+
+
+--
+-- Name: assignments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: web05
+--
+
+SELECT pg_catalog.setval('public.assignments_id_seq', 5, true);
+
+
+--
+-- Name: quotations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: web05
+--
+
+SELECT pg_catalog.setval('public.quotations_id_seq', 17, true);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: assignments assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.assignments
+    ADD CONSTRAINT assignments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: quotations quotations_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.quotations
+    ADD CONSTRAINT quotations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect ps1_production
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO web05;
+
+--
+-- Name: assignments; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.assignments (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.assignments OWNER TO web05;
+
+--
+-- Name: assignments_id_seq; Type: SEQUENCE; Schema: public; Owner: web05
+--
+
+CREATE SEQUENCE public.assignments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.assignments_id_seq OWNER TO web05;
+
+--
+-- Name: assignments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: web05
+--
+
+ALTER SEQUENCE public.assignments_id_seq OWNED BY public.assignments.id;
+
+
+--
+-- Name: quotations; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.quotations (
+    id bigint NOT NULL,
+    author_name character varying,
+    category character varying,
+    quote text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.quotations OWNER TO web05;
+
+--
+-- Name: quotations_id_seq; Type: SEQUENCE; Schema: public; Owner: web05
+--
+
+CREATE SEQUENCE public.quotations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.quotations_id_seq OWNER TO web05;
+
+--
+-- Name: quotations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: web05
+--
+
+ALTER SEQUENCE public.quotations_id_seq OWNED BY public.quotations.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO web05;
+
+--
+-- Name: assignments id; Type: DEFAULT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.assignments ALTER COLUMN id SET DEFAULT nextval('public.assignments_id_seq'::regclass);
+
+
+--
+-- Name: quotations id; Type: DEFAULT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.quotations ALTER COLUMN id SET DEFAULT nextval('public.quotations_id_seq'::regclass);
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	production	2018-09-14 17:44:40.474002	2018-09-14 17:44:40.474002
+\.
+
+
+--
+-- Data for Name: assignments; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.assignments (id, name, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: quotations; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.quotations (id, author_name, category, quote, created_at, updated_at) FROM stdin;
+1	Unknown 	Movie	I feel like those Jewish people in Germany in 1942.	2018-09-11 07:51:56	2018-09-11 07:51:56
+2	Rounak	Comic	If a man speaks in the forest and there is no woman there to hear him, is he still wrong?	2018-09-11 07:52:46	2018-09-11 07:52:46
+3	Raj	TV Series 	Men are like a fine wine. They all start out like grapes, and it’s our job to stomp on them and\nkeep them in the dark where they will mature into something you’d want to have dinner with.	2018-09-11 07:55:50	2018-09-11 07:55:50
+4	Gene Fowler	Books	An editor should have a pimp for a brother, so he’d have someone to look up to.	2018-09-11 20:19:03	2018-09-11 20:19:03
+5	Rounak	mo	raj naam toh sunna he hoga 	2018-09-12 06:58:40	2018-09-12 06:58:40
+6	deku	Anime 	plus ultra	2018-09-12 09:04:12	2018-09-12 09:04:12
+7	Nuchjanee	Movie	hello i am Ae.	2018-09-12 10:45:33	2018-09-12 10:45:33
+8	Nuchjanee	Songs	sorry 	2018-09-12 10:46:34	2018-09-12 10:46:34
+9	sagar	Comic	boku no hero acadmia	2018-09-13 11:04:58	2018-09-13 11:04:58
+10	George Lucas	Movies	Do, or do not, there is no try.	2018-09-09 20:23:36	2018-09-09 20:23:36
+11	Age of Empires' priest	Games	Woololo.	2018-09-09 20:24:29	2018-09-09 20:24:29
+12	J. R. R. Tolkien	Books	One ring to rule them all,\nOne ring to find them,\nOne ring to bring them all and in the darkness bind them.	2018-09-09 20:27:13	2018-09-09 20:27:13
+13	George R. R. Martin	Books	"A reader lives a thousand lives before he dies. The man who never reads lives only one."	2018-09-09 20:41:47	2018-09-09 20:41:47
+14	Harrison Ford	Movies	Hokey religions and ancient weapons are no match for a good blaster at your side, kid	2018-09-09 20:50:41	2018-09-09 20:50:41
+15	John Lennon	Music	Give peace a chance!	2018-09-10 18:10:15	2018-09-10 18:10:15
+16	Ringo Starr	Music	I've got blisters on my fingers!	2018-09-10 19:08:44	2018-09-10 19:08:44
+17	Barney	Books	I am awesome	2018-09-11 07:21:36	2018-09-11 07:21:36
+18	Nick	Beauty	Milk is a absolutely beautiful girl!	2018-09-11 14:55:37	2018-09-11 14:55:37
+19	G. R. R. Martin 	NOVEL	Volar Morghulis	2018-09-11 16:31:36	2018-09-11 16:31:36
+20	tt	ggg	test	2018-09-11 17:06:25	2018-09-11 17:06:25
+21	tt	fff	eieieie	2018-09-11 17:07:06	2018-09-11 17:07:06
+22	rororo	Beauty	eieieieieie	2018-09-11 17:07:29	2018-09-11 17:07:29
+23	George Lucas	Movies	Do, or do not, there is no try.	2018-09-09 20:23:36	2018-09-09 20:23:36
+24	Age of Empires' priest	Games	Woololo.	2018-09-09 20:24:29	2018-09-09 20:24:29
+25	J. R. R. Tolkien	Books	One ring to rule them all,\nOne ring to find them,\nOne ring to bring them all and in the darkness bind them.	2018-09-09 20:27:13	2018-09-09 20:27:13
+26	George R. R. Martin	Books	"A reader lives a thousand lives before he dies. The man who never reads lives only one."	2018-09-09 20:41:47	2018-09-09 20:41:47
+27	Harrison Ford	Movies	Hokey religions and ancient weapons are no match for a good blaster at your side, kid	2018-09-09 20:50:41	2018-09-09 20:50:41
+28	John Lennon	Music	Give peace a chance!	2018-09-10 18:10:15	2018-09-10 18:10:15
+29	Ringo Starr	Music	I've got blisters on my fingers!	2018-09-10 19:08:44	2018-09-10 19:08:44
+30	Nischal	Question	Who is Nick???	2018-09-12 16:09:54	2018-09-12 16:09:54
+31	Nischal	Question	Who is Milk???	2018-09-12 16:13:34	2018-09-12 16:13:34
+32	Will Hunting	Movies	How do you like them apples	2018-09-13 05:12:52	2018-09-13 05:12:52
+33	Sean McGuire	Movies	Watch it right there, Chief!	2018-09-13 07:51:07	2018-09-13 07:51:07
+34	\N	Beauty	\N	2018-09-13 08:10:33	2018-09-13 08:10:33
+35	\N	Beauty	\N	2018-09-13 12:50:59	2018-09-13 12:50:59
+36	\N	Beauty	\N	2018-09-14 06:23:26	2018-09-14 06:23:26
+37	aa	aaa	aa	2018-09-14 06:24:54	2018-09-14 06:24:54
+38	George Lucas	Movies	Do, or do not, there is no try.	2018-09-09 20:23:36	2018-09-09 20:23:36
+39	Age of Empires' priest	Games	Woololo.	2018-09-09 20:24:29	2018-09-09 20:24:29
+40	J. R. R. Tolkien	Books	One ring to rule them all,\nOne ring to find them,\nOne ring to bring them all and in the darkness bind them.	2018-09-09 20:27:13	2018-09-09 20:27:13
+41	George R. R. Martin	Books	"A reader lives a thousand lives before he dies. The man who never reads lives only one."	2018-09-09 20:41:47	2018-09-09 20:41:47
+42	Harrison Ford	Movies	Hokey religions and ancient weapons are no match for a good blaster at your side, kid	2018-09-09 20:50:41	2018-09-09 20:50:41
+43	John Lennon	Music	Give peace a chance!	2018-09-10 18:10:15	2018-09-10 18:10:15
+44	Ringo Starr	Music	I've got blisters on my fingers!	2018-09-10 19:08:44	2018-09-10 19:08:44
+45	Barney	Books	I am awesome	2018-09-11 07:21:36	2018-09-11 07:21:36
+46	Nick	Beauty	Milk is a absolutely beautiful girl!	2018-09-11 14:55:37	2018-09-11 14:55:37
+47	G. R. R. Martin 	NOVEL	Volar Morghulis	2018-09-11 16:31:36	2018-09-11 16:31:36
+48	tt	ggg	test	2018-09-11 17:06:25	2018-09-11 17:06:25
+49	tt	fff	eieieie	2018-09-11 17:07:06	2018-09-11 17:07:06
+50	rororo	Beauty	eieieieieie	2018-09-11 17:07:29	2018-09-11 17:07:29
+51	George Lucas	Movies	Do, or do not, there is no try.	2018-09-09 20:23:36	2018-09-09 20:23:36
+52	Age of Empires' priest	Games	Woololo.	2018-09-09 20:24:29	2018-09-09 20:24:29
+53	J. R. R. Tolkien	Books	One ring to rule them all,\nOne ring to find them,\nOne ring to bring them all and in the darkness bind them.	2018-09-09 20:27:13	2018-09-09 20:27:13
+54	George R. R. Martin	Books	"A reader lives a thousand lives before he dies. The man who never reads lives only one."	2018-09-09 20:41:47	2018-09-09 20:41:47
+55	Harrison Ford	Movies	Hokey religions and ancient weapons are no match for a good blaster at your side, kid	2018-09-09 20:50:41	2018-09-09 20:50:41
+56	John Lennon	Music	Give peace a chance!	2018-09-10 18:10:15	2018-09-10 18:10:15
+57	Ringo Starr	Music	I've got blisters on my fingers!	2018-09-10 19:08:44	2018-09-10 19:08:44
+58	Nischal	Question	Who is Nick???	2018-09-12 16:09:54	2018-09-12 16:09:54
+59	Nischal	Question	Who is Milk???	2018-09-12 16:13:34	2018-09-12 16:13:34
+60	Will Hunting	Movies	How do you like them apples	2018-09-13 05:12:52	2018-09-13 05:12:52
+61	Sean McGuire	Movies	Watch it right there, Chief!	2018-09-13 07:51:07	2018-09-13 07:51:07
+62	\N	Beauty	\N	2018-09-13 08:10:33	2018-09-13 08:10:33
+63	\N	Beauty	\N	2018-09-13 12:50:59	2018-09-13 12:50:59
+64	\N	Beauty	\N	2018-09-14 06:23:26	2018-09-14 06:23:26
+65	aa	aaa	aa	2018-09-14 06:24:54	2018-09-14 06:24:54
+66	\N	Movies	\N	2018-09-14 08:27:39	2018-09-14 08:27:39
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20180829192007
+20180910081221
+\.
+
+
+--
+-- Name: assignments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: web05
+--
+
+SELECT pg_catalog.setval('public.assignments_id_seq', 1, false);
+
+
+--
+-- Name: quotations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: web05
+--
+
+SELECT pg_catalog.setval('public.quotations_id_seq', 66, true);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: assignments assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.assignments
+    ADD CONSTRAINT assignments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: quotations quotations_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.quotations
+    ADD CONSTRAINT quotations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect ps1_test
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect template1
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE template1; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE template1 IS 'default template for new databases';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect testing_development
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: portfolio_value(); Type: FUNCTION; Schema: public; Owner: web05
+--
+
+CREATE FUNCTION public.portfolio_value() RETURNS numeric
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+c1 CURSOR FOR SELECT * FROM my_stocks NATURAL LEFT OUTER JOIN stock_prices;
+total_val NUMERIC DEFAULT 0;
+stk_val NUMERIC DEFAULT 0;
+stk RECORD;
+BEGIN
+OPEN c1;
+LOOP
+FETCH c1 INTO stk;
+IF stk IS NOT NULL THEN
+IF stk.price>0 THEN
+stk_val := (stk.n_shares * stk.price);
+total_val := total_val + stk_val;
+ELSE
+stk_val := 0;
+END IF;
+RAISE NOTICE 'Value of: % = %', stk.symbol,stk_val;
+END IF;
+EXIT WHEN NOT FOUND;
+END LOOP;
+CLOSE c1;
+RETURN total_val;
+END;
+$$;
+
+
+ALTER FUNCTION public.portfolio_value() OWNER TO web05;
+
+--
+-- Name: trade_cal(character varying); Type: FUNCTION; Schema: public; Owner: web05
+--
+
+CREATE FUNCTION public.trade_cal(in_str character varying) RETURNS numeric
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+out_str NUMERIC DEFAULT 0;
+stk_cal NUMERIC DEFAULT 0;
+BEGIN
+out_str :=0;
+FOR i IN 1..LENGTH(in_str) LOOP
+stk_cal := ASCII(SUBSTR(in_str,i,1));
+out_str := out_str + stk_cal;
+END LOOP;
+RETURN out_str;
+END;
+$$;
+
+
+ALTER FUNCTION public.trade_cal(in_str character varying) OWNER TO web05;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO web05;
+
+--
+-- Name: my_stocks; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.my_stocks (
+    symbol character varying(20) NOT NULL,
+    n_shares integer NOT NULL,
+    date_acquired date NOT NULL
+);
+
+
+ALTER TABLE public.my_stocks OWNER TO web05;
+
+--
+-- Name: newly_acquired_stocks; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.newly_acquired_stocks (
+    symbol character varying(20) NOT NULL,
+    n_shares integer NOT NULL,
+    date_acquired date NOT NULL
+);
+
+
+ALTER TABLE public.newly_acquired_stocks OWNER TO web05;
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO web05;
+
+--
+-- Name: stock_prices; Type: TABLE; Schema: public; Owner: web05
+--
+
+CREATE TABLE public.stock_prices (
+    symbol character varying(20) NOT NULL,
+    quote_date date NOT NULL,
+    price integer NOT NULL
+);
+
+
+ALTER TABLE public.stock_prices OWNER TO web05;
+
+--
+-- Name: stocks_i_like; Type: VIEW; Schema: public; Owner: web05
+--
+
+CREATE VIEW public.stocks_i_like AS
+ SELECT my_stocks.symbol,
+    sum(my_stocks.n_shares) AS total_shares_held,
+    max(my_stocks.date_acquired) AS last_acquired,
+    stock_prices.price,
+    (sum(my_stocks.n_shares) * stock_prices.price) AS total_value_held
+   FROM (public.my_stocks
+     LEFT JOIN public.stock_prices USING (symbol))
+  GROUP BY my_stocks.symbol, stock_prices.price
+ HAVING (count(my_stocks.symbol) > 1);
+
+
+ALTER TABLE public.stocks_i_like OWNER TO web05;
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2018-08-30 08:30:41.045557	2018-08-30 08:30:41.045557
+\.
+
+
+--
+-- Data for Name: my_stocks; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.my_stocks (symbol, n_shares, date_acquired) FROM stdin;
+AMAT	5000	2018-06-09
+ALXN	6000	2018-07-09
+FDC	7000	2018-08-09
+STZ	8000	2018-09-09
+OC	9000	2018-10-09
+SDIVX	1000	2018-11-09
+AMAT	5000	2018-09-14
+ALXN	6000	2018-09-14
+STZ	8000	2018-09-14
+\.
+
+
+--
+-- Data for Name: newly_acquired_stocks; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.newly_acquired_stocks (symbol, n_shares, date_acquired) FROM stdin;
+FDC	7000	2018-08-09
+STZ	8000	2018-09-09
+OC	9000	2018-10-09
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+\.
+
+
+--
+-- Data for Name: stock_prices; Type: TABLE DATA; Schema: public; Owner: web05
+--
+
+COPY public.stock_prices (symbol, quote_date, price) FROM stdin;
+AMAT	2018-09-14	291
+ALXN	2018-09-14	307
+FDC	2018-09-14	205
+STZ	2018-09-14	257
+OC	2018-09-14	146
+\.
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: web05
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect testing_test
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database cluster dump complete
+--
+
