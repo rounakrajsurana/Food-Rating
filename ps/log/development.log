@@ -51218,3 +51218,48 @@ Processing by AssignmentsController#index as HTML
 Completed 200 OK in 407ms (Views: 390.5ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35m (52.5ms)[0m  [1m[35mCREATE DATABASE "ps1_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE DATABASE "ps1_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (8.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4162183102011986100)[0m
+  ↳ bin/rails:9
+  [1m[35m (49.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (50.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(4162183102011986100)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for 127.0.0.1 at 2018-10-05 21:04:34 +0700
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/rounak/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by AssignmentsController#index as HTML
+  Rendering assignments/index.html.erb within layouts/application
+  Rendered assignments/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 460ms (Views: 442.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/basics/index" for 127.0.0.1 at 2018-10-05 21:04:58 +0700
+Processing by BasicsController#index as HTML
+  Rendering basics/index.html.erb within layouts/application
+  Rendered basics/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 63ms (Views: 59.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/basics/quotations" for 127.0.0.1 at 2018-10-05 21:05:01 +0700
+Processing by BasicsController#quotations as HTML
+  [1m[35m (78.8ms)[0m  [1m[34mSELECT DISTINCT "quotations"."category" FROM "quotations"[0m
+  ↳ app/controllers/basics_controller.rb:8
+  Rendering basics/quotations.html.erb within layouts/application
+  [1m[36mQuotation Load (0.9ms)[0m  [1m[34mSELECT "quotations".* FROM "quotations" WHERE 1=1 ORDER BY "quotations"."category" ASC[0m
+  ↳ app/views/basics/quotations.html.erb:34
+  Rendered basics/quotations.html.erb within layouts/application (57.5ms)
+Completed 200 OK in 219ms (Views: 109.2ms | ActiveRecord: 86.7ms)
+
+

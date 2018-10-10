@@ -21,30 +21,12 @@ ActiveRecord::Schema.define(version: 2018_09_10_081221) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "my_stocks", id: false, force: :cascade do |t|
-    t.string "symbol", limit: 20, null: false
-    t.integer "n_shares", null: false
-    t.date "date_acquired", null: false
-  end
-
-  create_table "newly_acquired_stocks", id: false, force: :cascade do |t|
-    t.string "symbol", limit: 20, null: false
-    t.integer "n_shares", null: false
-    t.date "date_acquired", null: false
-  end
-
   create_table "quotations", force: :cascade do |t|
     t.string "author_name"
     t.string "category"
     t.text "quote"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "stock_prices", id: false, force: :cascade do |t|
-    t.string "symbol", limit: 20, null: false
-    t.date "quote_date", null: false
-    t.integer "price", null: false
   end
 
 end
