@@ -4,14 +4,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def admin?
-    self.role.name == "Admin" if !self.role.blank?
-  end
-  
-  def member?
-    self.role.name == "Member" if !self.role.blank?
-  end
+         before_save :assign_default_role
 
-  # define the fuctions in ability.rb using handouts 4 please follow from the step 4 of cancancan
-  
-end
+         def admin?
+           self.admin == true
+         end
+
+         def set_admin
+           self.admin = true
+         end
+
+         private
+
+         def assign_default_role
+           if current_user
+             self.admin = false if self.admin.nil?
+           end
+         end
+       end

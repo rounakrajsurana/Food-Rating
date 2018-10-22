@@ -3,6 +3,8 @@ class DishesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # GET /dishes
   # GET /dishes.json
+  load_and_authorize_resource
+
   def index
     @dishes = Dish.all
   end

@@ -3,6 +3,8 @@ class RatingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # GET /ratings
   # GET /ratings.json
+  load_and_authorize_resource
+
   def index
     @ratings = Rating.all
   end
