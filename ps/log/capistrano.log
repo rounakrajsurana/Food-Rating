@@ -761,3 +761,234 @@ and the repository exists.
   INFO [dd03c964] Running /usr/bin/env echo "Branch master (at 004981a064a6144f110701a1f496e554b70b2d77) deployed as release 20180924161338 by st120546" >> /home/deploy/food_rating/revisions.log as deploy@web5.cs.ait.ac.th
  DEBUG [dd03c964] Command: cd /home/deploy/food_rating/releases && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env echo "Branch master (at 004981a064a6144f110701a1f496e554b70b2d77) deployed as release 20180924161338 by st120546" >> /home/deploy/food_rating/revisions.log )
   INFO [8e13159e] Finished in 0.074 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-09-24 23:29:05 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [f2ca0977] Running [ -d $HOME/.rbenv ] as deploy@web5.cs.ait.ac.th
+ DEBUG [f2ca0977] Command: [ -d $HOME/.rbenv ]
+ DEBUG [8e2b4271] Finished in 4.239 seconds with exit status 0 (successful).
+ DEBUG [d25e6bdf] Running [ -d $HOME/.rbenv/plugins/ruby-build ] as deploy@web5.cs.ait.ac.th
+ DEBUG [d25e6bdf] Command: [ -d $HOME/.rbenv/plugins/ruby-build ]
+ DEBUG [ed00ef0b] Finished in 0.142 seconds with exit status 0 (successful).
+ DEBUG [862e749e] Running [ -d $HOME/.rbenv/versions/2.5.1 ] as deploy@web5.cs.ait.ac.th
+ DEBUG [862e749e] Command: [ -d $HOME/.rbenv/versions/2.5.1 ]
+ DEBUG [3fd1401f] Finished in 0.112 seconds with exit status 0 (successful).
+ DEBUG [956db00e] Running $HOME/.rbenv/bin/rbenv exec gem query --quiet --installed --name-matches ^bundler$ as deploy@web5.cs.ait.ac.th
+ DEBUG [956db00e] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; $HOME/.rbenv/bin/rbenv exec gem query --quiet --installed --name-matches ^bundler$ )
+ DEBUG [a07d11b0] 	true
+ DEBUG [a07d11b0] Finished in 0.604 seconds with exit status 0 (successful).
+ DEBUG [bc5888af] Running [ -d $HOME/.rbenv/versions/2.5.1 ] as deploy@web5.cs.ait.ac.th
+ DEBUG [bc5888af] Command: [ -d $HOME/.rbenv/versions/2.5.1 ]
+ DEBUG [efff767b] Finished in 0.065 seconds with exit status 0 (successful).
+  INFO [47130317] Running /usr/bin/env mkdir -p /tmp as deploy@web5.cs.ait.ac.th
+ DEBUG [47130317] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env mkdir -p /tmp )
+  INFO [15182bd3] Finished in 0.098 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-food_rating-production-st120546.sh 0.0%
+  INFO Uploading /tmp/git-ssh-food_rating-production-st120546.sh 100.0%
+  INFO [c7eb9835] Running /usr/bin/env chmod 700 /tmp/git-ssh-food_rating-production-st120546.sh as deploy@web5.cs.ait.ac.th
+ DEBUG [c7eb9835] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env chmod 700 /tmp/git-ssh-food_rating-production-st120546.sh )
+  INFO [df396440] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [367e462c] Running /usr/bin/env git ls-remote git@ait-vision.org:web18-05 HEAD as deploy@web5.cs.ait.ac.th
+ DEBUG [367e462c] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-food_rating-production-st120546.sh" ; /usr/bin/env git ls-remote git@ait-vision.org:web18-05 HEAD )
+ DEBUG [4fc30d43] 	9e3986e71b5e7a1574e9ee929efa1fb4341df4b5	HEAD
+  INFO [4fc30d43] Finished in 3.796 seconds with exit status 0 (successful).
+  INFO [50ba75d7] Running /usr/bin/env mkdir -p /home/deploy/food_rating/shared /home/deploy/food_rating/releases as deploy@web5.cs.ait.ac.th
+ DEBUG [50ba75d7] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env mkdir -p /home/deploy/food_rating/shared /home/deploy/food_rating/releases )
+  INFO [597b4813] Finished in 0.071 seconds with exit status 0 (successful).
+  INFO [88334e75] Running /usr/bin/env mkdir -p /home/deploy/food_rating/shared/log /home/deploy/food_rating/shared/tmp /home/deploy/food_rating/shared/public/system /home/deploy/food_rating/shared/.bundle /home/deploy/food_rating/shared/public/assets as deploy@web5.cs.ait.ac.th
+ DEBUG [88334e75] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env mkdir -p /home/deploy/food_rating/shared/log /home/deploy/food_rating/shared/tmp /home/deploy/food_rating/shared/public/system /home/deploy/food_rating/shared/.bundle /home/deploy/food_rating/shared/public/assets )
+  INFO [6e0c8979] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [33861e4f] Running /usr/bin/env mkdir -p /home/deploy/food_rating/shared/config as deploy@web5.cs.ait.ac.th
+ DEBUG [33861e4f] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env mkdir -p /home/deploy/food_rating/shared/config )
+  INFO [99ad864b] Finished in 0.068 seconds with exit status 0 (successful).
+ DEBUG [3f25cf53] Running [ -f /home/deploy/food_rating/shared/config/database.yml ] as deploy@web5.cs.ait.ac.th
+ DEBUG [3f25cf53] Command: [ -f /home/deploy/food_rating/shared/config/database.yml ]
+ DEBUG [ec676ea0] Finished in 0.078 seconds with exit status 0 (successful).
+ DEBUG [97fbc061] Running [ -f /home/deploy/food_rating/shared/config/master.key ] as deploy@web5.cs.ait.ac.th
+ DEBUG [97fbc061] Command: [ -f /home/deploy/food_rating/shared/config/master.key ]
+ DEBUG [45de589d] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [42826198] Running [ -f /home/deploy/food_rating/current/REVISION ] as deploy@web5.cs.ait.ac.th
+ DEBUG [42826198] Command: [ -f /home/deploy/food_rating/current/REVISION ]
+ DEBUG [2340c799] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [9fa232bb] Running /usr/bin/env cat /home/deploy/food_rating/current/REVISION 2>/dev/null as deploy@web5.cs.ait.ac.th
+ DEBUG [9fa232bb] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env cat /home/deploy/food_rating/current/REVISION 2>/dev/null )
+ DEBUG [1d08f779] 	004981a064a6144f110701a1f496e554b70b2d77
+ DEBUG [1d08f779] Finished in 0.110 seconds with exit status 0 (successful).
+ DEBUG [c69406bf] Running [ -f /home/deploy/food_rating/repo/HEAD ] as deploy@web5.cs.ait.ac.th
+ DEBUG [c69406bf] Command: [ -f /home/deploy/food_rating/repo/HEAD ]
+ DEBUG [4e6311e0] Finished in 0.096 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/deploy/food_rating/repo
+ DEBUG [3fad7b5c] Running if test ! -d /home/deploy/food_rating/repo; then echo "Directory does not exist '/home/deploy/food_rating/repo'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [3fad7b5c] Command: if test ! -d /home/deploy/food_rating/repo; then echo "Directory does not exist '/home/deploy/food_rating/repo'" 1>&2; false; fi
+ DEBUG [31b8982e] Finished in 0.076 seconds with exit status 0 (successful).
+  INFO [0785148b] Running /usr/bin/env git remote set-url origin git@ait-vision.org:web18-05 as deploy@web5.cs.ait.ac.th
+ DEBUG [0785148b] Command: cd /home/deploy/food_rating/repo && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-food_rating-production-st120546.sh" ; /usr/bin/env git remote set-url origin git@ait-vision.org:web18-05 )
+  INFO [aa686d74] Finished in 0.085 seconds with exit status 0 (successful).
+  INFO [5efc988b] Running /usr/bin/env git remote update --prune as deploy@web5.cs.ait.ac.th
+ DEBUG [5efc988b] Command: cd /home/deploy/food_rating/repo && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-food_rating-production-st120546.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [ec8306a4] 	Fetching origin
+ DEBUG [ec8306a4] 	From ait-vision.org:web18-05
+ DEBUG [ec8306a4] 	   004981a..9e3986e  capist     -> capist
+   004981a..9e3986e  master     -> master
+  INFO [ec8306a4] Finished in 4.440 seconds with exit status 0 (successful).
+ DEBUG [fb3886ea] Running if test ! -d /home/deploy/food_rating/repo; then echo "Directory does not exist '/home/deploy/food_rating/repo'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [fb3886ea] Command: if test ! -d /home/deploy/food_rating/repo; then echo "Directory does not exist '/home/deploy/food_rating/repo'" 1>&2; false; fi
+ DEBUG [ca9f61a3] Finished in 0.080 seconds with exit status 0 (successful).
+  INFO [e153b6b7] Running /usr/bin/env mkdir -p /home/deploy/food_rating/releases/20180924162914 as deploy@web5.cs.ait.ac.th
+ DEBUG [e153b6b7] Command: cd /home/deploy/food_rating/repo && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-food_rating-production-st120546.sh" ; /usr/bin/env mkdir -p /home/deploy/food_rating/releases/20180924162914 )
+  INFO [3b493948] Finished in 0.078 seconds with exit status 0 (successful).
+  INFO [fb306f66] Running /usr/bin/env git archive master ps | /usr/bin/env tar -x --strip-components 1 -f - -C /home/deploy/food_rating/releases/20180924162914 as deploy@web5.cs.ait.ac.th
+ DEBUG [fb306f66] Command: cd /home/deploy/food_rating/repo && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-food_rating-production-st120546.sh" ; /usr/bin/env git archive master ps | /usr/bin/env tar -x --strip-components 1 -f - -C /home/deploy/food_rating/releases/20180924162914 )
+  INFO [cbe20777] Finished in 2.434 seconds with exit status 0 (successful).
+ DEBUG [f1a4620e] Running if test ! -d /home/deploy/food_rating/repo; then echo "Directory does not exist '/home/deploy/food_rating/repo'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [f1a4620e] Command: if test ! -d /home/deploy/food_rating/repo; then echo "Directory does not exist '/home/deploy/food_rating/repo'" 1>&2; false; fi
+ DEBUG [4f3cfc52] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [3a497054] Running /usr/bin/env git rev-list --max-count=1 master as deploy@web5.cs.ait.ac.th
+ DEBUG [3a497054] Command: cd /home/deploy/food_rating/repo && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-food_rating-production-st120546.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [394b08cb] 	9e3986e71b5e7a1574e9ee929efa1fb4341df4b5
+ DEBUG [394b08cb] Finished in 0.089 seconds with exit status 0 (successful).
+ DEBUG [93eb6374] Running if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [93eb6374] Command: if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi
+ DEBUG [9b334187] Finished in 0.078 seconds with exit status 0 (successful).
+  INFO [49ba4865] Running /usr/bin/env echo "9e3986e71b5e7a1574e9ee929efa1fb4341df4b5" > REVISION as deploy@web5.cs.ait.ac.th
+ DEBUG [49ba4865] Command: cd /home/deploy/food_rating/releases/20180924162914 && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env echo "9e3986e71b5e7a1574e9ee929efa1fb4341df4b5" > REVISION )
+  INFO [4f5cb0f6] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO [e37d35a7] Running /usr/bin/env mkdir -p /home/deploy/food_rating/releases/20180924162914/config as deploy@web5.cs.ait.ac.th
+ DEBUG [e37d35a7] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env mkdir -p /home/deploy/food_rating/releases/20180924162914/config )
+  INFO [7453239e] Finished in 0.087 seconds with exit status 0 (successful).
+ DEBUG [14c6b388] Running [ -L /home/deploy/food_rating/releases/20180924162914/config/database.yml ] as deploy@web5.cs.ait.ac.th
+ DEBUG [14c6b388] Command: [ -L /home/deploy/food_rating/releases/20180924162914/config/database.yml ]
+ DEBUG [bdede6f5] Finished in 0.067 seconds with exit status 1 (failed).
+ DEBUG [6d3a5a4e] Running [ -f /home/deploy/food_rating/releases/20180924162914/config/database.yml ] as deploy@web5.cs.ait.ac.th
+ DEBUG [6d3a5a4e] Command: [ -f /home/deploy/food_rating/releases/20180924162914/config/database.yml ]
+ DEBUG [19f99aa8] Finished in 0.088 seconds with exit status 0 (successful).
+  INFO [a930792f] Running /usr/bin/env rm /home/deploy/food_rating/releases/20180924162914/config/database.yml as deploy@web5.cs.ait.ac.th
+ DEBUG [a930792f] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env rm /home/deploy/food_rating/releases/20180924162914/config/database.yml )
+  INFO [ad48499c] Finished in 0.068 seconds with exit status 0 (successful).
+  INFO [a3a73032] Running /usr/bin/env ln -s /home/deploy/food_rating/shared/config/database.yml /home/deploy/food_rating/releases/20180924162914/config/database.yml as deploy@web5.cs.ait.ac.th
+ DEBUG [a3a73032] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ln -s /home/deploy/food_rating/shared/config/database.yml /home/deploy/food_rating/releases/20180924162914/config/database.yml )
+  INFO [dfad3c14] Finished in 0.070 seconds with exit status 0 (successful).
+ DEBUG [28c1a6a0] Running [ -L /home/deploy/food_rating/releases/20180924162914/config/master.key ] as deploy@web5.cs.ait.ac.th
+ DEBUG [28c1a6a0] Command: [ -L /home/deploy/food_rating/releases/20180924162914/config/master.key ]
+ DEBUG [56132f1f] Finished in 0.070 seconds with exit status 1 (failed).
+ DEBUG [5e8681d8] Running [ -f /home/deploy/food_rating/releases/20180924162914/config/master.key ] as deploy@web5.cs.ait.ac.th
+ DEBUG [5e8681d8] Command: [ -f /home/deploy/food_rating/releases/20180924162914/config/master.key ]
+ DEBUG [29ec59c9] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO [b8be3bb6] Running /usr/bin/env rm /home/deploy/food_rating/releases/20180924162914/config/master.key as deploy@web5.cs.ait.ac.th
+ DEBUG [b8be3bb6] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env rm /home/deploy/food_rating/releases/20180924162914/config/master.key )
+  INFO [ae16a7e0] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [e85f933e] Running /usr/bin/env ln -s /home/deploy/food_rating/shared/config/master.key /home/deploy/food_rating/releases/20180924162914/config/master.key as deploy@web5.cs.ait.ac.th
+ DEBUG [e85f933e] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ln -s /home/deploy/food_rating/shared/config/master.key /home/deploy/food_rating/releases/20180924162914/config/master.key )
+  INFO [92c649e9] Finished in 0.087 seconds with exit status 0 (successful).
+  INFO [14f2d7ff] Running /usr/bin/env mkdir -p /home/deploy/food_rating/releases/20180924162914 /home/deploy/food_rating/releases/20180924162914/public as deploy@web5.cs.ait.ac.th
+ DEBUG [14f2d7ff] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env mkdir -p /home/deploy/food_rating/releases/20180924162914 /home/deploy/food_rating/releases/20180924162914/public )
+  INFO [1392d05e] Finished in 0.075 seconds with exit status 0 (successful).
+ DEBUG [a4ba76bb] Running [ -L /home/deploy/food_rating/releases/20180924162914/log ] as deploy@web5.cs.ait.ac.th
+ DEBUG [a4ba76bb] Command: [ -L /home/deploy/food_rating/releases/20180924162914/log ]
+ DEBUG [0a7b460f] Finished in 0.069 seconds with exit status 1 (failed).
+ DEBUG [f8e34b30] Running [ -d /home/deploy/food_rating/releases/20180924162914/log ] as deploy@web5.cs.ait.ac.th
+ DEBUG [f8e34b30] Command: [ -d /home/deploy/food_rating/releases/20180924162914/log ]
+ DEBUG [5994a866] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [93374817] Running /usr/bin/env rm -rf /home/deploy/food_rating/releases/20180924162914/log as deploy@web5.cs.ait.ac.th
+ DEBUG [93374817] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env rm -rf /home/deploy/food_rating/releases/20180924162914/log )
+  INFO [5413d347] Finished in 0.079 seconds with exit status 0 (successful).
+  INFO [00415ebd] Running /usr/bin/env ln -s /home/deploy/food_rating/shared/log /home/deploy/food_rating/releases/20180924162914/log as deploy@web5.cs.ait.ac.th
+ DEBUG [00415ebd] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ln -s /home/deploy/food_rating/shared/log /home/deploy/food_rating/releases/20180924162914/log )
+  INFO [83c96771] Finished in 0.071 seconds with exit status 0 (successful).
+ DEBUG [d7929a18] Running [ -L /home/deploy/food_rating/releases/20180924162914/tmp ] as deploy@web5.cs.ait.ac.th
+ DEBUG [d7929a18] Command: [ -L /home/deploy/food_rating/releases/20180924162914/tmp ]
+ DEBUG [d6ddcdc3] Finished in 0.060 seconds with exit status 1 (failed).
+ DEBUG [27fe7e39] Running [ -d /home/deploy/food_rating/releases/20180924162914/tmp ] as deploy@web5.cs.ait.ac.th
+ DEBUG [27fe7e39] Command: [ -d /home/deploy/food_rating/releases/20180924162914/tmp ]
+ DEBUG [8762eee2] Finished in 0.087 seconds with exit status 0 (successful).
+  INFO [e434a9a9] Running /usr/bin/env rm -rf /home/deploy/food_rating/releases/20180924162914/tmp as deploy@web5.cs.ait.ac.th
+ DEBUG [e434a9a9] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env rm -rf /home/deploy/food_rating/releases/20180924162914/tmp )
+  INFO [ed981d3e] Finished in 0.387 seconds with exit status 0 (successful).
+  INFO [23347a13] Running /usr/bin/env ln -s /home/deploy/food_rating/shared/tmp /home/deploy/food_rating/releases/20180924162914/tmp as deploy@web5.cs.ait.ac.th
+ DEBUG [23347a13] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ln -s /home/deploy/food_rating/shared/tmp /home/deploy/food_rating/releases/20180924162914/tmp )
+  INFO [00edd8eb] Finished in 0.078 seconds with exit status 0 (successful).
+ DEBUG [9a325cd9] Running [ -L /home/deploy/food_rating/releases/20180924162914/public/system ] as deploy@web5.cs.ait.ac.th
+ DEBUG [9a325cd9] Command: [ -L /home/deploy/food_rating/releases/20180924162914/public/system ]
+ DEBUG [ad6c6305] Finished in 0.062 seconds with exit status 1 (failed).
+ DEBUG [e6d77f7a] Running [ -d /home/deploy/food_rating/releases/20180924162914/public/system ] as deploy@web5.cs.ait.ac.th
+ DEBUG [e6d77f7a] Command: [ -d /home/deploy/food_rating/releases/20180924162914/public/system ]
+ DEBUG [fe90b960] Finished in 0.072 seconds with exit status 1 (failed).
+  INFO [bdf8d182] Running /usr/bin/env ln -s /home/deploy/food_rating/shared/public/system /home/deploy/food_rating/releases/20180924162914/public/system as deploy@web5.cs.ait.ac.th
+ DEBUG [bdf8d182] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ln -s /home/deploy/food_rating/shared/public/system /home/deploy/food_rating/releases/20180924162914/public/system )
+  INFO [d40c13ed] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [b64eeabe] Running [ -L /home/deploy/food_rating/releases/20180924162914/.bundle ] as deploy@web5.cs.ait.ac.th
+ DEBUG [b64eeabe] Command: [ -L /home/deploy/food_rating/releases/20180924162914/.bundle ]
+ DEBUG [e3fed7e7] Finished in 0.063 seconds with exit status 1 (failed).
+ DEBUG [f9a2838b] Running [ -d /home/deploy/food_rating/releases/20180924162914/.bundle ] as deploy@web5.cs.ait.ac.th
+ DEBUG [f9a2838b] Command: [ -d /home/deploy/food_rating/releases/20180924162914/.bundle ]
+ DEBUG [0c24c35a] Finished in 0.070 seconds with exit status 1 (failed).
+  INFO [c655cce7] Running /usr/bin/env ln -s /home/deploy/food_rating/shared/.bundle /home/deploy/food_rating/releases/20180924162914/.bundle as deploy@web5.cs.ait.ac.th
+ DEBUG [c655cce7] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ln -s /home/deploy/food_rating/shared/.bundle /home/deploy/food_rating/releases/20180924162914/.bundle )
+  INFO [6c4bd7dd] Finished in 0.116 seconds with exit status 0 (successful).
+ DEBUG [27a470c0] Running [ -L /home/deploy/food_rating/releases/20180924162914/public/assets ] as deploy@web5.cs.ait.ac.th
+ DEBUG [27a470c0] Command: [ -L /home/deploy/food_rating/releases/20180924162914/public/assets ]
+ DEBUG [b2e21a95] Finished in 0.089 seconds with exit status 1 (failed).
+ DEBUG [56be7015] Running [ -d /home/deploy/food_rating/releases/20180924162914/public/assets ] as deploy@web5.cs.ait.ac.th
+ DEBUG [56be7015] Command: [ -d /home/deploy/food_rating/releases/20180924162914/public/assets ]
+ DEBUG [9631ee43] Finished in 0.061 seconds with exit status 1 (failed).
+  INFO [d7f06e69] Running /usr/bin/env ln -s /home/deploy/food_rating/shared/public/assets /home/deploy/food_rating/releases/20180924162914/public/assets as deploy@web5.cs.ait.ac.th
+ DEBUG [d7f06e69] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ln -s /home/deploy/food_rating/shared/public/assets /home/deploy/food_rating/releases/20180924162914/public/assets )
+  INFO [e639b54a] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [fa6d0c57] Running if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [fa6d0c57] Command: if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi
+ DEBUG [a4670f00] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [8068dd10] Running $HOME/.rbenv/bin/rbenv exec bundle check --path /home/deploy/food_rating/shared/bundle as deploy@web5.cs.ait.ac.th
+ DEBUG [8068dd10] Command: cd /home/deploy/food_rating/releases/20180924162914 && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; $HOME/.rbenv/bin/rbenv exec bundle check --path /home/deploy/food_rating/shared/bundle )
+ DEBUG [82c9404a] 	The Gemfile's dependencies are satisfied
+ DEBUG [82c9404a] Finished in 0.783 seconds with exit status 0 (successful).
+ DEBUG [2901b5e2] Running if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [2901b5e2] Command: if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi
+ DEBUG [ac8a24b6] Finished in 0.069 seconds with exit status 0 (successful).
+  INFO [d2268221] Running $HOME/.rbenv/bin/rbenv exec bundle exec rake assets:precompile as deploy@web5.cs.ait.ac.th
+ DEBUG [d2268221] Command: cd /home/deploy/food_rating/releases/20180924162914 && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" RAILS_ENV="production" RAILS_GROUPS="" ; $HOME/.rbenv/bin/rbenv exec bundle exec rake assets:precompile )
+ DEBUG [1de41332] 	Yarn executable was not detected in the system.
+ DEBUG [1de41332] 	Download Yarn at https://yarnpkg.com/en/docs/install
+  INFO [1de41332] Finished in 3.222 seconds with exit status 0 (successful).
+ DEBUG [55268a67] Running if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [55268a67] Command: if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi
+ DEBUG [64ff5442] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [63b54923] Running /usr/bin/env mkdir -p /home/deploy/food_rating/releases/20180924162914/assets_manifest_backup as deploy@web5.cs.ait.ac.th
+ DEBUG [63b54923] Command: cd /home/deploy/food_rating/releases/20180924162914 && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env mkdir -p /home/deploy/food_rating/releases/20180924162914/assets_manifest_backup )
+  INFO [c466d850] Finished in 0.069 seconds with exit status 0 (successful).
+ DEBUG [ad1ab3f3] Running /usr/bin/env ls /home/deploy/food_rating/releases/20180924162914/public/assets/.sprockets-manifest* as deploy@web5.cs.ait.ac.th
+ DEBUG [ad1ab3f3] Command: cd /home/deploy/food_rating/releases/20180924162914 && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ls /home/deploy/food_rating/releases/20180924162914/public/assets/.sprockets-manifest* )
+ DEBUG [9ce36e9a] 	/home/deploy/food_rating/releases/20180924162914/public/assets/.sprockets-manifest-0485e9fb9b4c9777a4c42778296c05c2.json
+ DEBUG [9ce36e9a] Finished in 0.075 seconds with exit status 0 (successful).
+ DEBUG [b60f42f0] Running /usr/bin/env ls /home/deploy/food_rating/releases/20180924162914/public/assets/.sprockets-manifest* as deploy@web5.cs.ait.ac.th
+ DEBUG [b60f42f0] Command: cd /home/deploy/food_rating/releases/20180924162914 && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ls /home/deploy/food_rating/releases/20180924162914/public/assets/.sprockets-manifest* )
+ DEBUG [23456531] 	/home/deploy/food_rating/releases/20180924162914/public/assets/.sprockets-manifest-0485e9fb9b4c9777a4c42778296c05c2.json
+ DEBUG [23456531] Finished in 0.070 seconds with exit status 0 (successful).
+  INFO [20390739] Running /usr/bin/env cp /home/deploy/food_rating/releases/20180924162914/public/assets/.sprockets-manifest-0485e9fb9b4c9777a4c42778296c05c2.json /home/deploy/food_rating/releases/20180924162914/assets_manifest_backup as deploy@web5.cs.ait.ac.th
+ DEBUG [20390739] Command: cd /home/deploy/food_rating/releases/20180924162914 && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env cp /home/deploy/food_rating/releases/20180924162914/public/assets/.sprockets-manifest-0485e9fb9b4c9777a4c42778296c05c2.json /home/deploy/food_rating/releases/20180924162914/assets_manifest_backup )
+  INFO [e83235c7] Finished in 0.093 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+ DEBUG [07f07bb5] Running if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [07f07bb5] Command: if test ! -d /home/deploy/food_rating/releases/20180924162914; then echo "Directory does not exist '/home/deploy/food_rating/releases/20180924162914'" 1>&2; false; fi
+ DEBUG [3c846511] Finished in 0.074 seconds with exit status 0 (successful).
+  INFO [3a6c3d96] Running $HOME/.rbenv/bin/rbenv exec bundle exec rake db:migrate as deploy@web5.cs.ait.ac.th
+ DEBUG [3a6c3d96] Command: cd /home/deploy/food_rating/releases/20180924162914 && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" RAILS_ENV="production" ; $HOME/.rbenv/bin/rbenv exec bundle exec rake db:migrate )
+  INFO [f27786aa] Finished in 2.693 seconds with exit status 0 (successful).
+  INFO [a144ae74] Running /usr/bin/env ln -s /home/deploy/food_rating/releases/20180924162914 /home/deploy/food_rating/releases/current as deploy@web5.cs.ait.ac.th
+ DEBUG [a144ae74] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ln -s /home/deploy/food_rating/releases/20180924162914 /home/deploy/food_rating/releases/current )
+  INFO [042e5c6a] Finished in 0.080 seconds with exit status 0 (successful).
+  INFO [3dd7bdf5] Running /usr/bin/env mv /home/deploy/food_rating/releases/current /home/deploy/food_rating as deploy@web5.cs.ait.ac.th
+ DEBUG [3dd7bdf5] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env mv /home/deploy/food_rating/releases/current /home/deploy/food_rating )
+  INFO [f3826452] Finished in 0.070 seconds with exit status 0 (successful).
+  INFO [c39fbd48] Running /usr/bin/env touch /home/deploy/food_rating/releases/20180924162914/tmp/restart.txt as deploy@web5.cs.ait.ac.th
+ DEBUG [c39fbd48] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env touch /home/deploy/food_rating/releases/20180924162914/tmp/restart.txt )
+  INFO [e1ef73d6] Finished in 0.075 seconds with exit status 0 (successful).
+ DEBUG [9b764090] Running /usr/bin/env ls -x /home/deploy/food_rating/releases as deploy@web5.cs.ait.ac.th
+ DEBUG [9b764090] Command: ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env ls -x /home/deploy/food_rating/releases )
+ DEBUG [56d730d9] 	20180924160522	20180924161338	20180924162914
+ DEBUG [56d730d9] Finished in 0.065 seconds with exit status 0 (successful).
+ DEBUG [b6bfe769] Running if test ! -d /home/deploy/food_rating/releases; then echo "Directory does not exist '/home/deploy/food_rating/releases'" 1>&2; false; fi as deploy@web5.cs.ait.ac.th
+ DEBUG [b6bfe769] Command: if test ! -d /home/deploy/food_rating/releases; then echo "Directory does not exist '/home/deploy/food_rating/releases'" 1>&2; false; fi
+ DEBUG [3ddad243] Finished in 0.068 seconds with exit status 0 (successful).
+  INFO [724e6cc5] Running /usr/bin/env echo "Branch master (at 9e3986e71b5e7a1574e9ee929efa1fb4341df4b5) deployed as release 20180924162914 by st120546" >> /home/deploy/food_rating/revisions.log as deploy@web5.cs.ait.ac.th
+ DEBUG [724e6cc5] Command: cd /home/deploy/food_rating/releases && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env echo "Branch master (at 9e3986e71b5e7a1574e9ee929efa1fb4341df4b5) deployed as release 20180924162914 by st120546" >> /home/deploy/food_rating/revisions.log )
+  INFO [52d06591] Finished in 0.065 seconds with exit status 0 (successful).

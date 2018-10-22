@@ -51218,3 +51218,129 @@ Processing by AssignmentsController#index as HTML
 Completed 200 OK in 407ms (Views: 390.5ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-09-26 02:31:12 +0700
+  [1m[35m (136.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/st120546/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by AssignmentsController#index as HTML
+  Rendering assignments/index.html.erb within layouts/application
+  Rendered assignments/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 481ms (Views: 459.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/basics/index" for 127.0.0.1 at 2018-09-26 02:34:55 +0700
+Processing by BasicsController#index as HTML
+  Rendering basics/index.html.erb within layouts/application
+  Rendered basics/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 54ms (Views: 52.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/basics/quotations" for 127.0.0.1 at 2018-09-26 02:34:57 +0700
+Processing by BasicsController#quotations as HTML
+  [1m[35m (39.4ms)[0m  [1m[34mSELECT DISTINCT "quotations"."category" FROM "quotations"[0m
+  ↳ app/controllers/basics_controller.rb:8
+  Rendering basics/quotations.html.erb within layouts/application
+  [1m[36mQuotation Load (0.9ms)[0m  [1m[34mSELECT "quotations".* FROM "quotations" WHERE 1=1 ORDER BY "quotations"."category" ASC[0m
+  ↳ app/views/basics/quotations.html.erb:34
+  Rendered basics/quotations.html.erb within layouts/application (597.2ms)
+Completed 200 OK in 889ms (Views: 655.2ms | ActiveRecord: 151.8ms)
+
+
+Started GET "/basics/quotations?utf8=%E2%9C%93&keyword=te&commit=Search" for 127.0.0.1 at 2018-09-26 02:35:13 +0700
+Processing by BasicsController#quotations as HTML
+  Parameters: {"utf8"=>"✓", "keyword"=>"te", "commit"=>"Search"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT DISTINCT "quotations"."category" FROM "quotations"[0m
+  ↳ app/controllers/basics_controller.rb:8
+  Rendering basics/quotations.html.erb within layouts/application
+  [1m[36mQuotation Load (1.3ms)[0m  [1m[34mSELECT "quotations".* FROM "quotations" WHERE (lower(quote) LIKE '%te%' or lower(author_name) LIKE '%te%') ORDER BY "quotations"."category" ASC[0m
+  ↳ app/views/basics/quotations.html.erb:34
+  Rendered basics/quotations.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 37ms (Views: 31.5ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/basics/quotations" for 127.0.0.1 at 2018-09-26 02:36:02 +0700
+Processing by BasicsController#quotations as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"W1Egyf4Uxtmg7lXklYQVM4ysCJNpyhL9TVMhel1POzeB6jxrpu+J4hIED6ZzTBVuz3GgDOW+oaWlphGnQ2aQFg==", "quotation"=>{"author_name"=>"an", "category"=>"cat", "quote"=>"qqq"}, "commit"=>"Create"}
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT DISTINCT "quotations"."category" FROM "quotations"[0m
+  ↳ app/controllers/basics_controller.rb:8
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/basics_controller.rb:15
+  [1m[36mQuotation Create (148.4ms)[0m  [1m[32mINSERT INTO "quotations" ("author_name", "category", "quote", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_name", "an"], ["category", "cat"], ["quote", "qqq"], ["created_at", "2018-09-25 19:36:02.519490"], ["updated_at", "2018-09-25 19:36:02.519490"]]
+  ↳ app/controllers/basics_controller.rb:15
+  [1m[35m (77.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/basics_controller.rb:15
+Redirected to http://web05.com/basics/quotations
+Completed 302 Found in 233ms (ActiveRecord: 227.5ms)
+
+
+Started GET "/basics/quotations" for 127.0.0.1 at 2018-09-26 02:36:02 +0700
+Processing by BasicsController#quotations as HTML
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT DISTINCT "quotations"."category" FROM "quotations"[0m
+  ↳ app/controllers/basics_controller.rb:8
+  Rendering basics/quotations.html.erb within layouts/application
+  [1m[36mQuotation Load (0.7ms)[0m  [1m[34mSELECT "quotations".* FROM "quotations" WHERE 1=1 ORDER BY "quotations"."category" ASC[0m
+  ↳ app/views/basics/quotations.html.erb:34
+  Rendered basics/quotations.html.erb within layouts/application (23.7ms)
+Completed 200 OK in 48ms (Views: 45.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/basics/quotations?utf8=%E2%9C%93&keyword=q&commit=Search" for 127.0.0.1 at 2018-09-26 02:36:11 +0700
+Processing by BasicsController#quotations as HTML
+  Parameters: {"utf8"=>"✓", "keyword"=>"q", "commit"=>"Search"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT DISTINCT "quotations"."category" FROM "quotations"[0m
+  ↳ app/controllers/basics_controller.rb:8
+  Rendering basics/quotations.html.erb within layouts/application
+  [1m[36mQuotation Load (34.5ms)[0m  [1m[34mSELECT "quotations".* FROM "quotations" WHERE (lower(quote) LIKE '%q%' or lower(author_name) LIKE '%q%') ORDER BY "quotations"."category" ASC[0m
+  ↳ app/views/basics/quotations.html.erb:34
+  Rendered basics/quotations.html.erb within layouts/application (43.3ms)
+Completed 200 OK in 74ms (Views: 36.5ms | ActiveRecord: 35.0ms)
+
+
+Started GET "/basics/quotations?utf8=%E2%9C%93&keyword=w&commit=Search" for 127.0.0.1 at 2018-09-26 02:36:17 +0700
+Processing by BasicsController#quotations as HTML
+  Parameters: {"utf8"=>"✓", "keyword"=>"w", "commit"=>"Search"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT DISTINCT "quotations"."category" FROM "quotations"[0m
+  ↳ app/controllers/basics_controller.rb:8
+  Rendering basics/quotations.html.erb within layouts/application
+  [1m[36mQuotation Load (0.6ms)[0m  [1m[34mSELECT "quotations".* FROM "quotations" WHERE (lower(quote) LIKE '%w%' or lower(author_name) LIKE '%w%') ORDER BY "quotations"."category" ASC[0m
+  ↳ app/views/basics/quotations.html.erb:34
+  Rendered basics/quotations.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 36ms (Views: 31.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/basics/quotations?utf8=%E2%9C%93&keyword=q&commit=Search" for 127.0.0.1 at 2018-09-26 02:36:22 +0700
+Processing by BasicsController#quotations as HTML
+  Parameters: {"utf8"=>"✓", "keyword"=>"q", "commit"=>"Search"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT DISTINCT "quotations"."category" FROM "quotations"[0m
+  ↳ app/controllers/basics_controller.rb:8
+  Rendering basics/quotations.html.erb within layouts/application
+  [1m[36mQuotation Load (1.3ms)[0m  [1m[34mSELECT "quotations".* FROM "quotations" WHERE (lower(quote) LIKE '%q%' or lower(author_name) LIKE '%q%') ORDER BY "quotations"."category" ASC[0m
+  ↳ app/views/basics/quotations.html.erb:34
+  Rendered basics/quotations.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 36ms (Views: 31.6ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-10-05 20:40:12 +0700
+  [1m[35m (102.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/st120546/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by AssignmentsController#index as HTML
+  Rendering assignments/index.html.erb within layouts/application
+  Rendered assignments/index.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 734ms (Views: 671.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-10-05 20:48:35 +0700
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/st120546/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by AssignmentsController#index as HTML
+  Rendering assignments/index.html.erb within layouts/application
+  Rendered assignments/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 233ms (Views: 222.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-10-05 20:48:38 +0700
+Processing by AssignmentsController#index as HTML
+  Rendering assignments/index.html.erb within layouts/application
+  Rendered assignments/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 28ms (Views: 26.5ms | ActiveRecord: 0.0ms)
+
+
