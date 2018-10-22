@@ -1,8 +1,12 @@
 set :deploy_to, "/home/deploy/food_rating"
 
-set :default_env, {'HTTP_PROXY'=>'192.41.170.23:3128',
-                   'HTTPS_PROXY'=>'192.41.170.23:3128'}
+raise "Could not find BAZOOKA_USER environment variable. Please set it in your .bashrc!" unless ENV['BAZOOKA_USER']
 
+set :default_env, {
+    'HTTP_PROXY' => '192.41.170.23:3128',
+    'HTTPS_PROXY' => '192.41.170.23:3128',
+    'BAZOOKA_USER' => ENV['BAZOOKA_USER'],
+}
 server "web5.cs.ait.ac.th", user: "deploy", roles: %w{app db web}
 
 # server-based syntax
