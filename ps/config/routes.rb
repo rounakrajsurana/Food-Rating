@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :stalls
+  resources :categories
   devise_for :users
   get 'basics/index', to: 'basics#index'
   get 'basics/quotations', as: 'quotations'

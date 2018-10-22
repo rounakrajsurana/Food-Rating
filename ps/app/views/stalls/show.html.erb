@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @stall.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @stall.desc %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @stall.picture %>
+</p>
+
+<p>
+  <strong>Latlog:</strong>
+  <%= @stall.latlog %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @stall.user %>
+</p>
+
+<%= link_to 'Edit', edit_stall_path(@stall) %> |
+<%= link_to 'Back', stalls_path %>

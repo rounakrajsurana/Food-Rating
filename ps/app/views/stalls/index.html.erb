@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stalls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Desc</th>
+      <th>Picture</th>
+      <th>Latlog</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stalls.each do |stall| %>
+      <tr>
+        <td><%= stall.name %></td>
+        <td><%= stall.desc %></td>
+        <td><%= stall.picture %></td>
+        <td><%= stall.latlog %></td>
+        <td><%= stall.user %></td>
+        <td><%= link_to 'Show', stall %></td>
+        <td><%= link_to 'Edit', edit_stall_path(stall) %></td>
+        <td><%= link_to 'Destroy', stall, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stall', new_stall_path %>
