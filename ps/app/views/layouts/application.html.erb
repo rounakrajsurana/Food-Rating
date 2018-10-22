@@ -3,7 +3,7 @@
 th {
     background-color: #4CAF50;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
 }
 th, td {
     padding: 15px;
@@ -33,6 +33,16 @@ footer {
    color: white;
    text-align: center;
 }
+.abanner {
+    position: static;
+    background-color: darkgreen;
+    padding: 2px 2px;
+}
+.ablock {
+    position: static;
+    border: 2px solid #73AD21;
+    max-width:500px;
+}
 </style>
 <html>
   <head>
@@ -43,24 +53,23 @@ footer {
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <nav class="navbar navbar-default">
-        <ul class="nav navbar-nav">
+        <!-- <ul class="nav navbar-nav"> -->
             <div id="container">
                 <div id="user_status">
                     <% if user_signed_in? %>
                         Welcome <%= current_user.email %>! Not you?
-                        <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %> </li>
+                        &emsp;<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
                     <% else %>
-                        <li> <%= link_to "Sign in", new_user_session_path %> </li>
-                        <li> <%= link_to "Sign up", new_user_registration_path %> </li>
+                        &emsp; <%= link_to "Sign in", new_user_session_path %>
+                        &emsp; <%= link_to "Sign up", new_user_registration_path %>
                     <% end %>
                 </div>
             </div>
-        </ul>
+        <!-- </ul> -->
     </nav>
-    <h1><font color='#0A2A0A'><center>GROUP WEB05: AIT Food Ratings</center></font></h1>
+    <div class='abanner'><h1><font color='white'><center>GROUP WEB05: AIT Food Ratings</center></font></h1></div>
     <br>  <br>
             <%= yield %>
             <br>
@@ -68,10 +77,9 @@ footer {
 	    <footer>
 	  <center>
 		  <font color='white'>
-			  <ul>
-				  <li><%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc=http%3A%2F%2Fweb5.cs.ait.ac.th%2F") %></li>
-				  <li><%= link_to("Issue Tracker", "https://trello.com/b/TdI6bAGa/ait-food-rating") %></li>
-		  	  </ul>
+				  <%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc=http%3A%2F%2Fweb5.cs.ait.ac.th%2F") %>
+				  <br>
+          <%= link_to("Issue Tracker", "https://trello.com/b/TdI6bAGa/ait-food-rating") %>
 		  </font>
 	  </center>
   </footer>
