@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   get 'basics/index', to: 'basics#index'
   get 'basics/quotations', as: 'quotations'
   post 'basics/quotations'
@@ -25,10 +26,11 @@ Rails.application.routes.draw do
   get 'google_news/data_scraper', as: "googlenews"
   
   # get 'basics/index', as: "basics_ps1"
-
+  get 'home/index'
   get "/as/soln", to: "assignments#solution"
   # resources :assignments
-  resources :basics
+  # resources :basics
+  # resources :home
   root "assignments#index"  
   
 

@@ -1105,3 +1105,8 @@ and the repository exists.
   INFO [4b40a8ca] Running /usr/bin/env echo "Branch master (at 9e3986e71b5e7a1574e9ee929efa1fb4341df4b5) deployed as release 20181010052732 by rounak" >> /home/deploy/food_rating/revisions.log as deploy@web5.cs.ait.ac.th
  DEBUG [4b40a8ca] Command: cd /home/deploy/food_rating/releases && ( export HTTP_PROXY="192.41.170.23:3128" HTTPS_PROXY="192.41.170.23:3128" BAZOOKA_USER="st119979" RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="2.5.1" ; /usr/bin/env echo "Branch master (at 9e3986e71b5e7a1574e9ee929efa1fb4341df4b5) deployed as release 20181010052732 by rounak" >> /home/deploy/food_rating/revisions.log )
   INFO [d7e8ec4a] Finished in 0.078 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-10-10 12:34:54 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [bc1b57e9] Running [ -d $HOME/.rbenv ] as deploy@web5.cs.ait.ac.th
+ DEBUG [bc1b57e9] Command: [ -d $HOME/.rbenv ]
