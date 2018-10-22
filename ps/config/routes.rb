@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :stalls
   resources :categories
+  resources :stalls
+  resources :dishes
+  resources :ratings
   devise_for :users
   get 'basics/index', to: 'basics#index'
   get 'basics/quotations', as: 'quotations'
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
   post 'basics/import_quotations'
   get 'solution/ps2one', as: "solnp21"
   get 'solution/ps2two', as: "solnp22"
- 
+
   # get  'basics/erase_personalization', to: 'basics#erase_personalization', as: 'quotations_erase'
    # get  'basics/quotations',      to: 'basics#kill',      as: 'quotations_kill'
 
@@ -26,21 +28,26 @@ Rails.application.routes.draw do
   get 'solution/index'
   get 'dividebyzero/divided', as: "zero_exception"
   get 'google_news/data_scraper', as: "googlenews"
-  
+
   # get 'basics/index', as: "basics_ps1"
   get 'home/index'
+  get 'categories/index'
+  get 'stalls/index'
+  get 'dishes/index'
+  get 'ratings/index'
+
   get "/as/soln", to: "assignments#solution"
   # resources :assignments
   # resources :basics
   # resources :home
-  root "assignments#index"  
-  
+  root "assignments#index"
 
 
-  
+
+
     # <%= h quotation.author_name %>: <%= h quotation.quote %> -- <%= h quotation.category %>
     # <%= link_to 'Killed', basics_killed_path%>
-        
+
 
   #get "/app/view/assignments/devided_page", to: "assignments#divided", as: "zero_exception"
   #get "/app/views/assignments/google_page", to: "assignments#gogoogle", as: "googlenews"

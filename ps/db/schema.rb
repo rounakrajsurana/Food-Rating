@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_22_170914) do
+ActiveRecord::Schema.define(version: 2018_10_22_172532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,79 @@ ActiveRecord::Schema.define(version: 2018_10_22_170914) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
+  create_table "dishes", force: :cascade do |t|
+    t.string "name"
+    t.string "desc"
+    t.string "picture"
+    t.bigint "category_id"
+    t.bigint "stall_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_dishes_on_category_id"
+    t.index ["stall_id"], name: "index_dishes_on_stall_id"
+    t.index ["user_id"], name: "index_dishes_on_user_id"
+  end
+
+  create_table "my_stocks", id: false, force: :cascade do |t|
+    t.string "symbol", limit: 20, null: false
+    t.integer "n_shares", null: false
+    t.date "date_acquired", null: false
+  end
+
+  create_table "newly_acquired_stocks", id: false, force: :cascade do |t|
+    t.string "symbol", limit: 20, null: false
+    t.integer "n_shares", null: false
+    t.date "date_acquired", null: false
+  end
+
+  create_table "problems", force: :cascade do |t|
+    t.integer "pid"
+    t.bigint "problemset_id"
+    t.string "pname"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["problemset_id"], name: "index_problems_on_problemset_id"
+  end
+
+  create_table "problemsets", force: :cascade do |t|
+    t.integer "psid"
+    t.string "psname"
+    t.date "date_assign"
+    t.date "date_due"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "quotations", force: :cascade do |t|
     t.string "author_name"
     t.string "category"
     t.text "quote"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "rate"
+    t.string "comment"
+    t.bigint "dish_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_ratings_on_dish_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
+  create_table "solutions", force: :cascade do |t|
+    t.integer "sid"
+    t.bigint "problem_id"
+    t.text "desc"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["problem_id"], name: "index_solutions_on_problem_id"
   end
 
   create_table "stalls", force: :cascade do |t|
@@ -46,6 +113,12 @@ ActiveRecord::Schema.define(version: 2018_10_22_170914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_stalls_on_user_id"
+  end
+
+  create_table "stock_prices", id: false, force: :cascade do |t|
+    t.string "symbol", limit: 20, null: false
+    t.date "quote_date", null: false
+    t.integer "price", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -61,5 +134,12 @@ ActiveRecord::Schema.define(version: 2018_10_22_170914) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "dishes", "categories"
+  add_foreign_key "dishes", "stalls"
+  add_foreign_key "dishes", "users"
+  add_foreign_key "problems", "problemsets"
+  add_foreign_key "ratings", "dishes"
+  add_foreign_key "ratings", "users"
+  add_foreign_key "solutions", "problems"
   add_foreign_key "stalls", "users"
 end
