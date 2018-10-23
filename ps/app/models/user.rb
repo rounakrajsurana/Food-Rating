@@ -4,21 +4,29 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-         before_save :assign_default_role
+         #before_save :assign_default_role
 
-         def admin?
-           self.admin == true
-         end
+         # def admin?
+         #   self.admin
+         # end
+         #
+         # def set_admin
+         #   self.admin = true
+         # end
+         #
+         # def stall?
+         #   self.stall
+         # end
+         #
+         # def set_stall
+         #   self.stall = true
+         # end
 
-         def set_admin
-           self.admin = true
-         end
+         # private
 
-         private
-
-         def assign_default_role
-           if current_user
-             self.admin = false if self.admin.nil?
-           end
-         end
+         # def assign_default_role
+         #   if current_user
+         #     self.member = true
+         #   end
+         # end
        end

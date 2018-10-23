@@ -60,6 +60,9 @@ footer {
                 <div id="user_status">
                     <% if user_signed_in? %>
                         Welcome <%= current_user.email %>! Not you?
+                        <% if current_user.admin? %>
+                          &emsp;<%= link_to "Admin Page", '/admin' %>
+                        <% end %>
                         &emsp;<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
                     <% else %>
                         &emsp; <%= link_to "Sign in", new_user_session_path %>
