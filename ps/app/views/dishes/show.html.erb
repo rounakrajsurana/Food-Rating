@@ -29,6 +29,11 @@
   <strong>User:</strong>
   <%= @dish.user %>
 </p>
-
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+<br>
+<% if user_signed_in? %>
+    <% if current_user.admin? %>
+        &emsp;<%= link_to 'Edit', edit_stall_path(@stall) %>
+        &emsp;<%= link_to "Create Dish", 'dishes/new' %>
+    <% end %>
+   |&emsp;<%= link_to 'Back', stalls_path %>
+<% end %>

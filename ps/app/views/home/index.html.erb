@@ -7,11 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 
-<% if flash[:error] %>
-    <div id="error">
-        <%= flash[:error] %>
-    </div>
-<% end %>
 <div class='ablock'>
 <ul>
   <li> <%= link_to "Categories", categories_path %> </li>

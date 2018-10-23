@@ -27,7 +27,7 @@ class DishesController < ApplicationController
   # POST /dishes.json
   def create
     @dish = Dish.new(dish_params)
-
+    @dish.user = current_user.id
     respond_to do |format|
       if @dish.save
         format.html { redirect_to @dish, notice: 'Dish was successfully created.' }

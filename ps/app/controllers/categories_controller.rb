@@ -3,6 +3,8 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # GET /categories
   # GET /categories.json
+  load_and_authorize_resource
+
   def index
     @categories = Category.all
 
@@ -26,7 +28,7 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
-    @category.user_id = current_user.id
+    @category.user = current_user.id
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
