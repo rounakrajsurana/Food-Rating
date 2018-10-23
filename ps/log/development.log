@@ -52242,3 +52242,19 @@ FOREIGN KEY ("user_id")
   ↳ /home/rounak/.rbenv/versions/2.5.1/bin/rake:23
   [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   ↳ /home/rounak/.rbenv/versions/2.5.1/bin/rake:23
+Started GET "/" for 127.0.0.1 at 2018-10-23 00:27:36 +0700
+  [1m[35m (27.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/rounak/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by AssignmentsController#index as HTML
+  Rendering assignments/index.html.erb within layouts/application
+  Rendered assignments/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 3759ms (Views: 3719.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home/index" for 127.0.0.1 at 2018-10-23 00:27:53 +0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (71.5ms)
+Completed 200 OK in 91ms (Views: 89.0ms | ActiveRecord: 0.0ms)
+
+
