@@ -8,13 +8,12 @@
 </head>
 
 <div class='ablock'>
-
-</div>
+  <p>
 <% if user_signed_in? %>
     <% if current_user.stall? %>
-        &emsp;<%= link_to 'Edit', edit_dish_path(@dish) %>
         &emsp;<%= link_to "My Dishes", dishes_path %>
     <% end %>
-   |&emsp;<%= link_to 'Back', dishes_path %>
 <% end %>
+</p>
+</div>
 </html>
