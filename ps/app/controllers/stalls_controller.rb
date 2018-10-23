@@ -1,8 +1,10 @@
 class StallsController < ApplicationController
   before_action :set_stall, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, except: [:index, :show]
   # GET /stalls
   # GET /stalls.json
+  load_and_authorize_resource
+  
   def index
     @stalls = Stall.all
   end

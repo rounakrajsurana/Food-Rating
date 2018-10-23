@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @dish.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @dish.desc %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @dish.picture %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @dish.category %>
+</p>
+
+<p>
+  <strong>Stall:</strong>
+  <%= @dish.stall %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @dish.user %>
+</p>
+<br>
+<% if user_signed_in? %>
+    <% if current_user.admin? %>
+        &emsp;<%= link_to 'Edit', edit_stall_path(@stall) %>
+        &emsp;<%= link_to "Create Dish", 'dishes/new' %>
+    <% end %>
+   |&emsp;<%= link_to 'Back', stalls_path %>
+<% end %>
