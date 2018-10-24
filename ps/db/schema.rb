@@ -43,38 +43,6 @@ ActiveRecord::Schema.define(version: 2018_10_23_035247) do
     t.index ["user_id"], name: "index_dishes_on_user_id"
   end
 
-  create_table "my_stocks", id: false, force: :cascade do |t|
-    t.string "symbol", limit: 20, null: false
-    t.integer "n_shares", null: false
-    t.date "date_acquired", null: false
-  end
-
-  create_table "newly_acquired_stocks", id: false, force: :cascade do |t|
-    t.string "symbol", limit: 20, null: false
-    t.integer "n_shares", null: false
-    t.date "date_acquired", null: false
-  end
-
-  create_table "problems", force: :cascade do |t|
-    t.integer "pid"
-    t.bigint "problemset_id"
-    t.string "pname"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["problemset_id"], name: "index_problems_on_problemset_id"
-  end
-
-  create_table "problemsets", force: :cascade do |t|
-    t.integer "psid"
-    t.string "psname"
-    t.date "date_assign"
-    t.date "date_due"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "quotations", force: :cascade do |t|
     t.string "author_name"
     t.string "category"
@@ -94,16 +62,6 @@ ActiveRecord::Schema.define(version: 2018_10_23_035247) do
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
-  create_table "solutions", force: :cascade do |t|
-    t.integer "sid"
-    t.bigint "problem_id"
-    t.text "desc"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["problem_id"], name: "index_solutions_on_problem_id"
-  end
-
   create_table "stalls", force: :cascade do |t|
     t.string "name"
     t.string "desc"
@@ -113,12 +71,6 @@ ActiveRecord::Schema.define(version: 2018_10_23_035247) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_stalls_on_user_id"
-  end
-
-  create_table "stock_prices", id: false, force: :cascade do |t|
-    t.string "symbol", limit: 20, null: false
-    t.date "quote_date", null: false
-    t.integer "price", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -153,9 +105,7 @@ ActiveRecord::Schema.define(version: 2018_10_23_035247) do
   add_foreign_key "dishes", "categories"
   add_foreign_key "dishes", "stalls"
   add_foreign_key "dishes", "users"
-  add_foreign_key "problems", "problemsets"
   add_foreign_key "ratings", "dishes"
   add_foreign_key "ratings", "users"
-  add_foreign_key "solutions", "problems"
   add_foreign_key "stalls", "users"
 end
