@@ -72,6 +72,7 @@ footer {
                         &emsp;<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
                         <% if current_user.admin? %>
                           &emsp;<%= link_to "Admin Page", '/home/admin' %>
+                          &emsp;<%= link_to "User Page", '/home/user' %>
                         <% end %>
                         <% if current_user.stall? %>
                           &emsp;<%= link_to "My Stall", '/home/stall' %>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'home/member'
   get 'home/stall'
   get 'home/admin'
+  get 'home/user'
   # get 'basics/index', to: 'basics#index'
   get 'basics/index'
   # get 'basics/search' => 'basics#search'
