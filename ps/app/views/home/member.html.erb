@@ -7,9 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 
-<div class='ablock'>
-<p>
-  <%= link_to "Ratings & Reviews History", dishes_path %>
-</p>
-</div>
+<% if user_signed_in? %>
+    <% if current_user.stall? %>
+    <div class='ablock'>
+      <p>
+        <%= link_to "Ratings & Reviews History", dishes_path %>
+      </p>
+      </div>
+      <% end %>
+<% end %>
 </html>

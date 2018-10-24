@@ -71,7 +71,7 @@ footer {
                         Welcome <%= current_user.email %>! Not you?
                         &emsp;<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
                         <% if current_user.admin? %>
-                          &emsp;<%= link_to "Admin Page", '/admin' %>
+                          &emsp;<%= link_to "Admin Page", '/home/admin' %>
                         <% end %>
                         <% if current_user.stall? %>
                           &emsp;<%= link_to "My Stall", '/home/stall' %>

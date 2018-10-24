@@ -1,4 +1,4 @@
-Feature: Stall
+Feature: Admin
     As an admin, I want to associate stalls with the owner.
 Scenario: Add new stall with specific owner
     An admin should be able to add a stall with specific owner user.
