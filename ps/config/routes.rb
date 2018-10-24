@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :dishes
   resources :ratings
 
-  devise_for :views
   devise_for :users
 
   root to: 'assignments#index'
