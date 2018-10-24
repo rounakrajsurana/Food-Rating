@@ -3,7 +3,7 @@ Feature: Review
 Scenario: Add new review to a dish
     A Member should be able to create rating & reviews belongs to dishes.
 
-Given I am a Member
+Given I am a member
 And I am signed in
 And I want to create a review
 

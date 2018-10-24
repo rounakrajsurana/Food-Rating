@@ -1,0 +1,19 @@
+<html>
+
+<head>
+  <title>Stall</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<div class='ablock'>
+  <p>
+<% if user_signed_in? %>
+    <% if current_user.stall? %>
+        &emsp;<%= link_to "My Dishes", dishes_path %>
+    <% end %>
+<% end %>
+</p>
+</div>
+</html>

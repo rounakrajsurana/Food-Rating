@@ -3,7 +3,7 @@ Feature: Stall
 Scenario: Add new stall with specific owner
     An admin should be able to add a stall with specific owner user.
 
-Given I am an Admin
+Given I am an admin
 And I am signed in
 And I want to add a stall
 

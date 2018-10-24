@@ -3,7 +3,7 @@ Feature: Dish
 Scenario: Add new dish into a stall
     A Stall should be able to add dish into a stall with specific category.
 
-Given I am a Stall
+Given I am a stall
 And I am signed in
 And I want to add a dish
 
