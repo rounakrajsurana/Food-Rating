@@ -1,5 +1,5 @@
 Given("I am a Member") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @member = FactoryBot.create :user
 end
 
 Given("I want to create a review") do

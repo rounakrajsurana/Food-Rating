@@ -7,13 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 
-<div class='ablock'>
-  <p>
+
 <% if user_signed_in? %>
     <% if current_user.stall? %>
+    <div class='ablock'>
+      <p>
         &emsp;<%= link_to "My Dishes", dishes_path %>
+      </p>
+      </div>
     <% end %>
 <% end %>
-</p>
-</div>
 </html>

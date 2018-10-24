@@ -1,5 +1,5 @@
 Given("I am a Stall") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @stall = FactoryBot.create :stall
 end
 
 Given("I am signed in") do
