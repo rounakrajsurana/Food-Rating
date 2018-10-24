@@ -1,14 +1,14 @@
 <html>
 
 <head>
-  <title>Stall</title>
+  <title>Admin</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 
 <% if user_signed_in? %>
-    <% if current_user.stall? %>
+    <% if current_user.admin? %>
     <div class='ablock'>
     <ul>
       <li> <%= link_to "Categories", categories_path %> </li>

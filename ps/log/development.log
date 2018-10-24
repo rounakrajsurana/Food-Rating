@@ -60020,3 +60020,56 @@ Processing by Devise::SessionsController#new as HTML
 Completed 200 OK in 61ms (Views: 57.4ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-10-24 22:52:44 +0700
+  [1m[35m (18.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/st120546/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by AssignmentsController#index as HTML
+  Rendering assignments/index.html.erb within layouts/application
+  Rendered assignments/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 575ms (Views: 558.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-10-24 22:52:46 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (73.6ms)
+Completed 200 OK in 155ms (Views: 131.3ms | ActiveRecord: 6.9ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-10-24 22:52:50 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"L160oDKFKgTFjvfUTPfjBMugSkuNgnNC4BFDZei3GP2ZYJG65MDZWjS7JzR8rSxp+f3PtJhyFvOURz0KBPvSOg==", "user"=>{"email"=>"admin@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin@gmail.com"], ["LIMIT", 1]]
+  ↳ /home/st120546/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 250ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-10-24 22:52:50 +0700
+Processing by AssignmentsController#index as HTML
+  Rendering assignments/index.html.erb within layouts/application
+  Rendered assignments/index.html.erb within layouts/application (0.5ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:70
+Completed 200 OK in 48ms (Views: 44.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/home/admin" for 127.0.0.1 at 2018-10-24 22:52:52 +0700
+Processing by HomeController#admin as HTML
+  Rendering home/admin.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/admin.html.erb:10
+  Rendered home/admin.html.erb within layouts/application (34.8ms)
+Completed 200 OK in 54ms (Views: 50.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/home/admin" for 127.0.0.1 at 2018-10-24 22:52:55 +0700
+Processing by HomeController#admin as HTML
+  Rendering home/admin.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/admin.html.erb:10
+  Rendered home/admin.html.erb within layouts/application (48.7ms)
+Completed 200 OK in 68ms (Views: 66.5ms | ActiveRecord: 0.5ms)
+
+
