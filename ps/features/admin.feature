@@ -10,8 +10,7 @@ When I visit the user page
 Then I should see recently registered users
 
 And I want to ban a user
-When I submit the form
-Then I should see the successful message
+Then I should see the User successful message
 
 And I want to add a stall
 

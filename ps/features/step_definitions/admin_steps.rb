@@ -23,12 +23,8 @@ Given("I want to ban a user") do
   @member.active = false
 end
 
-When("I submit the form") do
-
-end
-
-Then("I should see the successful message") do
-  expect(page).to have_content('User successfully updated')
+Then("I should see the User successful message") do
+  expect(page).to have_content('List of Users')
 end
 
 Given("I want to add a stall") do

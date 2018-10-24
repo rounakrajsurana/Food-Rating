@@ -1,6 +1,7 @@
 FactoryBot.define do
 
   factory :admin, class: User do
+    id { "1" }
     email { "admin@ait.asia" }
     password { 'password' }
     password_confirmation { 'password' }
@@ -11,6 +12,7 @@ FactoryBot.define do
   end
 
   factory :stall, class: User do
+    id { "2" }
     email { 'stall@ait.asia' }
     password { 'password' }
     password_confirmation { 'password' }
@@ -21,6 +23,7 @@ FactoryBot.define do
   end
 
   factory :member, class: User do
+    id { "3" }
     email { 'member@ait.asia' }
     password { 'password' }
     password_confirmation { 'password' }
