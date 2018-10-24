@@ -1,4 +1,4 @@
-Given("I am a Stall") do
+Given("I am a stall") do
   @stall = FactoryBot.create :stall
 end
 

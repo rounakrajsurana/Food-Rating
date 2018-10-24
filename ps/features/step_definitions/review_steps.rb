@@ -1,4 +1,4 @@
-Given("I am a Member") do
+Given("I am a member") do
   @member = FactoryBot.create :user
 end
 
