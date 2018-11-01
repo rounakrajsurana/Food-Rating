@@ -1,6 +1,7 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  # before_action :find_dish
   # GET /ratings
   # GET /ratings.json
   load_and_authorize_resource
@@ -27,7 +28,8 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
-    @rating.user = current_user.id
+    @rating.user_id = current_user.id
+    # @raring.dish_id = @dish_id
     respond_to do |format|
       if @rating.save
         format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
@@ -73,4 +75,11 @@ class RatingsController < ApplicationController
     def rating_params
       params.require(:rating).permit(:rate, :comment, :dish_id, :user_id)
     end
+
+    def find_dish
+			@dish = Dish.find(params[:dish_id])
+		end
+
+		
+
 end

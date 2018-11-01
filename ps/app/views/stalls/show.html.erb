@@ -20,15 +20,12 @@
   <%= @stall.latlog %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @stall.user %>
-</p>
+
 
 <% if user_signed_in? %>
     <% if current_user.admin? %>
         &emsp;<%= link_to 'Edit', edit_stall_path(@stall) %>
-        &emsp;<%= link_to "Create Dish", 'dishes/new' %>
+        &emsp;<%= link_to "Create Dish", new_dish_path() %>
     <% end %>
    |&emsp;<%= link_to 'Back', stalls_path %>
 <% end %>

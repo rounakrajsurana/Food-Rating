@@ -27,7 +27,8 @@ class StallsController < ApplicationController
   # POST /stalls.json
   def create
     @stall = Stall.new(stall_params)
-
+    @stall.user_id = current_user.id
+    
     respond_to do |format|
       if @stall.save
         format.html { redirect_to @stall, notice: 'Stall was successfully created.' }

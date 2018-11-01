@@ -21,7 +21,7 @@
         <td><%= stall.desc %></td>
         <td><%= stall.picture %></td>
         <td><%= stall.latlog %></td>
-        <td><%= stall.user %></td>
+        
         <td><%= link_to 'Show', stall %></td>
         <td><%= link_to 'Edit', edit_stall_path(stall) %></td>
         <td><%= link_to 'Destroy', stall, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -32,4 +32,7 @@
 
 <br>
 
+<%= link_to 'Back', home_index_path %>
+&nbsp;
+&nbsp;
 <%= link_to 'New Stall', new_stall_path %>

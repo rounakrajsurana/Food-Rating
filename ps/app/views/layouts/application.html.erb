@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <style>
 th {
     background-color: #4CAF50;
@@ -35,7 +36,7 @@ footer {
 }
 .abanner {
     position: static;
-    background-color: darkgreen;
+    background-color: lightblue;
     padding: 2px 2px;
 }
 .ablock {
@@ -54,6 +55,17 @@ footer {
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+  <%= link_to 'Home', home_index_path %>&nbsp;
+  <div class='abanner'>
+  
+  <h4>
+      <font color='#EBF6F2'>
+      
+      <center>GROUP WEB05: AIT Food Ratings</center>
+      </div>
+      </font>
+  </h4>
+</div>
     <% if flash[:error] %>
         <div id="error">
         <p><mark color='red'><%= flash[:error] %></mark></p>
@@ -63,7 +75,7 @@ footer {
         <p></mark><%= flash[:alert] %></mark></p>
         </div>
     <% end %>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-dark">
         <!-- <ul class="nav navbar-nav"> -->
             <div id="container">
                 <div id="user_status">
@@ -86,7 +98,8 @@ footer {
             </div>
         <!-- </ul> -->
     </nav>
-    <div class='abanner'><h4><font color='#EBF6F2'><center>GROUP WEB05: AIT Food Ratings</center></font></h4></div>
+
+    
     <br>  <br>
             <%= yield %>
             <br>
