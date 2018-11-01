@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap";
+ @import "bootstrap";
 
 
 /* Variables, mixins, etc.. */
@@ -80,7 +80,7 @@ p.alert, p.notice {
 
 	.navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
 		background-color: darken(#f1c40f, 5%);
-		color: #fff;	
+		color: #fff;
 	}
 
 }
@@ -110,4 +110,3 @@ p.alert, p.notice {
 	}
 
 }
-
