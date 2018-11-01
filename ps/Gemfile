@@ -20,7 +20,7 @@ gem 'cancancan', '~> 1.15.0'
 gem 'rails_admin'
 
 gem 'jquery-rails'
-gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 group :test do
   gem 'cucumber-rails', :require => false
