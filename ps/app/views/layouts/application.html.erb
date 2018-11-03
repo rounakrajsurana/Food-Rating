@@ -1,52 +1,6 @@
 <!DOCTYPE html>
-
-<style>
-th {
-    background-color: #4CAF50;
-    color: white;
-    font-size: 18px;
-}
-th, td {
-    padding: 15px;
-    text-align: left;
-}
-tr:hover {
-    background-color: #f5f5f5;
-    }
-table#ltable td {
-    border-bottom: 1px solid #ddd;
-    padding: 15px;
-    text-align: left;
-}
-table#itable th {
-    color: white;
-    /*font-size: 4;*/
-    background-color: #2F4F4F; /*778899;/*#2F4F4F*/
-    padding: 15px;
-    text-align: left;
-}
-footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: #0A2A0A;
-   color: white;
-   text-align: center;
-}
-.abanner {
-    position: static;
-    background-color: lightblue;
-    padding: 2px 2px;
-}
-.ablock {
-    position: static;
-    border: 2px solid #73AD21;
-    max-width:500px;
-}
-</style>
 <html>
-  <head>
+<head>
     <title>PS-Web05</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -55,17 +9,9 @@ footer {
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-  <%= link_to 'Home', home_index_path %>&nbsp;
-  <div class='abanner'>
-  
   <h4>
-      <font color='#EBF6F2'>
-      
-      <center>GROUP WEB05: AIT Food Ratings</center>
-      </div>
-      </font>
+      GROUP WEB05: AIT Food Ratings
   </h4>
-</div>
     <% if flash[:error] %>
         <div id="error">
         <p><mark color='red'><%= flash[:error] %></mark></p>
@@ -75,8 +21,65 @@ footer {
         <p></mark><%= flash[:alert] %></mark></p>
         </div>
     <% end %>
+    <!-- Second navbar for search -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-3">
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Home", home_index_path %>&nbsp;</li>
+            <li> <%= link_to "Categories", categories_path %> </li>
+            <li> <%= link_to "Stalls", stalls_path %> </li>
+            <li> <%= link_to "Dishes", dishes_path %> </li>
+            <li> <%= link_to "Reviews", ratings_path %> </li>
+            <% if user_signed_in? %>
+              <% if current_user.admin? %>
+              <li><%= link_to "Admin", '/admin' %></li>
+              <li><%= link_to "Users", '/admin/user' %></li>
+              <% end %>
+              <% if current_user.stall? %>
+                <li><%= link_to "My Stall", '/home/stall' %></li>
+              <% end %>
+              <li><a href="#">My Reviews</a></li>
+              <li><%= link_to "My Profile", '/home/member' %></li>
+            <% end %>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li>
+              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
+            </li>
+          </ul>
+          <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" />
+              </div>
+              <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </form>
+          </div>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+    <% if user_signed_in? %>
+      Welcome <%= current_user.email %> ! Not you?
+      &emsp;<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+    <% else %>
+      &emsp; <%= link_to "Sign in", new_user_session_path %>
+      &emsp; <%= link_to "Sign up", new_user_registration_path %>
+    <% end %>
+    <!--
     <nav class="navbar navbar-dark">
-        <!-- <ul class="nav navbar-nav"> -->
             <div id="container">
                 <div id="user_status">
                     <% if user_signed_in? %>
@@ -96,22 +99,27 @@ footer {
                     <% end %>
                 </div>
             </div>
-        <!-- </ul> -->
-    </nav>
 
-    
-    <br>  <br>
-            <%= yield %>
-            <br>
-	    <br><br><br>
-	    <footer>
-	  <center>
-		  <font color='white'>
-				  <%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc=http%3A%2F%2Fweb5.cs.ait.ac.th%2F") %>
-				  <br>
-          <%= link_to("Issue Tracker", "https://trello.com/b/TdI6bAGa/ait-food-rating") %>
-		  </font>
-	  </center>
+    </nav>-->
+
+    <br><br><%= yield %><br><br><br><br>
+
+    <!-- <div class="table100 ver2 m-b-110">
+    <div class="table100-head">
+    <tr class="row100 head">
+    <div class="table100-body js-pscroll ps ps--active-y">
+    <table>
+    <tbody>
+    <tr class="row100 body">
+    <td class="cell100 column1">Virtual Cycle</td> -->
+	 <footer>
+      <%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc=http%3A%2F%2Fweb5.cs.ait.ac.th") %>
+      <br>
+      <%= link_to("HTML syntax validation New", "https://validator.w3.org/nu/?doc="+request.original_url) %>
+      <br>
+      <%= link_to("Issue Tracker", "https://trello.com/b/TdI6bAGa/ait-food-rating") %>
+      <br>
   </footer>
+
   </body>
 </html>
