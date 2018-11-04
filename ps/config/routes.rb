@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   resources :assignments
   resources :categories
+
+  
   resources :stalls
+
+
   resources :dishes
   resources :ratings
 

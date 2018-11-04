@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
-
+<div class='center'>
+<div class='sblock'>
 <p>
   <strong>Rate:</strong>
   <%= @rating.rate %>
@@ -19,6 +20,7 @@
   <strong>User:</strong>
   <%= @rating.user %>
 </p>
-
-<%= link_to 'Edit', edit_rating_path(@rating) %> |
-<%= link_to 'Back', ratings_path %>
+</div>
+<p><%= link_to 'Edit', edit_rating_path(@rating) %> |
+<%= link_to 'Back', ratings_path %></p>
+</div>

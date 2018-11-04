@@ -1,16 +1,16 @@
 
 <h3>New quotation</h3>
 	<%= form_for @quotation, :url => { :action => :quotations } do |form| %>
-	
+
 
 	<fieldset>
 		<legend>Enter details</legend>
-		
+
 		<div class="form_row">
 		<%= form.label :author_name %>
 		<%= form.text_field :author_name, :size => 20, :maxlength => 40 %>
 		</div>
-		
+
 		<div class="form_row">
 		<%= form.label :category %>
 		<%= form.text_field :category, :size => 20, :maxlength => 40 %>
@@ -25,7 +25,7 @@
 	<p>
 		<div class="actions">
 		<%= form.submit 'Create' %>
-		
+
 		</div>
 	</p>
 	<% end %>

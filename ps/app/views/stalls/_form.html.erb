@@ -12,23 +12,29 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <b>Stall Name</b>
+    <%= form.text_field :name, :class => "fcontrol"  %>
   </div>
 
   <div class="field">
-    <%= form.label :desc %>
-    <%= form.text_field :desc %>
+    <b>Introduction</b>
+    <%= form.text_area :desc %>
   </div>
 
   <div class="field">
     <%= form.label :picture %>
-    <%= form.text_field :picture %>
+    <%= form.text_field :picture, :class => "fcontrol"  %>
   </div>
 
   <div class="field">
     <%= form.label :latlog %>
     <%= form.text_field :latlog %>
+  </div>
+
+  <div class="field">
+    <%= form.label :owner %>
+    <%= collection_select(:stall, :owner, User.all, :id, :email, {:prompt => false}) %>
+
   </div>
 
   <div class="actions">

@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
+<div class='center'>
+<%= image_tag(@dish.picture, size: "400x300", :alt => @dish.name) %>
 
 <p>
-  <strong>Name:</strong>
-  <%= @dish.name %>
+  <h2>Dish: <%= @dish.name %></h2>
 </p>
-
+<div class='sblock'>
 <p>
-  <strong>Desc:</strong>
+  <strong>Description</strong>
   <%= @dish.desc %>
 </p>
 
@@ -17,23 +18,26 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @dish.category %>
+  <%= @dish.category.name %>
 </p>
 
 <p>
   <strong>Stall:</strong>
-  <%= @dish.stall %>
+  <%= @dish.stall.name %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @dish.user %>
+  <%= @dish.user.email %>
 </p>
+</div>
 <br>
+<p>
 <% if user_signed_in? %>
     <% if current_user.admin? %>
-        &emsp;<%= link_to 'Edit', edit_stall_path(@stall) %>
-        &emsp;<%= link_to "Create Dish", 'dishes/new' %>
+        &emsp;<%= link_to 'Edit', edit_dish_path(@dish) %>
+        &emsp;<%= link_to "Create Review", 'reviews/new' %>
     <% end %>
-   |&emsp;<%= link_to 'Back', stalls_path %>
 <% end %>
+</p>
+</div>

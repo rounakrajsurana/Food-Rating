@@ -13,6 +13,12 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require jquery3
+//= require jquery
+//= require jquery_ujs
+//= require jquery.tokeninput
 //= require bootstrap-sprockets
+//= require best_in_place
+//= require best_in_place.purr
+//= require jquery.purr
+//
 //= require_tree .

@@ -1,12 +1,24 @@
 class DishesController < ApplicationController
   before_action :set_dish, only: [:show, :edit, :update, :destroy]
+  # before_action :set_stall, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   # GET /dishes
   # GET /dishes.json
   load_and_authorize_resource
 
   def index
-    @dishes = Dish.all
+    # @dishes = Dish.all
+    @dishes = (params[:dish].blank?) ? Dish.all : Dish.where(name: params[:q])
+    @dishes = @dishes.paginate(per_page: 32, page: params[:page])
+
+    respond_to do |format|
+      format.html
+      # format.json {
+      #   render json: Dish.where('name ilike ?', "%#{params[:q]}%")
+      #   .select('id, name as dish_name')
+      # }
+    end
+    # @quotes = @quotes.paginate(per_page: 5, page: params[:page])
   end
 
   # GET /dishes/1
@@ -17,6 +29,13 @@ class DishesController < ApplicationController
   # GET /dishes/new
   def new
     @dish = Dish.new
+    @categories = Category.all
+
+    if current_user.admin?
+      @stalls = Stall.all
+    elsif current_user.stall?
+      @stalls = Stall.find(params[:owner_id])
+    end
   end
 
   # GET /dishes/1/edit
@@ -67,6 +86,11 @@ class DishesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_dish
       @dish = Dish.find(params[:id])
+    end
+
+    def set_stall
+      @stall = Stall.where(id: params[:stall_id])
+      # @stall = Stall.find(params[:stall_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

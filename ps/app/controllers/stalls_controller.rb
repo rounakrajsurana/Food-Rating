@@ -1,10 +1,11 @@
 class StallsController < ApplicationController
   before_action :set_stall, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  # before_action :set_owner
   # GET /stalls
   # GET /stalls.json
   load_and_authorize_resource
-  
+
   def index
     @stalls = Stall.all
   end
@@ -12,11 +13,17 @@ class StallsController < ApplicationController
   # GET /stalls/1
   # GET /stalls/1.json
   def show
+    @owner = User.where(id: params[:owner])
   end
 
   # GET /stalls/new
   def new
     @stall = Stall.new
+    if current_user.admin?
+      @owners = User.all
+    elsif current_user.stall?
+      @owners = User.where(id: params[:owner])
+    end
   end
 
   # GET /stalls/1/edit
@@ -28,7 +35,6 @@ class StallsController < ApplicationController
   def create
     @stall = Stall.new(stall_params)
     @stall.user_id = current_user.id
-    
     respond_to do |format|
       if @stall.save
         format.html { redirect_to @stall, notice: 'Stall was successfully created.' }
@@ -70,8 +76,12 @@ class StallsController < ApplicationController
       @stall = Stall.find(params[:id])
     end
 
+    # def set_owner
+    #   @owner = User.where(id: params[:owner])
+    # end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def stall_params
-      params.require(:stall).permit(:name, :desc, :picture, :latlog, :user_id)
+      params.require(:stall).permit(:name, :desc, :picture, :latlog, :user_id, :owner)
     end
 end

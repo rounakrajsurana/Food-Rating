@@ -1,37 +1,51 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Dishes</h1>
-
+<p>
+<%= form_tag dishes_path, method: "get" do %>
+  <%= label_tag(:dish, "Search: ") %>
+  <%= text_field_tag(:dish) %>
+  <%= submit_tag("Search") %>
+<% end %>
+</p>
 <table>
   <thead>
     <tr>
+      <th>Created At</th>
+      <th>Dish ID</th>
       <th>Name</th>
-      <th>Desc</th>
-      <th>Picture</th>
+      <th>Description</th>
       <th>Category</th>
       <th>Stall</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>Created By</th>
+      <th>Updated By</th>
+      <th colspan="3">- Admin Only -</th>
     </tr>
   </thead>
-
   <tbody>
     <% @dishes.each do |dish| %>
       <tr>
-        <td><%= dish.name %></td>
+        <td><%= dish.created_at %></td>
+        <td><%= dish.id %></td>
+        <td><%= best_in_place dish, :name %></td>
         <td><%= dish.desc %></td>
-        <td><%= dish.picture %></td>
-        <td><%= dish.category %></td>
-        <td><%= dish.stall %></td>
-        <td><%= dish.user %></td>
-        <td><%= link_to 'Show', dish %></td>
-        <td><%= link_to 'Edit', edit_dish_path(dish) %></td>
-        <td><%= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= dish.category.name %></td>
+        <td><%= dish.stall.name %></td>
+        <td><%= dish.user.email %></td>
+        <td><%= dish.updated_at %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Show', dish %></td>
+          <td><%= link_to 'Edit', edit_dish_path(dish) %></td>
+          <td><%= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'New Dish', new_dish_path %>
+<%= will_paginate @dishes %>
+<br>
+<% if current_user.admin? || dish.stall.owner?%>
+  <p class='center'><%= image_tag("add-circle.png", size: "16x16", :alt => "New") %>&nbsp;
+  <%= link_to 'New Dish', new_dish_path %></p>
+<% end %>

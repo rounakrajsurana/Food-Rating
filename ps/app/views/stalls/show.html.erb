@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
+<div class='center'>
+<%= image_tag(@stall.picture, size: "400x300", :alt => @stall.name) %>
 
 <p>
-  <strong>Name:</strong>
-  <%= @stall.name %>
+  <h2>Stall: <%= @stall.name %></h2>
 </p>
-
+<div class='sblock'>
 <p>
-  <strong>Desc:</strong>
+  <strong>Introduction:</strong>
   <%= @stall.desc %>
 </p>
 
@@ -20,12 +21,22 @@
   <%= @stall.latlog %>
 </p>
 
+<p>
+  <strong>Owner:</strong>
+  <%= @owner %>
+</p>
 
-
+<p>
+  <strong>Created By:</strong>
+  <%= @stall.user.email %>
+</p>
+</div>
+<p>
 <% if user_signed_in? %>
-    <% if current_user.admin? %>
+    <% if current_user.admin? || (current_user.id==@stall.owner_id)%>
         &emsp;<%= link_to 'Edit', edit_stall_path(@stall) %>
         &emsp;<%= link_to "Create Dish", new_dish_path() %>
     <% end %>
-   |&emsp;<%= link_to 'Back', stalls_path %>
 <% end %>
+</p>
+</div>

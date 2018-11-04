@@ -12,33 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <b>Dish Name</b>
+    <%= form.text_field :name, :class => "fcontrol" %>
   </div>
 
   <div class="field">
-    <%= form.label :desc %>
-    <%= form.text_field :desc %>
+    <b>Description</b>
+    <%= form.text_area :desc %>
   </div>
 
   <div class="field">
     <%= form.label :picture %>
-    <%= form.text_field :picture %>
+    <%= form.text_field :picture, :class => "fcontrol"  %>
   </div>
 
   <div class="field">
     <%= form.label :category_id %>
-    <%= form.text_field :category_id %>
+    <%= collection_select(:dish, :category_id, @categories, :id, :name, {:prompt => false}) %>
   </div>
 
   <div class="field">
     <%= form.label :stall_id %>
-    <%= form.text_field :stall_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= collection_select(:dish, :stall_id, @stalls, :id, :name, {:prompt => false}) %>
   </div>
 
   <div class="actions">

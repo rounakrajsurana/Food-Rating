@@ -80,6 +80,6 @@ class RatingsController < ApplicationController
 			@dish = Dish.find(params[:dish_id])
 		end
 
-		
+
 
 end

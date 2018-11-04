@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
 table {
     border-collapse: collapse;
     width: 100%;
@@ -11,25 +11,25 @@ th, td {
 }
 
 tr:hover {background-color:#f5f5f5;}
-</style>
+</style> -->
 <!-- searching -->
 <div align="center">
  <%= form_tag("", method: "get") do %>
    <div class="search_form_row">
-	  	<label><h2>Search for a keyword</h2></label>  
+	  	<label><h2>Search for a keyword</h2></label>
 	   	<%= text_field_tag :keyword, params[:keyword], placeholder: 'Search for a key word', type: :search %>
-	     
-	   	<%= submit_tag 'Search' %>	
+
+	   	<%= submit_tag 'Search' %>
 	   	<%= submit_tag 'clear' %>
 
-	   	<% end %>     	
+	   	<% end %>
     </div>
 </div>
 
 
 <!-- printing the quotations -->
 <h2>Quotations</h2>
-      	 
+
 <table>
 	<% for quotation in @quotations %>
                 <tr><td><%= h quotation.author_name %>: <%= h quotation.quote %> -- <%= h quotation.category %>
@@ -54,7 +54,7 @@ tr:hover {background-color:#f5f5f5;}
 <!-- to delete cookies -->
 	<center>
 		<button>
-			<%= link_to 'Erase my Personalization', :action => "killed", :del => 'yes' %> 
+			<%= link_to 'Erase my Personalization', :action => "killed", :del => 'yes' %>
 		</button>
 	</center>
 <hr/>
@@ -70,20 +70,20 @@ tr:hover {background-color:#f5f5f5;}
 <hr/>
 <br/>
 
- 
+
 
 <h2>New quotation</h2>
 	<%= form_for @quotation, :url => { :action => :quotations } do |form| %>
-	
+
 
 	<fieldset>
 		<legend>Enter details</legend>
-				
+
 			<div class="form_row">
 			<%= form.label :author_name %>
 			<%= form.text_field :author_name, :size => 20, :maxlength => 40 %>
 			</div>
-			
+
 			<div class="form-control">
 			<%= form.label :category %>
 			<%= form.text_field :category, list: 'cate-gory' %>
@@ -97,18 +97,18 @@ tr:hover {background-color:#f5f5f5;}
 			<div class="form_row">
 			<%= form.label :quote %>
 			<%= form.text_area :quote, :rows => 2, :cols => 40, :maxlength => 500 %>
-			</div>	
-			
+			</div>
+
 			<p>
 				<div class="actions">
 				<%= form.submit 'Create' %>
-				
+
 				</div>
 			</p>
 			<% end %>
 
 	</fieldset>
-	
+
 	<br>
 
 
@@ -119,7 +119,7 @@ tr:hover {background-color:#f5f5f5;}
 	  <fieldset>
 	    <legend>Import Quotations</legend>
 	    <div class="import_form_row">
-	     
+
 	      <%= file_field_tag 'upload' %>
 	      <%= submit_tag("Import XML") %>
 	    </div>
@@ -134,6 +134,3 @@ tr:hover {background-color:#f5f5f5;}
 	<br>
 
 	<%= link_to 'Go to Database solution', solnp22_path %>
-
-
-

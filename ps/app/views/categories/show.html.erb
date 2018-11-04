@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<div class='center'>
 <p>
-  <strong>Name:</strong>
+  <h2>Category:</h2>
   <%= @category.name %>
 </p>
 
@@ -9,6 +9,5 @@
   <strong>User:</strong>
   <%= @category.user.email %>
 </p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+</div>
+<p class='center'><%= link_to 'Edit', edit_category_path(@category) %></p>
