@@ -1,7 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Ratings</h1>
-
+<p>
+<%= form_tag ratings_path, method: "get" do %>
+  <%= label_tag(:rating, "Search: ") %>
+  <%= text_field_tag(:rating) %>
+  <%= submit_tag("Search") %>
+<% end %>
+</p>
 <table>
   <thead>
     <tr>
@@ -24,8 +30,8 @@
         <td><%= rating.comment %></td>
         <td><%= rating.user.email %></td>
         <td><%= rating.updated_at %></td>
+        <td><%= link_to 'Show', rating %></td>
         <% if current_user.admin? %>
-          <td><%= link_to 'Show', rating %></td>
           <td><%= link_to 'Edit', edit_rating_path(rating) %></td>
           <td><%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
@@ -34,7 +40,6 @@
   </tbody>
 </table>
 <br>
-<% if current_user.admin? %>
+
   <p class='center'><%= image_tag("add-circle.png", size: "16x16", :alt => "New") %>&nbsp;
   <%= link_to 'New Rating', new_rating_path %>
-<% end %>

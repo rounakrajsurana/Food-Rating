@@ -8,6 +8,8 @@ class RatingsController < ApplicationController
 
   def index
     @ratings = Rating.all
+    @ratings = @ratings.paginate(per_page: 32, page: params[:page])
+    @rating = Rating.new
   end
 
   # GET /ratings/1

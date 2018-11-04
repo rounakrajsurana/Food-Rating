@@ -23,8 +23,8 @@
         <!-- <td><%= stall.latlog %></td> -->
         <td><%= stall.user.email %></td>
         <td><%= stall.updated_at %></td>
+        <td><%= link_to 'Show', stall %></td>
         <% if current_user.admin? %>
-          <td><%= link_to 'Show', stall %></td>
           <td><%= link_to 'Edit', edit_stall_path(stall) %></td>
           <td><%= link_to 'Destroy', stall, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>

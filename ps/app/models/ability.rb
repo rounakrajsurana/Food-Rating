@@ -4,7 +4,7 @@ class Ability
     user ||= User.new
     can :read, :all
     # return unless user && user.admin?
-  
+
         if user.active
           can :read, :all
             if user.admin?
@@ -25,8 +25,10 @@ class Ability
               end
     # else
     #    can :read, :all
-          
-        end 
+        elsif user.active==false
+          format.html { redirect_to root_url, notice: 'Your account has been banned, Please contact Admin.' }
+          format.json { head :no_content }
+        end
       end
   end
 end

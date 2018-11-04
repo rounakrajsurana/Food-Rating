@@ -7,7 +7,7 @@ Given I am a stall
 And I am signed in
 And I want to add a dish
 
-When I visit the My Dishes page
+When I visit the My Stall page
 Then I should see a link for create new dish
 
 When I click the link

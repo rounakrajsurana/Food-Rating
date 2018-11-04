@@ -23,6 +23,9 @@ class HomeController < ApplicationController
     def member
     end
 
+    def review
+    end
+
     def about
     end
 end

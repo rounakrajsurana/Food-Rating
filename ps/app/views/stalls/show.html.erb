@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 <div class='center'>
-<%= image_tag(@stall.picture, size: "400x300", :alt => @stall.name) %>
-
+<% if @stall.picture%>
+  <%= image_tag(@stall.picture, size: "400x300", :alt => @stall.name) %>
+<% end %>
 <p>
   <h2>Stall: <%= @stall.name %></h2>
 </p>
@@ -23,7 +24,7 @@
 
 <p>
   <strong>Owner:</strong>
-  <%= @owner %>
+  <%= @sowner.email %>  <%= current_user.id %>== <%= @stall.owner %>
 </p>
 
 <p>
@@ -33,7 +34,7 @@
 </div>
 <p>
 <% if user_signed_in? %>
-    <% if current_user.admin? || (current_user.id==@stall.owner_id)%>
+    <% if (current_user.admin? || current_user.id==@stall.owner)%>
         &emsp;<%= link_to 'Edit', edit_stall_path(@stall) %>
         &emsp;<%= link_to "Create Dish", new_dish_path() %>
     <% end %>

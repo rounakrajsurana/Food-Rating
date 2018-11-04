@@ -1,13 +1,16 @@
 class StallsController < ApplicationController
   before_action :set_stall, only: [:show, :edit, :update, :destroy]
+  before_action :set_sowner, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
-  # before_action :set_owner
+
   # GET /stalls
   # GET /stalls.json
   load_and_authorize_resource
 
   def index
     @stalls = Stall.all
+    @stalls = @stalls.paginate(per_page: 32, page: params[:page])
+    @stall = Stall.new
   end
 
   # GET /stalls/1
@@ -76,9 +79,9 @@ class StallsController < ApplicationController
       @stall = Stall.find(params[:id])
     end
 
-    # def set_owner
-    #   @owner = User.where(id: params[:owner])
-    # end
+    def set_sowner
+      @sowner = User.find(@stall.owner)
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stall_params

@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 2018_11_04_061347) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "owner"
+    t.integer "owner"
     t.index ["user_id"], name: "index_stalls_on_user_id"
   end
 

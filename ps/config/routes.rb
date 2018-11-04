@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :assignments
   resources :categories
 
-  
+
   resources :stalls
 
 
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'assignments/index', to: 'assignments#index'
   get 'home/index'
   get 'home/member'
+  get 'home/review'
   get 'home/stall'
   get 'home/admin'
   get 'home/user'

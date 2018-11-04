@@ -7,17 +7,17 @@ class DishesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    # @dishes = Dish.all
-    @dishes = (params[:dish].blank?) ? Dish.all : Dish.where(name: params[:q])
+    @dishes = Dish.all
+    # @dishes = (params[:dish].blank?) ? Dish.all : Dish.where(name: params[:q])
     @dishes = @dishes.paginate(per_page: 32, page: params[:page])
-
-    respond_to do |format|
-      format.html
+    @dish = Dish.new
+    # respond_to do |format|
+    #   format.html
       # format.json {
       #   render json: Dish.where('name ilike ?', "%#{params[:q]}%")
       #   .select('id, name as dish_name')
       # }
-    end
+    # end
     # @quotes = @quotes.paginate(per_page: 5, page: params[:page])
   end
 
@@ -34,7 +34,7 @@ class DishesController < ApplicationController
     if current_user.admin?
       @stalls = Stall.all
     elsif current_user.stall?
-      @stalls = Stall.find(params[:owner_id])
+      @stalls = Stall.where(owner: current_user.id)
     end
   end
 
