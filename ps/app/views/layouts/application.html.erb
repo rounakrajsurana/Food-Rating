@@ -9,9 +9,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-  <div class='abanner'>
-      AIT Food Ratings
-  </div>
+  <h4>
+      GROUP WEB05: AIT Food Ratings
+  </h4>
     <% if flash[:error] %>
         <div id="error">
         <p><mark color='red'><%= flash[:error] %></mark></p>
@@ -47,6 +47,7 @@
           <% end %>
 
               <ul>  
+          <a class="navbar-brand" href="#"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -114,23 +115,25 @@
     
     <br><%= yield %><br><br>
 
-    <p><%= link_to '<< Go Back', request.referrer, :class => "foot" %></p>
-    <br><br><br><br>
+    </nav>-->
 
-       <!-- <div class="table100 ver2 m-b-110">
-       <div class="table100-head">
-       <tr class="row100 head">
-       <div class="table100-body js-pscroll ps ps--active-y">
-       <table>
-       <tbody>
-       <tr class="row100 body">
-       <td class="cell100 column1">Virtual Cycle</td> -->
-   <footer>
+    <br><br><%= yield %><br><br><br><br>
+
+    <!-- <div class="table100 ver2 m-b-110">
+    <div class="table100-head">
+    <tr class="row100 head">
+    <div class="table100-body js-pscroll ps ps--active-y">
+    <table>
+    <tbody>
+    <tr class="row100 body">
+    <td class="cell100 column1">Virtual Cycle</td> -->
+	 <footer>
       <br>
       <%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc="+request.original_url) %>
       <br>
       <%= link_to("Issue Tracker", "https://trello.com/b/TdI6bAGa/ait-food-rating") %>
       <br>
   </footer>
+
   </body>
 </html>
