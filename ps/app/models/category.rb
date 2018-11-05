@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   belongs_to :user
+  has_many :dish
   #before_validation :assign_user
 
   # def assign_user

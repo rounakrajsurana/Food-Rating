@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   resources :stalls
 
 
-  resources :dishes
-  resources :ratings
-
+  resources :dishes do
+    resources :ratings
+  end
   devise_for :users
 
   root to: 'assignments#index'

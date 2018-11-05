@@ -31,12 +31,33 @@
   <%= @dish.user.email %>
 </p>
 </div>
+<% if user_signed_in? %>
+
+<div class="row">
+<div class="col-md-4">
+
+		<div class="review">
+
+      <!-- Where the reviews/ratings will go -->
+      <h1>Ratings</h1>
+      <%= render @dish.ratings %>
+
+
+			<div>
+				<%= link_to "Add Rating", new_dish_rating_path(@dish), class: "btn-custom" %>
+			</div>
+
+		</div>	
+    </div>
+	</div>
+  <% end %>
+
 <br>
 <p>
 <% if user_signed_in? %>
     <% if current_user.admin? %>
-        &emsp;<%= link_to 'Edit', edit_dish_path(@dish) %>
-        &emsp;<%= link_to "Create Review", 'reviews/new' %>
+        &emsp;<%= link_to 'Edit', edit_dish_rating_path(@dish) %>
+       
     <% end %>
 <% end %>
 </p>

@@ -97,4 +97,8 @@ class DishesController < ApplicationController
     def dish_params
       params.require(:dish).permit(:name, :desc, :picture, :category_id, :stall_id, :user_id)
     end
+
+    def find_dish
+			@dish = Dish.find(params[:dish_id])
+		end
 end

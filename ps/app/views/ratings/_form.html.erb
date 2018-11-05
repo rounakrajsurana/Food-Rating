@@ -1,16 +1,6 @@
-<%= form_with(model: rating, local: true) do |form| %>
-  <% if rating.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(rating.errors.count, "error") %> prohibited this rating from being saved:</h2>
-
-      <ul>
-      <% rating.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_with(model: @ratings, local: true) do |form| %>
+  
+<div>
   <div class="field">
     <%= form.label :rate %>
     <%= form.number_field :rate %>
@@ -25,4 +15,6 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+</div>
 <% end %>
+

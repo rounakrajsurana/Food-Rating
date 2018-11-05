@@ -21,6 +21,7 @@
         <p></mark><%= flash[:alert] %></mark></p>
         </div>
     <% end %>
+    
     <!-- Second navbar for search -->
     <nav class="navbar navbar-inverse">
       <div class="container">
@@ -33,18 +34,45 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">WEB05</a>
+          <ul class="nav navbar-nav navbar-left">
+          <li><a class="navbar-brand" href="/">WEB05</a></li>
+          
+          <% if user_signed_in? %>
+              <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" />
+              </div>
+              <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </form>
+          <% end %>
+
+              <ul>  
         </div>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-3">
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Home", home_index_path %>&nbsp;</li>
-            <li> <%= link_to "Categories", categories_path %> </li>
-            <li> <%= link_to "Stalls", stalls_path %> </li>
-            <li> <%= link_to "Dishes", dishes_path %> </li>
-            <li> <%= link_to "Ratings", ratings_path %> </li>
+            
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li> 
+            
+            <li>
             <% if user_signed_in? %>
-              <li><%= link_to "My Reviews", '/home/review' %></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navdrop" role="button" data-toggle="dropdown" data-hover="dropdown">Services</a>
+                <div class="dropdown-menu" aria-labelledby="navdrop">
+                
+                <ul>
+                    <li>  <%= link_to "Categories", categories_path %> </li>
+                    <li>  <%= link_to "Stalls", stalls_path %> </li>
+                    <li>  <%= link_to "Dishes", dishes_path %></li>
+
+                </ul>
+                </div>      
+              </li>
+
+             <!-- <li><%= link_to "My Reviews", '/home/review' %></li> -->
               <li><%= link_to "My Profile", '/home/member' %></li>
               <% if current_user.stall? %>
                 <li><%= link_to "My Stall", '/home/stall' %></li>
@@ -53,34 +81,38 @@
                 <li><%= link_to "Admin", '/admin' %></li>
                 <li><%= link_to "Users", '/admin/user' %></li>
               <% end %>
+            
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            <!-- <li><a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a><li>
+             -->       
             <% end %>
-            <li><a href="#">About</a></li>
-            <!-- <li><a href="#">Contact</a></li> -->
-            <li>
-              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
-            </li>
+            <br>
+            <% if user_signed_in? %>
+           <!-- Welcome <%= current_user.email %> ! Not you?-->
+            <% else %>
+      <li><%= link_to "Sign in", new_user_session_path %></li>
+      <li><%= link_to "Sign up", new_user_registration_path %></li>
+      <% end %>
+
           </ul>
+                    
           <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
-            <form class="navbar-form navbar-right" role="search">
+          
+            <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search" />
               </div>
               <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </form>
+              
           </div>
+          
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
     </nav><!-- /.navbar -->
     <p>
-    <% if user_signed_in? %>
-        Welcome <%= current_user.email %> ! Not you?
-      &emsp;<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-    <% else %>
-      &emsp; <%= link_to "Sign in", new_user_session_path %>
-      &emsp; <%= link_to "Sign up", new_user_registration_path %>
-    <% end %>
-    </p>
-    <br><br><%= yield %><br><br>
+    
+    <br><%= yield %><br><br>
 
     <p><%= link_to '<< Go Back', request.referrer, :class => "foot" %></p>
     <br><br><br><br>
@@ -94,9 +126,8 @@
        <tr class="row100 body">
        <td class="cell100 column1">Virtual Cycle</td> -->
    <footer>
-      <%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc=http%3A%2F%2Fweb5.cs.ait.ac.th") %>
       <br>
-      <%= link_to("HTML syntax validation New", "https://validator.w3.org/nu/?doc="+request.original_url) %>
+      <%= link_to("HTML syntax validation", "https://validator.w3.org/nu/?doc="+request.original_url) %>
       <br>
       <%= link_to("Issue Tracker", "https://trello.com/b/TdI6bAGa/ait-food-rating") %>
       <br>
