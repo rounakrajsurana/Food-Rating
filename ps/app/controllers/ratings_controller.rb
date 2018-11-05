@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show] 
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :find_dish
   # GET /ratings
   # GET /ratings.json
@@ -31,8 +31,8 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
     @rating.user_id = current_user.id
-    @rating.dish_id = @dish_id
-    
+    @rating.dish_id = @dish.id
+
 
       if @rating.save
         redirect_to dish_path(@dish)
@@ -43,13 +43,13 @@ class RatingsController < ApplicationController
         # format.html { render :new }
         # format.json { render json: @rating.errors, status: :unprocessable_entity }
       end
-    
+
   end
 
   # PATCH/PUT /ratings/1
   # PATCH/PUT /ratings/1.json
   def update
-    
+
       if @rating.update(rating_params)
 
         redirect_to dish_path(@dish)
@@ -61,7 +61,7 @@ class RatingsController < ApplicationController
         # format.html { render :edit }
         # format.json { render json: @rating.errors, status: :unprocessable_entity }
       end
-    
+
   end
 
   # DELETE /ratings/1
@@ -88,7 +88,7 @@ class RatingsController < ApplicationController
     def find_dish
 			@dish = Dish.find(params[:dish_id])
 		end
-		
+
 		def find_rating
 			@rating = Rating.find(params[:id])
 		end

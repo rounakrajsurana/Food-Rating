@@ -113,7 +113,16 @@ select {
     padding: 16px 20px;
     background-color: #c0c7c7;
     border-radius: 4px;
-    // border: 2px solid #646e6f;
+    max-width: 80%;
+    position: static;
+    margin: auto;
+    align-content: center;
+}
+.rblock {
+    padding: 16px 20px;
+    background-color: #9aedf9;
+    border-radius: 4px;
+    border: 2px solid #646e6f;
     max-width: 80%;
     position: static;
     margin: auto;

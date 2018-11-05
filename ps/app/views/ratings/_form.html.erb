@@ -1,5 +1,5 @@
-<%= form_with(model: @ratings, local: true) do |form| %>
-  
+<%= form_for @rating, url: {action: "create"} do |form| %>
+
 <div>
   <div class="field">
     <%= form.label :rate %>
@@ -17,4 +17,3 @@
   </div>
 </div>
 <% end %>
-
