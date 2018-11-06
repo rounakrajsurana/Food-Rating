@@ -1,2 +1,22 @@
-<p> <%= rating.rate %></p>
+
+
+<div class="rating-rate" data-score="<%= rating.rate %>"></div>
 <p> <%= rating.comment %></p>
+
+<% if user_signed_in? %>
+
+        <% if rating.user_id == current_user.id %>
+        
+        <div class="links btn-group">
+
+            <%= link_to "Edit", edit_dish_rating_path(rating.dish, rating), class: "btn btn-custom" %>
+            <%= link_to "Delete", method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
+            <!-- 
+            <%= link_to "Delete", dish_path(rating.dish, rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
+            -->
+
+        </div>
+		
+        <% end %>	
+
+<% end %>

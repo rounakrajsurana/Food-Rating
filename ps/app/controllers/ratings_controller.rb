@@ -1,7 +1,9 @@
 class RatingsController < ApplicationController
-  before_action :set_rating, only: [:show, :edit, :update, :destroy]
+  # before_action :set_rating, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_dish
+  before_action :find_rating, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
   # GET /ratings
   # GET /ratings.json
   load_and_authorize_resource
@@ -24,6 +26,7 @@ class RatingsController < ApplicationController
 
   # GET /ratings/1/edit
   def edit
+   
   end
 
   # POST /ratings
@@ -35,10 +38,12 @@ class RatingsController < ApplicationController
 
 
       if @rating.save
+
         redirect_to dish_path(@dish)
         # format.html { redirect_to dish_path, notice: 'Rating was successfully created.' }
         # format.json { render :show, status: :created, location: @rating }
       else
+
         render 'new'
         # format.html { render :new }
         # format.json { render json: @rating.errors, status: :unprocessable_entity }
@@ -49,7 +54,7 @@ class RatingsController < ApplicationController
   # PATCH/PUT /ratings/1
   # PATCH/PUT /ratings/1.json
   def update
-
+      
       if @rating.update(rating_params)
 
         redirect_to dish_path(@dish)
@@ -67,10 +72,13 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1
   # DELETE /ratings/1.json
   def destroy
+
     @rating.destroy
+      
+    
     respond_to do |format|
-      format.html { redirect_to ratings_url, notice: 'Rating was successfully destroyed.' }
-      format.json { head :no_content }
+       format.html { redirect_to dish_path, notice: 'Rating was successfully destroyed.' }
+    #   format.json { head :no_content }
     end
   end
 

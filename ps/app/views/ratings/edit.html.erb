@@ -1,5 +1,25 @@
-<h1>Editing Rating</h1>
+<h1>Edit Rating</h1>
+<%= form_for @rating, url: {action: "update"} do |form| %>
 
-<%= render 'form', rating: @rating %>
-
-<p class='center'><%= link_to 'Show', @rating %></p>
+            <div id="rating-form">
+            <label>Rating</label>
+          </div>
+        
+          <div class="field">
+            <%= form.label :comment %>
+            <%= form.text_field :comment %>
+          </div>
+        
+        
+          <div class="actions">
+            <%= form.submit %>
+          </div>
+        </div>
+<% end %>
+        
+<script>
+	$('#rating-form').raty({
+		path: '/assets/',
+		scoreName: 'rating[rate]' 	
+	});
+</script>

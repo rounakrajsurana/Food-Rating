@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class='center'>
-<%= image_tag(@dish.picture, size: "400x300", :alt => @dish.name) %>
+
 
 <p>
   <h2>Dish: <%= @dish.name %></h2>
@@ -30,6 +30,14 @@
   <strong>User:</strong>
   <%= @dish.user.email %>
 </p>
+
+<p>
+  <strong>Average Rating</strong>
+	<div class="average-rating-rate" data-score=<%= @average_rating %>></div>
+	<span class="number-of-ratings">Based on <%= @dish.ratings.count %> ratings</span>
+</p>
+
+
 </div>
 <% if user_signed_in? %>
 
@@ -53,12 +61,26 @@
   <% end %>
 
 <br>
-<p>
-<% if user_signed_in? %>
-    <% if current_user.admin? %>
-        &emsp;<%= link_to 'Edit', edit_dish_rating_path(@dish) %>
-       
-    <% end %>
-<% end %>
-</p>
+
 </div>
+
+<script>
+	$('.rating-rate').raty({
+		readOnly: true,
+		score: function() {
+			return $(this).attr('data-score');
+		},
+		path: '/assets/'
+	});
+</script>
+
+
+<script>
+	$('.average-rating-rate').raty({
+		readOnly: true,
+		path: '/assets/',
+		score: function() {
+			return $(this).attr('data-score')
+		}
+	});
+</script>

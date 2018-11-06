@@ -9,9 +9,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-  <h4>
-      GROUP WEB05: AIT Food Ratings
-  </h4>
+  <div class='abanner'>
+      AIT Food Ratings
+  </div>
+
     <% if flash[:error] %>
         <div id="error">
         <p><mark color='red'><%= flash[:error] %></mark></p>
@@ -114,7 +115,7 @@
     <p>
 
     <br><br><%= yield %><br><br><br><br>
-
+    
     <!-- <div class="table100 ver2 m-b-110">
     <div class="table100-head">
     <tr class="row100 head">

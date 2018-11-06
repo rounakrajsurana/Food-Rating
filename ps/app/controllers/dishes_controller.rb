@@ -1,5 +1,5 @@
 class DishesController < ApplicationController
-  before_action :set_dish, only: [:show, :edit, :update, :destroy]
+  before_action :set_dish, only: [:show, :edit, :update]
   # before_action :set_stall, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   # GET /dishes
@@ -24,7 +24,12 @@ class DishesController < ApplicationController
   # GET /dishes/1
   # GET /dishes/1.json
   def show
-  end
+		if @dish.ratings.blank?
+			@average_rating = 0
+		else
+			@average_rating = @dish.ratings.average(:rate).round(2)
+		end
+	end
 
   # GET /dishes/new
   def new
