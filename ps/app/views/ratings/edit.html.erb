@@ -1,25 +1,21 @@
 <h1>Edit Rating</h1>
 <%= form_for @rating, url: {action: "update"} do |form| %>
-
-            <div id="rating-form">
-            <label>Rating</label>
-          </div>
-        
-          <div class="field">
-            <%= form.label :comment %>
-            <%= form.text_field :comment %>
-          </div>
-        
-        
-          <div class="actions">
-            <%= form.submit %>
-          </div>
-        </div>
+<div class='center'>
+<% if @dish.picture%>
+<%= image_tag(@dish.picture, size: '400x300', :alt => @dish.name) %>
 <% end %>
-        
-<script>
-	$('#rating-form').raty({
-		path: '/assets/',
-		scoreName: 'rating[rate]' 	
-	});
-</script>
+</div>
+  <div id="rating-form">
+		<label>Rating</label>
+	</div>
+  <div class="field">
+    <label>Review</label>
+    <%= form.text_area :comment %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+</div>
+<% end %>
+
+<br><br><br><br>

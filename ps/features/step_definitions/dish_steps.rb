@@ -7,7 +7,7 @@ Given("I am signed in") do
   click_link 'Sign in'
   fill_in 'Email', with: @stall.email
   fill_in 'Password', with: @stall.password
-  click_button 'Log in'
+  click_button 'Sign in'
 end
 
 Given("I want to add a dish") do
@@ -37,7 +37,7 @@ When("I submit the form") do
   click_button 'Create Dish'
 end
 
-Then("I should see the details of the new dish") do  
+Then("I should see the details of the new dish") do
   expect(page).to have_content('Dish was successfully created.')
   expect(page).to have_content('Description')
 end

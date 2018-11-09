@@ -73,6 +73,10 @@ class StallsController < ApplicationController
     end
   end
 
+  # def map(center)
+  #   "https://maps.googleapis.com/maps/api/staticmap?center=#{center}&size=300x300&zoom=17"
+  # end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stall

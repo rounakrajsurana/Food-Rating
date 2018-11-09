@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 <div class='center'>
-
-
+  <div class='center'>
+  <% if @dish.picture%>
+    <%= image_tag(@dish.picture, size: "400x300", :alt => @dish.name) %>
+  <% end %>
 <p>
   <h2>Dish: <%= @dish.name %></h2>
 </p>
@@ -36,10 +38,13 @@
 	<div class="average-rating-rate" data-score=<%= @average_rating %>></div>
 	<span class="number-of-ratings">Based on <%= @dish.ratings.count %> ratings</span>
 </p>
-
+<% if user_signed_in? && (current_user.admin?||current_user.id==@dish.user_id)%>
+  <td><%= link_to 'Edit', edit_dish_path(@dish) %></td>
+  <td><%= link_to 'Destroy', @dish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
 
 </div>
-<% if user_signed_in? %>
+
 
 <div class="row">
 <div class="col-md-4">
@@ -47,40 +52,19 @@
 		<div class="review">
 
       <!-- Where the reviews/ratings will go -->
-      <h1>Ratings</h1>
+      <h1><%=image_tag('review.png', size: "60x40")%> Ratings&Reviews</h1>
       <%= render @dish.ratings %>
 
-
+<% if user_signed_in? %>
 			<div>
-				<%= link_to "Add Rating", new_dish_rating_path(@dish), class: "btn-custom" %>
+				<h4><%= link_to "Add Rating", new_dish_rating_path(@dish), class: "btn-custom" %></h4>
 			</div>
-
-		</div>	
+  <% end %>
+		</div>
     </div>
 	</div>
-  <% end %>
+
 
 <br>
 
 </div>
-
-<script>
-	$('.rating-rate').raty({
-		readOnly: true,
-		score: function() {
-			return $(this).attr('data-score');
-		},
-		path: '/assets/'
-	});
-</script>
-
-
-<script>
-	$('.average-rating-rate').raty({
-		readOnly: true,
-		path: '/assets/',
-		score: function() {
-			return $(this).attr('data-score')
-		}
-	});
-</script>

@@ -1,26 +1,21 @@
+
 <%= form_for @rating, url: {action: "create"} do |form| %>
-
-
+<div class='center'>
+<% if @dish.picture%>
+<%= image_tag(@dish.picture, size: '400x300', :alt => @dish.name) %>
+<% end %>
+</div>
   <div id="rating-form">
 		<label>Rating</label>
 	</div>
-
-
   <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_field :comment %>
+    <label>Review</label>
+    <%= form.text_area :comment %>
   </div>
-
-
   <div class="actions">
     <%= form.submit %>
   </div>
 </div>
 <% end %>
 
-<script>
-	$('#rating-form').raty({
-		path: '/assets/',
-		scoreName: 'rating[rate]' 	
-	});
-</script>
+<br><br><br><br>

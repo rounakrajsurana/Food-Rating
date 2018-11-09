@@ -7,7 +7,7 @@ Given("I am logged in") do
   click_link 'Sign in'
   fill_in 'Email', with: @admin.email
   fill_in 'Password', with: @admin.password
-  click_button 'Log in'
+  click_button 'Sign in'
 end
 
 When("I visit the user page") do

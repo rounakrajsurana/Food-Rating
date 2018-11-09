@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  has_many :dish
+  has_many :dishes
 	has_many :ratings
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

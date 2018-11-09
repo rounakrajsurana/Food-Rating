@@ -1,8 +1,9 @@
 class RatingsController < ApplicationController
   # before_action :set_rating, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :find_dish
-  before_action :find_rating, only: [:edit, :update, :destroy]
+  before_action :find_dish, except: [:destroy]
+  # before_action :set_user, except: [:new]
+  # before_action :find_ratings, only: [:edit, :update, :destroy]
   load_and_authorize_resource
   # GET /ratings
   # GET /ratings.json
@@ -26,7 +27,7 @@ class RatingsController < ApplicationController
 
   # GET /ratings/1/edit
   def edit
-   
+
   end
 
   # POST /ratings
@@ -54,7 +55,7 @@ class RatingsController < ApplicationController
   # PATCH/PUT /ratings/1
   # PATCH/PUT /ratings/1.json
   def update
-      
+
       if @rating.update(rating_params)
 
         redirect_to dish_path(@dish)
@@ -74,10 +75,9 @@ class RatingsController < ApplicationController
   def destroy
 
     @rating.destroy
-      
-    
+
     respond_to do |format|
-       format.html { redirect_to dish_path, notice: 'Rating was successfully destroyed.' }
+       format.html { redirect_to dish_path(@dish), notice: 'Rating was successfully destroyed.' }
     #   format.json { head :no_content }
     end
   end
@@ -97,9 +97,11 @@ class RatingsController < ApplicationController
 			@dish = Dish.find(params[:dish_id])
 		end
 
-		def find_rating
-			@rating = Rating.find(params[:id])
-		end
+		# def find_ratings
+		# 	@ratings = Rating.find(params[:id])
+		# end
 
-
+    # def set_user
+		# 	@user = User.find(params[:user_id])
+		# end
 end

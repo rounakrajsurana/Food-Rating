@@ -7,8 +7,8 @@ class DishesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @dishes = Dish.all
-    # @dishes = (params[:dish].blank?) ? Dish.all : Dish.where(name: params[:q])
+    # @dishes = Dish.all
+    @dishes = (params[:q].blank?) ? Dish.all : Dish.where(name: params[:q])
     @dishes = @dishes.paginate(per_page: 32, page: params[:page])
     @dish = Dish.new
     # respond_to do |format|
@@ -45,6 +45,12 @@ class DishesController < ApplicationController
 
   # GET /dishes/1/edit
   def edit
+    @categories = Category.all
+    if current_user.admin?
+      @stalls = Stall.all
+    elsif current_user.stall?
+      @stalls = Stall.where(owner: current_user.id)
+    end
   end
 
   # POST /dishes
@@ -106,4 +112,8 @@ class DishesController < ApplicationController
     def find_dish
 			@dish = Dish.find(params[:dish_id])
 		end
+    #
+    # def set_downer //set_user
+		# 	@user = User.find(params[:user_id])
+		# end
 end

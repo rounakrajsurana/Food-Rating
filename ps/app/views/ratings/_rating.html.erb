@@ -1,22 +1,20 @@
 
+<%= link_to image_tag('def-user.png', size: "80x60", :alt => rating.user.fullname), dish_path(rating.dish) %>
 
-<div class="rating-rate" data-score="<%= rating.rate %>"></div>
-<p> <%= rating.comment %></p>
+	<div class="average-rating-rate" data-score=<%= rating.rate %>></div>
+	<p class="review-comment"><%= rating.user.email %></p>
+	<p class="review-comment"><%= rating.created_at %></p>
+	<p class="review-comment"><%= rating.comment %></p>
 
 <% if user_signed_in? %>
-
-        <% if rating.user_id == current_user.id %>
-        
+        <% if (current_user.admin?||rating.user_id == current_user.id) %>
         <div class="links btn-group">
-
             <%= link_to "Edit", edit_dish_rating_path(rating.dish, rating), class: "btn btn-custom" %>
-            <%= link_to "Delete", method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
-            <!-- 
+            <%= link_to "Delete", rating_path(rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
+            <!--
             <%= link_to "Delete", dish_path(rating.dish, rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
             -->
-
         </div>
-		
-        <% end %>	
-
+        <% end %>
 <% end %>
+<br>

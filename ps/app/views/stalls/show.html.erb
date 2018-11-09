@@ -1,3 +1,28 @@
+<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        max-height: 400px;
+        margin: auto;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      /* html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      } */
+    </style>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvf5fw-Q54GekV7vGDCo5qY-wuzaUpEc&callback=initMap"
+    async defer></script>
 <p id="notice"><%= notice %></p>
 <div class='center'>
 <% if @stall.picture%>
@@ -20,11 +45,12 @@
 <p>
   <strong>Latlog:</strong>
   <%= @stall.latlog %>
+  <div id="map"></div>
 </p>
 
 <p>
   <strong>Owner:</strong>
-  <%= @sowner.email %>  <%= current_user.id %>== <%= @stall.owner %>
+  <%= @sowner.email %>
 </p>
 
 <p>

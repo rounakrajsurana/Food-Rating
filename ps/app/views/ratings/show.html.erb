@@ -1,27 +1,17 @@
-<div class="rblock">
-
-	<div class="review-rating" data-score="<%= review.rating %>"></div>
-	<p class="review-comment"><%= review.comment %></p>
-
+<div class="center">
+	<%= image_tag('def-user.png', size: "80x60", :alt => @rating.dish.name) %>
+	<div class="average-rating-rate" data-score="<%= @rating.rate %>"></div>
+	<br><p class="review-comment"><strong>Date: </strong><%= @rating.created_at.to_s %></p>
+	<p class="review-comment"><strong>By: </strong><%= @rating.user.email %></p>
+	<p class="review-comment"><strong>Review: </strong><%= @rating.comment %></p>
 
 	<% if user_signed_in? %>
-
-		<% if review.user_id == current_user.id %>
-
+		<% if @rating.user_id == current_user.id %>
 			<div class="links btn-group">
-
-				<%= link_to "Edit", edit_dish_rating_path(rating.dish, rating), class: "btn btn-custom" %>
-        <%= link_to 'Delete', rating, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
-        # <%= link_to "Delete", book_review_path(rating.dish, rating), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-custom" %>
-
+				<%= link_to "Edit", edit_dish_rating_path(@rating.dish, @rating), class: "btn btn-custom" %>
+        <%= link_to "Delete", @rating.dish, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-custom" %>
 			</div>
-
 		<% end %>
-
 	<% end %>
-
 </div>
-
-
-
-
+<br>

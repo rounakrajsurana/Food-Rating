@@ -29,11 +29,11 @@
   </div>
   <div class="field">
     <%= f.label :fullname %><br />
-    <%= f.text_field :fullname, autofocus: true%>
+    <%= f.text_field :fullname, autofocus: true, autocomplete: "fullname" %>
   </div>
   <div class="field">
     <%= f.label :contactno %><br />
-    <%= f.text_field :contactno, autofocus: true %>
+    <%= f.text_field :contactno, autofocus: true, autocomplete: "contactno"  %>
   </div>
   <div class="actions">
     <%= f.submit "Update" %>

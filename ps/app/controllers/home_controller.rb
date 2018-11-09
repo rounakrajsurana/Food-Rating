@@ -8,15 +8,19 @@ class HomeController < ApplicationController
       @categories = Category.all
       @categories = @categories.paginate(per_page: 8, page: params[:page])
 
-      @stalls = (params[:stall].blank?) ? Stall.all : Stall.where(name: params[:q])
-      @stalls = @stalls.paginate(per_page: 16, page: params[:page])
+      @stalls = (params[:stall].blank?) ? Stall.all : Stall.where(name: params[:stall])
+      @stalls = @stalls.order("updated_at DESC").paginate(per_page: 16, page: params[:page])
 
-      @dishes = (params[:dish].blank?) ? Dish.all : Dish.where(name: params[:q])
-      @dishes = @dishes.paginate(per_page: 16, page: params[:page])
+      @newdishes = (params[:newdish].blank?) ? Dish.all : Dish.where(name: params[:newdish])
+      @newdishes = @newdishes.order("created_at DESC").paginate(per_page: 16, page: params[:page])
 
-      @ratings = Rating.all
+      @dishes = (params[:dish].blank?) ? Dish.all : Dish.where(name: params[:dish])
+      @dishes = @dishes.order("updated_at DESC").paginate(per_page: 16, page: params[:page])
+
+      @ratings = Rating.all.order("created_at DESC")
       @ratings = @ratings.paginate(per_page: 5, page: params[:page])
 
+      
       # @category = Category.new
     end
 
@@ -27,5 +31,9 @@ class HomeController < ApplicationController
     end
 
     def about
+    end
+
+    def map(center)
+      "https://maps.googleapis.com/maps/api/staticmap?center=#{center}&size=300x300&zoom=17"
     end
 end

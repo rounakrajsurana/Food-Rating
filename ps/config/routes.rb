@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'assignments/index', to: 'assignments#index'
   get 'home/index'
   get 'home/member'
+  get 'home/map'
+  get 'home/about'
   get 'home/review'
   get 'home/stall'
   get 'home/admin'
