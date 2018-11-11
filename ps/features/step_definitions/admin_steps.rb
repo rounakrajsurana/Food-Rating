@@ -23,26 +23,39 @@ Given("I want to ban a user") do
   @member.active = false
 end
 
-Then("I should see the User successful message") do
+Then("I should see the User successful banned message") do
   expect(page).to have_content('List of Users')
 end
 
 Given("I want to add a stall") do
-  pending # Write code here that turns the phrase above into concrete actions
+  
+  #pending # Write code here that turns the phrase above into concrete actions
 end
 
 When("I visit the stalls page") do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/stalls'
+  #pending # Write code here that turns the phrase above into concrete actions
 end
 
 Then("I should see a link for create new stall") do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_link('New Stall')
+  #pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then("I should see a form to add a stall") do
-  pending # Write code here that turns the phrase above into concrete actions
+When("I click the new stall link") do
+  click_link('New Stall')  
+  #visit '/stalls/new';
 end
+
+Then("I should see a form to add a new stall") do
+  expect(page).to have_button('Create Stall')
+end
+
+When("I submit a new stall form") do
+  @stall = FactoryBot.build :stallname
+end
+
 
 Then("I should see the details of the new stall") do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content('Introduction')
 end

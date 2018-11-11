@@ -33,4 +33,23 @@ FactoryBot.define do
     stall { false }
   end
 
+  factory :dish, class: Dish do
+    id { "4" }
+    name { 'some dish name' }
+    desc { 'a very huge description is not required just basic ones are enough' }
+    picture { 'vegan1.jpg' }
+    category_id { '1' }
+    stall_id { '2' }
+    user_id { '3' }
+  end
+
+  factory :stallname, class: Stall do
+    id { "5" }
+    name { 'some stall name' }
+    desc { 'a small description is enough' }
+    picture { 'stall1.jpg' }
+    latlog { '45,45' }
+    user_id { '3' }
+  end
+
 end

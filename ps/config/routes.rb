@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   resources :ratings
 
   resources :stalls
-  resources :dishes
-
+  
   resources :dishes do
     resources :ratings
   end
