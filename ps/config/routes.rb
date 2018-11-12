@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   post 'basics/import_quotations'
 
   get 'solution/index'
+  get 'solution/ps6'
   get 'solution/ps2one', as: "solnp21"
   get 'solution/ps2two', as: "solnp22"
   get 'solution/ps1_dividezero', as: "soln1"
