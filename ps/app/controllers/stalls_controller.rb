@@ -97,6 +97,6 @@ class StallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stall_params
-      params.require(:stall).permit(:name, :desc, :picture, :latlog, :owner) #, :user_id
+      params.require(:stall).permit(:name, :desc, :picture, :address, :latlog, :owner) #, :user_id
     end
 end

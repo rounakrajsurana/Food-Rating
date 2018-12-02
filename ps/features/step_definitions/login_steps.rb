@@ -2,7 +2,7 @@ Given("I am on the home page") do
     visit '/'
    end
    And ("I want to sign in") do
-    @user = FactoryBot.create :Amember1
+    @user = FactoryBot.create :Amember
    end
    Then("I should see a link to sign in") do
     find_link('Sign in', href:"/users/sign_in")

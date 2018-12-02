@@ -3,7 +3,7 @@ Given("I am on the homepage") do
     end
 
     And ("I want to register as new user") do
-     @user = FactoryBot.create :Amember1
+     @user = FactoryBot.create :Amember
     end
 
     Then("I should see a link to sign up") do

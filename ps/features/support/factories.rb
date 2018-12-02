@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :Aadmin1, class: User do
+  factory :Aadmin, class: User do
     id { "501" }
     email { "admin@ait.asia" }
     password { 'password' }
@@ -11,7 +11,7 @@ FactoryBot.define do
     active { "true" }
   end
 
-  factory :Astall1, class: User do
+  factory :Astall, class: User do
     id { "502" }
     email { 'stall@ait.asia' }
     password { 'password' }
@@ -23,7 +23,7 @@ FactoryBot.define do
     active { true }
   end
 
-  factory :Amember1, class: User do
+  factory :Amember, class: User do
     id { "503" }
     email { 'member@ait.asia' }
     password { 'password' }
@@ -53,13 +53,13 @@ FactoryBot.define do
   end
 
   factory :dish, class: Dish do
-    id { "333" }
+    id { 333 }
     name { 'A dish name' }
     desc { 'A very huge description is not required just basic ones are enough' }
     picture { 'dish.png' }
-    category_id { '111' }
-    stall_id { '222' }
-    user_id { '502' }
+    category_id { 111 }
+    stall_id { 222 }
+    user_id { 502 }
   end
 
   # factory :rating, class: Ratings do

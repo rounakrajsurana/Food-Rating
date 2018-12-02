@@ -10,8 +10,10 @@
                 <tr>
               <% end %>
               <td>
-                <p class='center'><strong><%= dish.name %></strong></p>
-                <%= link_to image_tag(dish.picture, size: "220x165", :alt => dish.name), dish %>
+                <p class='center'><strong><%= link_to dish.name, dish %></strong></p>
+                <%if dish.picture.attached? %>
+                <%= link_to image_tag(dish.picture, size: "220x165"), dish %>
+                <%end%>
               </td>
               <% if (col_size%3)==0 %>
                 </tr>
@@ -36,8 +38,10 @@
                 <tr>
               <% end %>
               <td>
-              <p class='center'><strong><%= dish.name %></strong></p>
+              <p class='center'><strong><%= link_to dish.name, dish %></strong></p>
+            <%if dish.picture.attached? %>
             <%= link_to image_tag(dish.picture, size: "220x165", :alt => dish.name), dish %>
+            <%end%>
           </td>
               <%if (col_size%3)==0 %>
                 </tr>
@@ -78,20 +82,19 @@
     <tbody>
       <% col_size = 1
       @stalls.each do |stall|
-      if (col_size%4)>0
-        tropen = '<tr>'
-      else
-        tropen = ''
-      end %>
-          <td><%= link_to image_tag(stall.picture, size: "220x165", :alt => stall.name), stall %>
-          <br><p class='center'><%= col_size.to_s+'. '+stall.name %></p></td>
-          <%if (col_size%4)>0
-            trclose = '</tr>'
-          else
-            trclose = ''
-          end
-          col_size = col_size+1
-     end %>
+      if (col_size%3)==1 %>
+        <tr>
+      <% end %>
+          <td>
+            <%if stall.picture.attached? %>
+            <%= link_to image_tag(stall.picture, size: "220x165", :alt => stall.name), stall %>
+            <%end%>
+          <br><p class='center'><%= link_to stall.name, stall %></p></td>
+          <%if (col_size%3)==0 %>
+            </tr>
+          <%end%>
+          <% col_size = col_size+1 %>
+     <% end %>
     </tbody>
   </table>
   <%= will_paginate @stalls %>

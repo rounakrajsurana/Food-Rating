@@ -19,7 +19,11 @@
       <tr>
         <td><%= rating.created_at %></td>
         <td><%= rating.rating_id %></td>
-        <td><%= rating.dish.name %></td>
+        <td>
+          <%if rating.dish.name %>
+          <%= rating.dish.name %>
+          <%end%>
+        </td>
         <td><%= rating.rate %></td>
         <td><%= rating.comment %></td>
         <td><%= rating.user.email %></td>

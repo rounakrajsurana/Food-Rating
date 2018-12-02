@@ -3,15 +3,24 @@
 	<tr>
 			<td colspan="2">
 			<p class="review-comment"><%= rating.updated_at %></p>
-			<p class="review-comment"><strong><%= rating.dish.name %></strong></p>
+			<p class="review-comment"><strong><%= link_to rating.dish.name, dish_path(rating.dish) %></strong></p>
 		</td>
-			<td colspan="2">
-				<div class="average-rating-rate" data-score=<%= rating.rate %>></div>
-			</td>
+		<td>
+		<% if user_signed_in? %>
+					<% if (current_user.admin?||rating.user_id == current_user.id) %>
+								<% if (rating.user_id == current_user.id) %>
+									<%= link_to image_tag('edit.png', size: "20x20"), edit_dish_rating_path(rating.dish_id, rating), class: "btn btn-custom" %>
+								<%end%>
+									<%= link_to image_tag('del.png', size: "20x20"), rating_path(rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
+							 <% end %>
+		<% end %>
+		<%= link_to image_tag('hist.png', size: "20x20"),rating_path(rating), class: "btn btn-custom" %>
+		<div class="average-rating-rate" data-score=<%= rating.rate %>></div>
+ </td>
 	</tr>
 	<tr>
 		<td>
-<% if rating.dish.picture%>
+<% if rating.dish.picture.attached?%>
 	<%= link_to image_tag(rating.dish.picture, size: "120x90", :alt => rating.dish.name), dish_path(rating.dish_id) %>
 <% end %>
 </td>
@@ -21,24 +30,7 @@
 <%# <%=link_to image_tag('def-user.png', size: "80x60", :alt => rating.user.fullname) %>
 </td>
 <td>
-
-
 	<p class="review-comment"><%= rating.comment %></p>
 </td>
-<% if user_signed_in? %>
-        <% if (current_user.admin?||rating.user_id == current_user.id) %>
-<td>
-				<div class="links btn-group">
-					<% if (rating.user_id == current_user.id) %>
-            <%= link_to "Edit", edit_dish_rating_path(rating.dish_id, rating), class: "btn btn-custom" %>
-					<%end%>
-					  <%= link_to "Delete", rating_path(rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
-            <!--
-            <%# <%= link_to "Delete", dish_path(rating.dish, rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %> %>
-            -->
-        </div>
-</td>
-        <% end %>
-<% end %>
 </tr>
 <table>

@@ -1,7 +1,7 @@
 <h1>Edit Rating</h1>
 <%= form_for @rating, url: {action: "update"} do |form| %>
   <div class='center'>
-    <% if @dish.picture%>
+    <% if @dish.picture.attached?%>
     <%= image_tag(@dish.picture, size: '400x300', :alt => @dish.name) %>
     <% end %>
   </div>

@@ -35,19 +35,15 @@
   <strong>Introduction:</strong>
   <%= @stall.desc %>
 </p>
-
-<%if @stall.picture%>
 <p>
-  <strong>Picture:</strong>
-  <%= @stall.picture %>
+  <strong>Address:</strong>
+  <%= @stall.address %>
 </p>
-<%end%>
 <p>
-  <strong>Latlog:</strong>
+  <strong>Location:</strong>
   <%= @stall.latlog %>
   <div id="map"></div>
 </p>
-
 <p>
   <strong>Owner:</strong>
   <%= @sowner.email %>
@@ -94,7 +90,7 @@
                 <% end %>
               </strong>
                 </p>
-                <%if dish.picture%>
+                <%if dish.picture.attached?%>
               <%= link_to image_tag(dish.picture, size: "220x165", :alt => dish.name), dish %>
             <br><%end%>
             <p class='center'>

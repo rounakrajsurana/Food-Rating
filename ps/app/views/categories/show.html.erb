@@ -18,7 +18,9 @@
                 <% end %>
               </strong>
                 </p>
+                  <%if dish.picture.attached? %>                  
               <%= link_to image_tag(dish.picture, size: "220x165", :alt => dish.name), dish %>
+            <% end %>
             <br><p class='center'>
               <% if user_signed_in? && current_user.admin? %>
                 <%= link_to 'Edit', edit_dish_path(dish) %>

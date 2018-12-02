@@ -41,8 +41,8 @@
 <p>
 <% if user_signed_in? && (current_user.admin? || current_user.id==@dish.user_id)%>
       <p class='center'>
-          <%= link_to image_tag("edit.ico", size: "20x20", :alt => "Edit")+' Edit Dish', edit_dish_path(@dish) %>
-          <%= link_to 'X Destroy', @dish, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to image_tag("edit.ico", size: "20x20")+' Edit Dish', edit_dish_path(@dish) %>
+          <%= link_to image_tag('delete.png', size: "20x20")+' Delete Dish', @dish, method: :delete, data: { confirm: 'Are you sure?' } %>
       </p>
   <% end %>
 </p>

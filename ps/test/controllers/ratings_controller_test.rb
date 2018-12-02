@@ -25,10 +25,10 @@ class RatingsControllerTest < ActionDispatch::IntegrationTest
   #   assert_redirected_to dish_path(@dish)
   # end
 
-  test "should show rating" do
-    get rating_url(@rating)
-    assert_response :success
-  end
+  # test "should show rating" do
+  #   get rating_url(@rating)
+  #   assert_response :success
+  # end
 
   test "should get edit" do
     get edit_dish_rating_path(@rating.dish_id, @rating)
