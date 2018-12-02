@@ -1,5 +1,5 @@
 Given("I am a member") do
-  @member = FactoryBot.create :member
+  @member = FactoryBot.create :Amember1
 end
 
 Given("I am signed in as user") do
@@ -15,7 +15,7 @@ When("I visit the dish page") do
 end
 
 Then("I should see the description of dishes") do
-  #save_and_open_page 
+  #save_and_open_page
   expect(page).to have_content ('Dish ID')
   expect(page).to have_content ('Name')
   expect(page).to have_content('Description')
@@ -54,7 +54,7 @@ end
 
 Then("I should see the reviews") do
   expect(page).to have_content('Ratings&Reviews')
-  
+
 end
 
 Then("I should see my review added to the dish") do

@@ -3,6 +3,7 @@ class Dish < ApplicationRecord
   belongs_to :stall
   belongs_to :user
   has_many :ratings, dependent: :destroy
+  has_many :log_ratings, dependent: :destroy
 
   validates_presence_of :name
   validates_presence_of :desc

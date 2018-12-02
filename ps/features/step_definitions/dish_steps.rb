@@ -1,5 +1,5 @@
 Given("I am a stall owner") do
-  @stall = FactoryBot.create :stall
+  @stall = FactoryBot.create :Astall1
 end
 
 Given("I am signed in") do
@@ -35,7 +35,7 @@ end
 
 When("I submit the new dish form") do
   @dish = FactoryBot.build :dish
-  
+
 end
 
 Then("I should see the details of the new dish") do

@@ -2,13 +2,13 @@ class StallsController < ApplicationController
   before_action :set_stall, only: [:show, :edit, :update, :destroy]
   before_action :set_sowner, only: [:show, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
-  
+
   # GET /stalls
   # GET /stalls.json
   load_and_authorize_resource
 
   def index
-    @stalls = Stall.all
+    @stalls = Stall.all.order(updated_at: :DESC)
     @stalls = @stalls.paginate(per_page: 32, page: params[:page])
     @stall = Stall.new
   end
@@ -18,11 +18,11 @@ class StallsController < ApplicationController
   def show
     @owner = User.where(id: params[:owner])
 
-    @dishes = Dish.where("stall_id=?",params[:id])
+    @dishes = Dish.where("stall_id=?",params[:id]).order(updated_at: :DESC)
     unless params[:q].blank?
       @q = params[:q];
       @search = "%"+params[:q]+"%";
-      @dishes = Dish.where("stall_id = ? and lower(name) like ?", params[:id], @search)
+      @dishes = Dish.where("stall_id = ? and lower(name) like ?", params[:id], @search).order(updated_at: :DESC)
     end
       @dishes = @dishes.paginate(per_page: 30, page: params[:page])
   end

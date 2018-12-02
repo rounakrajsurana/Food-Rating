@@ -1,0 +1,29 @@
+
+<table>
+	<tr>
+			<td colspan="2">
+			<p class="review-comment"><%= rating.created_at %></p>
+			<p class="review-comment"><strong><%= rating.dish.name %></strong></p>
+		</td>
+			<td colspan="2">
+				<div class="average-rating-rate" data-score=<%= rating.rate %>></div>
+			</td>
+	</tr>
+	<tr>
+		<td>
+<% if rating.dish.picture%>
+	<%= link_to image_tag(rating.dish.picture, size: "120x90", :alt => rating.dish.name), dish_path(rating.dish_id) %>
+<% end %>
+</td>
+<td>
+<%= image_tag('def-user.png', size: "60x60", :alt => rating.user.fullname) %>
+<p class="review-comment"><%= rating.user.email %></p>
+<%# <%=link_to image_tag('def-user.png', size: "80x60", :alt => rating.user.fullname) %>
+</td>
+<td>
+
+
+	<p class="review-comment"><%= rating.comment %></p>
+</td>
+</tr>
+<table>

@@ -28,7 +28,7 @@ class HomeController < ApplicationController
     end
 
     def review
-      @ratings = Rating.where(user_id: current_user.id).order("created_at DESC")
+      @ratings = Rating.where(user_id: current_user.id).order("updated_at DESC")
       @ratings = @ratings.paginate(per_page: 5, page: params[:page])
     end
 

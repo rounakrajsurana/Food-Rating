@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_12_02_142837) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,6 +65,31 @@ ActiveRecord::Schema.define(version: 2018_12_02_142837) do
     t.index ["user_id"], name: "index_dishes_on_user_id"
   end
 
+  create_table "log_ratings", force: :cascade do |t|
+    t.integer "rating_id"
+    t.integer "rate"
+    t.string "comment"
+    t.bigint "dish_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_log_ratings_on_dish_id"
+    t.index ["user_id"], name: "index_log_ratings_on_user_id"
+  end
+
+#   create_table "my_stocks", id: false, force: :cascade do |t|
+#     t.string "symbol", limit: 20, null: false
+#     t.integer "n_shares", null: false
+#     t.date "date_acquired", null: false
+#   end
+#
+#   create_table "newly_acquired_stocks", id: false, force: :cascade do |t|
+#     t.string "symbol", limit: 20, null: false
+#     t.integer "n_shares", null: false
+#     t.date "date_acquired", null: false
+#   end
+#
+# >>>>>>> aeb
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -120,5 +146,11 @@ ActiveRecord::Schema.define(version: 2018_12_02_142837) do
   add_foreign_key "dishes", "categories"
   add_foreign_key "dishes", "stalls"
   add_foreign_key "dishes", "users"
+
+  add_foreign_key "log_ratings", "dishes"
+  add_foreign_key "log_ratings", "users"
+  add_foreign_key "problems", "problemsets"
+  add_foreign_key "solutions", "problems"
+
   add_foreign_key "stalls", "users"
 end

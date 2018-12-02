@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @log_rating.rating_id %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @log_rating.rate %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @log_rating.comment %>
+</p>
+
+<p>
+  <strong>Dish:</strong>
+  <%= @log_rating.dish %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @log_rating.user %>
+</p>
+
+<%= link_to 'Edit', edit_log_rating_path(@log_rating) %> |
+<%= link_to 'Back', log_ratings_path %>

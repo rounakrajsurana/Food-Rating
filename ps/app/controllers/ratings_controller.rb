@@ -7,10 +7,9 @@ class RatingsController < ApplicationController
   load_and_authorize_resource
   # GET /ratings
   # GET /ratings.json
-  load_and_authorize_resource
 
   def index
-    @ratings = Rating.all
+    @ratings = Rating.all.order(updated_at: :DESC)
     @ratings = @ratings.paginate(per_page: 32, page: params[:page])
     @rating = Rating.new
   end
@@ -18,6 +17,7 @@ class RatingsController < ApplicationController
   # GET /ratings/1
   # GET /ratings/1.json
   def show
+    @log_ratings = LogRating.where("rating_id=?",params[:id]).order(updated_at: :DESC)
   end
 
   # GET /ratings/new
@@ -36,38 +36,53 @@ class RatingsController < ApplicationController
     @rating = Rating.new(rating_params)
     @rating.user_id = current_user.id
     @rating.dish_id = @dish.id
-
-
+    respond_to do |format|
       if @rating.save
+        #============== Insert LogRating (Initial) ================
+        conn = ActiveRecord::Base.connection
+        rid = conn.quote(@rating.id) #sanitized params[:id]
+        query = "INSERT INTO log_ratings(rating_id, rate, comment, created_at, updated_at, dish_id, user_id)
+        select id, rate, comment, updated_at, updated_at, dish_id, #{current_user.id} from ratings where id=#{rid}"
+        result = conn.execute(query)
 
-        redirect_to dish_path(@dish)
-        # format.html { redirect_to dish_path, notice: 'Rating was successfully created.' }
-        # format.json { render :show, status: :created, location: @rating }
+        # redirect_to dish_path(@dish)
+        format.html { redirect_to dish_path(@dish), notice: 'Rating was successfully created.' }
+        format.json { render :show, status: :created, location: @rating }
       else
 
         render 'new'
         # format.html { render :new }
         # format.json { render json: @rating.errors, status: :unprocessable_entity }
       end
-
+    end
   end
 
   # PATCH/PUT /ratings/1
   # PATCH/PUT /ratings/1.json
   def update
-
+    respond_to do |format|
       if @rating.update(rating_params)
+        #============== Insert LogRating (Updates)================
+        conn = ActiveRecord::Base.connection
+        rid = conn.quote(@rating.id) #sanitized params[:id]
+        query = "INSERT INTO log_ratings(rating_id, rate, comment, created_at, updated_at, dish_id, user_id)
+        select id, rate, comment, updated_at, updated_at, dish_id, #{current_user.id} from ratings where id=#{rid}"
+        result = conn.execute(query)
+        # log_rating_params=rating_params
+        # log_rating_params[:rating_id] = @rating.id
+        # @log_rating = LogRating.new(log_rating_params)
+        # result=@log_rating.save
 
-        redirect_to dish_path(@dish)
-        # format.html { redirect_to @rating, notice: 'Rating was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @rating }
+        # redirect_to dish_path(@dish)
+        # format.html { redirect_to dish_path(@dish), notice: log_rating_params[:created_at]}
+        format.html { redirect_to dish_path(@dish), notice: 'Rating was successfully updated.'}
+        format.json { render :show, status: :ok, location: @rating }
       else
-
-        render 'edit'
-        # format.html { render :edit }
-        # format.json { render json: @rating.errors, status: :unprocessable_entity }
+        # render 'edit'
+        format.html { render :edit }
+        format.json { render json: @rating.errors, status: :unprocessable_entity }
       end
-
+    end
   end
 
   # DELETE /ratings/1
@@ -82,6 +97,15 @@ class RatingsController < ApplicationController
     end
   end
 
+  def execute_statement(sql)
+      results = ActiveRecord::Base.connection.execute(sql)
+      if results.present?
+        return results
+      else
+        return nil
+      end
+
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rating

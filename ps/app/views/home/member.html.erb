@@ -7,8 +7,13 @@
   <%= link_to "Edit My Profile", edit_user_registration_path %>
 </p>
 <p>
-  <%= link_to "Ratings & Reviews History", '/home/review' %>
+  <%= link_to "My Ratings & Reviews History", '/home/review' %>
 </p>
+  <% if current_user.admin?%>
+  <p>
+    <%= link_to "All Ratings & Reviews (Admin Only)", '/ratings' %>
+  </p>
+  <% end %>
 <%else%>
       <div class='center'>Please Log-In</div>
 <% end %>

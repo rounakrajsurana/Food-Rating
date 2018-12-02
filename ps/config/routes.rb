@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :log_ratings
   resources :assignments
   resources :categories
   resources :ratings

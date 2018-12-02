@@ -5,7 +5,7 @@
   <div class='ahead'>
   <div class="review">
     <!-- Where the reviews/ratings will go -->
-    <%= render @ratings %>
+    <%= render @ratings.order(updated_at: :DESC) %>
     <div>
   <%= will_paginate @ratings %>
   </div>

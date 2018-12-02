@@ -1,18 +1,17 @@
 FactoryBot.define do
-
-  factory :admin, class: User do
+  factory :Aadmin1, class: User do
     id { "501" }
     email { "admin@ait.asia" }
     password { 'password' }
     password_confirmation { 'password' }
     fullname { 'Name Admin' }
     contactno { '1234567890' }
-    admin { true }
-    stall { false }
-    active { true }
+    admin { "true" }
+    stall { "false" }
+    active { "true" }
   end
 
-  factory :stall, class: User do
+  factory :Astall1, class: User do
     id { "502" }
     email { 'stall@ait.asia' }
     password { 'password' }
@@ -24,7 +23,7 @@ FactoryBot.define do
     active { true }
   end
 
-  factory :member, class: User do
+  factory :Amember1, class: User do
     id { "503" }
     email { 'member@ait.asia' }
     password { 'password' }
@@ -63,12 +62,12 @@ FactoryBot.define do
     user_id { '502' }
   end
 
-  factory :rating, class: Ratings do
-    id { "444" }
-    rate { 5 }
-    comment { 'A Great dish!' }
-    dish_id { '333' }
-    user_id { '503' }
-  end
+  # factory :rating, class: Ratings do
+  #   id { "444" }
+  #   rate { 5 }
+  #   comment { 'A Great dish!' }
+  #   dish_id { '333' }
+  #   user_id { '503' }
+  # end
 
 end

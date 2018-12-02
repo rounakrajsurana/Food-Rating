@@ -2,7 +2,7 @@
 <table>
 	<tr>
 			<td colspan="2">
-			<p class="review-comment"><%= rating.created_at %></p>
+			<p class="review-comment"><%= rating.updated_at %></p>
 			<p class="review-comment"><strong><%= rating.dish.name %></strong></p>
 		</td>
 			<td colspan="2">
@@ -29,8 +29,10 @@
         <% if (current_user.admin?||rating.user_id == current_user.id) %>
 <td>
 				<div class="links btn-group">
+					<% if (rating.user_id == current_user.id) %>
             <%= link_to "Edit", edit_dish_rating_path(rating.dish_id, rating), class: "btn btn-custom" %>
-            <%= link_to "Delete", rating_path(rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
+					<%end%>
+					  <%= link_to "Delete", rating_path(rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %>
             <!--
             <%# <%= link_to "Delete", dish_path(rating.dish, rating), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-custom" %> %>
             -->

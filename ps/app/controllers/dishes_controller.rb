@@ -10,11 +10,11 @@ class DishesController < ApplicationController
     # @dishes = Dish.all
     # @dishes = (params[:q].blank?) ? Dish.all : Dish.where(name: params[:q])
     if params[:q].blank?
-        @dishes = Dish.all
+        @dishes = Dish.all.order(updated_at: :DESC)
     else
       @q = params[:q];
       @search = "%"+params[:q]+"%";
-      @dishes = Dish.where("lower(name) like ?", @search)
+      @dishes = Dish.where("lower(name) like ?", @search).order(updated_at: :DESC)
     end
     @dishes = @dishes.paginate(per_page: 15, page: params[:page])
     @dish = Dish.new
@@ -36,9 +36,10 @@ class DishesController < ApplicationController
 		else
 			@average_rating = @dish.ratings.average(:rate).round(2)
 		end
-
-    @myrating = Rating.where("user_id=? and dish_id=?", current_user.id, params[:id])
-	end
+    if current_user
+      @myrating = Rating.where("user_id=? and dish_id=?", current_user.id, params[:id]).order(updated_at: :DESC)
+	  end
+  end
 
   # GET /dishes/new
   def new
