@@ -2,7 +2,7 @@
 <div class= "profile">
   <div align="center">
   <% if (current_user.avatar.attached?)%>
-    <%= image_tag(current_user.avatar, size: "250x150") %>
+    <%= image_tag(current_user.avatar, size: "250x150", class: 'rounded-circle') %>
   <% end %>
       <h1>
         <%= current_user.fullname %>

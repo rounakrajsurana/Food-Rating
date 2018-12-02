@@ -3,6 +3,10 @@ class LogRatingsController < ApplicationController
   before_action :set_rating, only: [:new, :create, :edit, :update]
   # GET /log_ratings
   # GET /log_ratings.json
+  before_action :authenticate_user!, except: [:index, :show]
+  # before_action :set_user, except: [:new]
+  # before_action :find_ratings, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
   def index
     @log_ratings = LogRating.all.order(updated_at: :DESC)
   end

@@ -25,8 +25,8 @@
 <% end %>
 </td>
 <td>
-<% if (current_user.avatar.attached?)%>
-<%= image_tag(current_user.avatar, size: "60x60",class: "rounded-circle") %>
+<% if (rating.user.avatar.attached?)%>
+	<%= image_tag(rating.user.avatar, size: "60x60",class: "rounded-circle") %>
 <% end %>
 <p class="review-comment"><%= rating.user.email %></p>
 <%# <%=link_to image_tag('def-user.png', size: "80x60", :alt => rating.user.fullname) %>
