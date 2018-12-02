@@ -18,11 +18,15 @@
     <% @stalls.each do |stall| %>
       <tr>
         <td><%= stall.created_at %></td>
+        
         <td>
-    <% if stall.picture%>
+    <% if stall.picture.attached?%>
     	<%= link_to image_tag(stall.picture, size: "120x90", :alt => stall.name), stall_path(stall.id) %>
     <% end %>
     </td>
+
+    
+
         <td><%= stall.name %></td>
         <td><%= stall.desc %></td>
         <td><%= User.find(stall.owner).email %></td>

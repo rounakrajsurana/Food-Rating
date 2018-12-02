@@ -8,4 +8,5 @@ class Stall < ApplicationRecord
   # validates_presence_of :latlog
   validates_presence_of :owner
 
+  has_one_attached :picture
 end

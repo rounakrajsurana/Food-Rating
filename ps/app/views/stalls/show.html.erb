@@ -24,7 +24,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvf5fw-Q54GekV7vGDCo5qY-wuzaUpEc&callback=initMap" async defer></script>
 
 <div class='center'>
-<%if @stall.picture%>
+<%if @stall.picture.attached?%>
   <%= image_tag(@stall.picture, size: "400x300", :alt => @stall.name) %>
 <% end %>
   <p>

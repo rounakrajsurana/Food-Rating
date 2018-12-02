@@ -10,7 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :contactno,             null: false, default: ""
       t.boolean :admin,              default: false
       t.boolean :stall,              default: false
-      t.boolean :active,             default: false
+      t.boolean :active,             default: true
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
