@@ -28,7 +28,7 @@
       <tr>
         <td><%= dish.created_at %></td>
         <td>
-          <%if dish.picture%>
+          <%if dish.picture.attached?%>
           <%= link_to image_tag(dish.picture, size: "120x90", :alt => dish.name), dish %>
           <%end%>
         </td>
