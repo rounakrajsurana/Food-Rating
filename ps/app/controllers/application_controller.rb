@@ -7,20 +7,8 @@ class ApplicationController < ActionController::Base
   end
 
   def update_sanitized_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname, :contactno, :email, :password])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname, :contactno, :email, :password, :avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar])
   end
-  # rescue_from NoMethodError do |exception|
-  #   flash[:error] = "Incorrect values! Please check again."
-  #   redirect_to root_path
-  # end
-
-
-
-  # helper_method :current_user
-  #
-  # private
-  # def current_user
-  #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  # end
 
 end

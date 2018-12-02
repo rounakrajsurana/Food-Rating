@@ -3,6 +3,18 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+
+  <div class="form-group">
+     <div align="center">
+        <br>
+          <% if resource.avatar.attached? %>
+            <%= image_tag(resource.avatar, size: "150x100", class: "rounded-circle") %>
+          <% end %>      
+        <br>
+        <%= f.file_field :avatar %>  
+    </div>
+  </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -27,14 +39,17 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
+  
   <div class="field">
     <%= f.label :fullname %><br />
     <%= f.text_field :fullname, autofocus: true, autocomplete: "fullname" %>
   </div>
+ 
   <div class="field">
     <%= f.label :contactno %><br />
     <%= f.text_field :contactno, autofocus: true, autocomplete: "contactno"  %>
   </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

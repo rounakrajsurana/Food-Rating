@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates_presence_of :password, on: :create
   validates_presence_of :email
   validates_uniqueness_of :email
+  has_one_attached :avatar
   # before_save :hash_password
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2018_12_02_142837) do
     t.index ["user_id"], name: "index_log_ratings_on_user_id"
   end
 
+<<<<<<< Updated upstream
   create_table "my_stocks", id: false, force: :cascade do |t|
     t.string "symbol", limit: 20, null: false
     t.integer "n_shares", null: false
@@ -88,6 +89,8 @@ ActiveRecord::Schema.define(version: 2018_12_02_142837) do
     t.date "date_acquired", null: false
   end
 
+=======
+>>>>>>> Stashed changes
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -162,6 +165,14 @@ ActiveRecord::Schema.define(version: 2018_12_02_142837) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+<<<<<<< Updated upstream
+=======
+    t.string "fullname", default: "", null: false
+    t.string "contactno", default: "", null: false
+    t.boolean "admin", default: false
+    t.boolean "stall", default: false
+    t.boolean "active", default: true
+>>>>>>> Stashed changes
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -194,7 +205,10 @@ ActiveRecord::Schema.define(version: 2018_12_02_142837) do
   add_foreign_key "dishes", "users"
   add_foreign_key "log_ratings", "dishes"
   add_foreign_key "log_ratings", "users"
+<<<<<<< Updated upstream
   add_foreign_key "problems", "problemsets"
   add_foreign_key "solutions", "problems"
+=======
+>>>>>>> Stashed changes
   add_foreign_key "stalls", "users"
 end
