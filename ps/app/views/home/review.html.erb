@@ -1,19 +1,13 @@
-<html>
-
-<head>
-  <title>Member</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-
-<% if user_signed_in? %>
-    <% if current_user.stall? %>
-    <div class='ablock'>
-      <p>
-        <%= link_to "Ratings & Reviews History", dishes_path %>
-      </p>
-      </div>
-      <% end %>
-<% end %>
-</html>
+<!-- ================================ Ratings ================================ -->
+<br>
+<h1><%=image_tag('review.png', size: "60x40")%> My Reviews</h1>
+<div class='ablock'>
+  <div class='ahead'>
+  <div class="review">
+    <!-- Where the reviews/ratings will go -->
+    <%= render @ratings %>
+    <div>
+  <%= will_paginate @ratings %>
+  </div>
+</div>
+<div >

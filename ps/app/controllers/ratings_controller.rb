@@ -1,7 +1,7 @@
 class RatingsController < ApplicationController
   # before_action :set_rating, only: [:show, :edit, :update, :destroy]
+  before_action :set_dish, only: [:new, :create, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :find_dish, except: [:destroy]
   # before_action :set_user, except: [:new]
   # before_action :find_ratings, only: [:edit, :update, :destroy]
   load_and_authorize_resource
@@ -73,11 +73,11 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1
   # DELETE /ratings/1.json
   def destroy
-
+    did = @rating.dish_id
     @rating.destroy
 
     respond_to do |format|
-       format.html { redirect_to dish_path(@dish), notice: 'Rating was successfully destroyed.' }
+       format.html { redirect_to dish_path(did), notice: 'Rating was successfully destroyed.' }
     #   format.json { head :no_content }
     end
   end
@@ -93,7 +93,7 @@ class RatingsController < ApplicationController
       params.require(:rating).permit(:rate, :comment)
     end
 
-    def find_dish
+    def set_dish
 			@dish = Dish.find(params[:dish_id])
 		end
 

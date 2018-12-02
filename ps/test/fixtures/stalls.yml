@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  desc: MyString
-  picture: MyString
-  latlog: MyString
-  user: one
+  id: 1
+  name: MyString1
+  desc: MyString1
+  picture: stall.png
+  latlog: Mylatlog
+  user_id: 1
+  owner: 2
 
 two:
-  name: MyString
-  desc: MyString
-  picture: MyString
-  latlog: MyString
-  user: two
+  id: 2
+  name: MyString2
+  desc: MyString2
+  picture: stall.png
+  latlog: Mylatlog
+  user_id: 1
+  owner: 2

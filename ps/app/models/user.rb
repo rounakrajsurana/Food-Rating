@@ -1,7 +1,14 @@
 class User < ApplicationRecord
-
+  has_many :stalls
   has_many :dishes
 	has_many :ratings
+  # , dependent: :destroy
+  attr_accessor :password
+  # validates_confirmation_of :password
+  validates_presence_of :password, on: :create
+  validates_presence_of :email
+  validates_uniqueness_of :email
+  # before_save :hash_password
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

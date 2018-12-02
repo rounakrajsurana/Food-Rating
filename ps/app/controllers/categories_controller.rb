@@ -7,13 +7,20 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-    @categories = @categories.paginate(per_page: 8, page: params[:page])
-    @category = Category.new    
+    @categories = @categories.paginate(per_page: 20, page: params[:page])
+    @category = Category.new
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @dishes = Dish.where("category_id=?",params[:id])
+    unless params[:q].blank?
+      @q = params[:q];
+      @search = "%"+params[:q]+"%";
+      @dishes = Dish.where("category_id = ? and lower(name) like ?", params[:id], @search)
+    end
+      @dishes = @dishes.paginate(per_page: 30, page: params[:page])
   end
 
   # GET /categories/new

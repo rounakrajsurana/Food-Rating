@@ -4,8 +4,35 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
+Aadmin:
+  id: 1
+  email: "admin@hotmail.com"
+  encrypted_password: "$2a$10$ZU0x7nDXA1EKbUAjwKTCwegV/yfddZkvfKWEa9/arb5pBQuy/1oFu"
+  fullname: "AAdmin Test1"
+  contactno: "0846324444"
+  active: true
+  admin: true
+  stall: false
+
+Astall:
+    id: 2
+    email: "stall@hotmail.com"
+    encrypted_password: "$2a$10$ZU0x7nDXA1EKbUAjwKTCwegV/yfddZkvfKWEa9/arb5pBQuy/1oFu"
+    fullname: "AStall Test2"
+    contactno: "0846326666"
+    active: true
+    admin: false
+    stall: true
+
+Amember:
+    id: 3
+    email: "member@hotmail.com"
+    encrypted_password: "$2a$10$ZU0x7nDXA1EKbUAjwKTCwegV/yfddZkvfKWEa9/arb5pBQuy/1oFu"
+    fullname: "AMember Test3"
+    contactno: "0846326666"
+    active: true
+    admin: false
+    stall: false
 #
-two: {}
+# two: {}
 # column: value

@@ -1,4 +1,4 @@
-<!-- ================================ New Dishes ================================ -->
+<!-- ================================ Last Updated ================================ -->
 <div class='ablock'>
   <div class='ahead'>
   <h4>Last Update <%=image_tag('new-br.png', size: "80x40")%></h4>
@@ -6,26 +6,25 @@
     <tbody>
       <% col_size = 1
           @newdishes.each do |dish|
-              if (col_size%4)>0
-                tropen = '<tr>'
-              else
-                tropen = ''
-              end %>
-              <td><%= link_to image_tag(dish.picture, size: "200x150", :alt => dish.name), dish %>
-              <br><p class='center'><%= col_size.to_s+'. '+dish.name %></p></td>
-              <%if (col_size%4)>0
-                trclose = '</tr>'
-              else
-                trclose = ''
-              end
+              if (col_size%3)==1 %>
+                <tr>
+              <% end %>
+              <td>
+                <p class='center'><strong><%= dish.name %></strong></p>
+                <%= link_to image_tag(dish.picture, size: "220x165", :alt => dish.name), dish %>
+              </td>
+              <% if (col_size%3)==0 %>
+                </tr>
+              <%end
               col_size = col_size+1
-         end %>
+              %>
+         <% end %>
     </tbody>
   </table>
   <%= will_paginate @newdishes %>
   </div>
 </div>
-<!-- ================================ Dishes ================================ -->
+<!-- ================================ All Dishes ================================ -->
 <div class='ablock'>
   <div class='ahead'>
   <h4>All Dishes</h4>
@@ -33,20 +32,18 @@
     <tbody>
       <% col_size = 1
           @dishes.each do |dish|
-              if (col_size%4)>0
-                tropen = '<tr>'
-              else
-                tropen = ''
-              end %>
-              <td><%= link_to image_tag(dish.picture, size: "200x150", :alt => dish.name), dish %>
-              <br><p class='center'><%= col_size.to_s+'. '+dish.name %></p></td>
-              <%if (col_size%4)>0
-                trclose = '</tr>'
-              else
-                trclose = ''
-              end
-              col_size = col_size+1
-         end %>
+              if (col_size%3)==1 %>
+                <tr>
+              <% end %>
+              <td>
+              <p class='center'><strong><%= dish.name %></strong></p>
+            <%= link_to image_tag(dish.picture, size: "220x165", :alt => dish.name), dish %>
+          </td>
+              <%if (col_size%3)==0 %>
+                </tr>
+              <% end
+              col_size = col_size+1 %>
+         <% end %>
     </tbody>
   </table>
   <%= will_paginate @dishes %>
@@ -56,28 +53,18 @@
 <br>
 <div >
   <table class='tblock'>
-    <thead>
-      <tr>
-        <th>Categories</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
     <tbody>
   	  <% col_size = 1
       @categories.each do |category|
-      if (col_size%4)>0
-        tropen = '<tr>'
-      else
-        tropen = ''
-      end %>
-        <td><%= category.name %></td>
-        <%if (col_size%4)>0
-          trclose = '</tr>'
-        else
-          trclose = ''
-        end
-        col_size = col_size+1
-   end %>
+      if (col_size%5)==1  %>
+        <tr>
+      <% end %>
+        <th><%= link_to category.name, category %></th>
+        <%if (col_size%5)==0  %>
+          </tr>
+        <% end %>
+        <% col_size = col_size+1 %>
+   <% end %>
     </tbody>
   </table>
   <%= will_paginate @categories %>
@@ -96,7 +83,7 @@
       else
         tropen = ''
       end %>
-          <td><%= link_to image_tag(stall.picture, size: "200x150", :alt => stall.name), stall %>
+          <td><%= link_to image_tag(stall.picture, size: "220x165", :alt => stall.name), stall %>
           <br><p class='center'><%= col_size.to_s+'. '+stall.name %></p></td>
           <%if (col_size%4)>0
             trclose = '</tr>'
@@ -112,8 +99,8 @@
 </div>
 <!-- ================================ Ratings ================================ -->
 <br>
-<h1><%=image_tag('review.png', size: "60x40")%> Last Ratings</h1>
-<div class='ablock'>
+<h1><%=image_tag('review.png', size: "60x60")%> Last Ratings</h1>
+<!-- <div class='ablock'> -->
   <div class='ahead'>
   <div class="review">
     <!-- Where the reviews/ratings will go -->
@@ -122,5 +109,5 @@
   <%= will_paginate @ratings %>
   </div>
 </div>
-<div >
+<!-- <div > -->
 <%# <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure to delete?' } %>

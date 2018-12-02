@@ -1,8 +1,8 @@
 class StallsController < ApplicationController
   before_action :set_stall, only: [:show, :edit, :update, :destroy]
-  before_action :set_sowner, only: [:show, :edit, :update, :destroy]
+  before_action :set_sowner, only: [:show, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
-
+  
   # GET /stalls
   # GET /stalls.json
   load_and_authorize_resource
@@ -17,6 +17,14 @@ class StallsController < ApplicationController
   # GET /stalls/1.json
   def show
     @owner = User.where(id: params[:owner])
+
+    @dishes = Dish.where("stall_id=?",params[:id])
+    unless params[:q].blank?
+      @q = params[:q];
+      @search = "%"+params[:q]+"%";
+      @dishes = Dish.where("stall_id = ? and lower(name) like ?", params[:id], @search)
+    end
+      @dishes = @dishes.paginate(per_page: 30, page: params[:page])
   end
 
   # GET /stalls/new
@@ -89,6 +97,6 @@ class StallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stall_params
-      params.require(:stall).permit(:name, :desc, :picture, :latlog, :user_id, :owner)
+      params.require(:stall).permit(:name, :desc, :picture, :latlog, :owner) #, :user_id
     end
 end

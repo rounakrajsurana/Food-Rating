@@ -12,13 +12,13 @@
   <thead>
     <tr>
       <th>Created At</th>
-      <th>Dish ID</th>
+      <th>Picture</th>
       <th>Name</th>
       <th>Description</th>
       <th>Category</th>
       <th>Stall</th>
-      <th>Created By</th>
-      <th>Updated By</th>
+      <!-- <th>Created By</th>
+      <th>Updated By</th> -->
       <th>Details</th>
       <th colspan="2"></th>
     </tr>
@@ -27,15 +27,25 @@
     <% @dishes.each do |dish| %>
       <tr>
         <td><%= dish.created_at %></td>
-        <td><%= dish.id %></td>
-        <td><%= best_in_place dish, :name %></td>
+        <td>
+          <%if dish.picture%>
+          <%= link_to image_tag(dish.picture, size: "120x90", :alt => dish.name), dish %>
+          <%end%>
+        </td>
+        <td>
+          <% if user_signed_in? && (current_user.admin?||current_user.id==dish.user_id) %>
+        <%= best_in_place dish, :name %>
+      <% else %>
+        <%= dish.name %>
+      <% end %>
+        </td>
         <td><%= dish.desc %></td>
         <td><%= dish.category.name %></td>
         <td><%= dish.stall.name %></td>
-        <td><%= dish.user.email %></td>
-        <td><%= dish.updated_at %></td>
+        <!-- <td><%= dish.user.email %></td>
+        <td><%= dish.updated_at %></td> -->
         <td><%= link_to 'Show', dish %></td>
-        <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? && (current_user.admin?||current_user.id==dish.user_id) %>
           <td><%= link_to 'Edit', edit_dish_path(dish) %></td>
           <td><%= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
@@ -47,6 +57,6 @@
 <%= will_paginate @dishes %>
 <br>
 <% if user_signed_in? && (current_user.admin? || current_user.stall?)%>
-  <p class='center'><%= image_tag("add-circle.png", size: "16x16", :alt => "New") %>&nbsp;
+  <p class='center'><%= image_tag("add-circle.png", size: "20x20", :alt => "New") %>&nbsp;
   <%= link_to 'New Dish', new_dish_path %></p>
 <% end %>

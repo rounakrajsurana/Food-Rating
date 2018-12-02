@@ -8,8 +8,15 @@ class DishesController < ApplicationController
 
   def index
     # @dishes = Dish.all
-    @dishes = (params[:q].blank?) ? Dish.all : Dish.where(name: params[:q])
-    @dishes = @dishes.paginate(per_page: 32, page: params[:page])
+    # @dishes = (params[:q].blank?) ? Dish.all : Dish.where(name: params[:q])
+    if params[:q].blank?
+        @dishes = Dish.all
+    else
+      @q = params[:q];
+      @search = "%"+params[:q]+"%";
+      @dishes = Dish.where("lower(name) like ?", @search)
+    end
+    @dishes = @dishes.paginate(per_page: 15, page: params[:page])
     @dish = Dish.new
     # respond_to do |format|
     #   format.html
@@ -29,6 +36,8 @@ class DishesController < ApplicationController
 		else
 			@average_rating = @dish.ratings.average(:rate).round(2)
 		end
+
+    @myrating = Rating.where("user_id=? and dish_id=?", current_user.id, params[:id])
 	end
 
   # GET /dishes/new
@@ -99,19 +108,19 @@ class DishesController < ApplicationController
       @dish = Dish.find(params[:id])
     end
 
-    def set_stall
-      @stall = Stall.where(id: params[:stall_id])
-      # @stall = Stall.find(params[:stall_id])
-    end
+    # def set_stall
+    #   @stall = Stall.where(id: params[:stall_id])
+    #   # @stall = Stall.find(params[:stall_id])
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dish_params
       params.require(:dish).permit(:name, :desc, :picture, :category_id, :stall_id, :user_id)
     end
 
-    def find_dish
-			@dish = Dish.find(params[:dish_id])
-		end
+    # def find_dish
+		# 	@dish = Dish.find(params[:dish_id])
+		# end
     #
     # def set_downer //set_user
 		# 	@user = User.find(params[:user_id])

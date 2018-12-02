@@ -1,17 +1,28 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   name: MyString
   desc: MyString
-  picture: MyString
-  category: one
-  stall: one
-  user: one
+  picture: dish.png
+  category_id: 1
+  stall_id: 1
+  user_id: 2
 
 two:
+  id: 2
   name: MyString
   desc: MyString
-  picture: MyString
-  category: two
-  stall: two
-  user: two
+  picture: dish.png
+  category_id: 2
+  stall_id: 2
+  user_id: 2
+
+three:
+  id: 3
+  name: MyString
+  desc: MyString
+  picture: dish.png
+  category_id: 1
+  stall_id: 2
+  user_id: 1

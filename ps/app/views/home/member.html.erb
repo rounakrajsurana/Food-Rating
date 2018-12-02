@@ -1,19 +1,14 @@
-<html>
-
-<head>
-  <title>Member</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-
 <% if user_signed_in? %>
-    <% if current_user.stall? %>
-    <div class='ablock'>
-      <p>
-        <%= link_to "Ratings & Reviews History", dishes_path %>
-      </p>
-      </div>
-      <% end %>
+
+<p>
+  <%= link_to "Change Profile Picture", '' %>
+</p>
+<p>
+  <%= link_to "Edit My Profile", edit_user_registration_path %>
+</p>
+<p>
+  <%= link_to "Ratings & Reviews History", '/home/review' %>
+</p>
+<%else%>
+      <div class='center'>Please Log-In</div>
 <% end %>
-</html>

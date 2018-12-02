@@ -28,7 +28,7 @@ Then("I should see the User successful banned message") do
 end
 
 Given("I want to add a stall") do
-  
+
   #pending # Write code here that turns the phrase above into concrete actions
 end
 
@@ -43,7 +43,7 @@ Then("I should see a link for create new stall") do
 end
 
 When("I click the new stall link") do
-  click_link('New Stall')  
+  click_link('New Stall')
   #visit '/stalls/new';
 end
 

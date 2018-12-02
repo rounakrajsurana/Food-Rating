@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_04_061347) do
+ActiveRecord::Schema.define(version: 2018_12_01_213343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_11_04_061347) do
   create_table "dishes", force: :cascade do |t|
     t.string "name"
     t.string "desc"
-    t.string "picture"
+    t.string "picture", default: "dish.png"
     t.bigint "category_id"
     t.bigint "stall_id"
     t.bigint "user_id"
@@ -53,6 +53,11 @@ ActiveRecord::Schema.define(version: 2018_11_04_061347) do
     t.string "symbol", limit: 20, null: false
     t.integer "n_shares", null: false
     t.date "date_acquired", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "problems", force: :cascade do |t|
@@ -105,12 +110,13 @@ ActiveRecord::Schema.define(version: 2018_11_04_061347) do
   create_table "stalls", force: :cascade do |t|
     t.string "name"
     t.string "desc"
-    t.string "picture"
+    t.string "picture", default: "stall.png"
     t.string "latlog"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "owner"
+    t.string "address"
     t.index ["user_id"], name: "index_stalls_on_user_id"
   end
 

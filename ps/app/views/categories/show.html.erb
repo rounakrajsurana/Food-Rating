@@ -1,13 +1,38 @@
 <p id="notice"><%= notice %></p>
-<div class='center'>
-<p>
-  <h2>Category:</h2>
-  <%= @category.name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @category.user.email %>
-</p>
-</div>
-<p class='center'><%= link_to 'Edit', edit_category_path(@category) %></p>
+<h1><%=@category.name%></h1>
+<!-- ================================ All Dishes ================================ -->
+<table>
+  <tbody>
+    <% col_size = 1
+        @dishes.each do |dish|
+            if (col_size%3)==1 %>
+              <tr>
+            <% end %>
+            <td>
+              <p class='center'>
+                <strong>
+                  <% if user_signed_in? && (current_user.admin?||current_user.id==dish.user_id) %>
+                  <%= best_in_place dish, :name %>
+                <% else %>
+                  <%= dish.name %>
+                <% end %>
+              </strong>
+                </p>
+              <%= link_to image_tag(dish.picture, size: "220x165", :alt => dish.name), dish %>
+            <br><p class='center'>
+              <% if user_signed_in? && current_user.admin? %>
+                <%= link_to 'Edit', edit_dish_path(dish) %>
+                &emsp;
+                <%= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            </p>
+          </td>
+            <%if (col_size%3)==0 %>
+              </tr>
+            <% end
+            col_size = col_size+1 %>
+       <% end %>
+  </tbody>
+</table>
+<%= will_paginate @dishes %>
+<br>

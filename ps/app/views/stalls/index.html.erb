@@ -6,11 +6,10 @@
   <thead>
     <tr>
       <th>Created At</th>
+      <th>Picture</th>
       <th>Name</th>
-      <th>Description</th>
-      <!-- <th>Latlog</th> -->
-      <th>Created By</th>
-      <th>Updated At</th>
+      <th>Introduction</th>
+      <th>Owner</th>
       <th>Details</th>
       <th colspan="2"></th>
     </tr>
@@ -19,11 +18,14 @@
     <% @stalls.each do |stall| %>
       <tr>
         <td><%= stall.created_at %></td>
+        <td>
+    <% if stall.picture%>
+    	<%= link_to image_tag(stall.picture, size: "120x90", :alt => stall.name), stall_path(stall.id) %>
+    <% end %>
+    </td>
         <td><%= stall.name %></td>
         <td><%= stall.desc %></td>
-        <!-- <td><%= stall.latlog %></td> -->
-        <td><%= stall.user.email %></td>
-        <td><%= stall.updated_at %></td>
+        <td><%= User.find(stall.owner).email %></td>
         <td><%= link_to 'Show', stall %></td>
         <% if user_signed_in? && current_user.admin? %>
           <td><%= link_to 'Edit', edit_stall_path(stall) %></td>
@@ -35,6 +37,6 @@
 </table>
 <br>
 <% if user_signed_in? && current_user.admin? %>
-  <p class='center'><%= image_tag("add-circle.png", size: "16x16", :alt => "New") %>&nbsp;
+  <p class='center'><%= image_tag("add-circle.png", size: "20x20", :alt => "New") %>&nbsp;
   <%= link_to 'New Stall ', new_stall_path %></p>
 <% end %>

@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%# <p id="notice"><%= notice %></p>
 <div class='center'>
   <div class='center'>
   <% if @dish.picture%>
@@ -7,63 +7,69 @@
 <p>
   <h2>Dish: <%= @dish.name %></h2>
 </p>
+<p>
+  <div class="average-rating-rate" data-score=<%= @average_rating %>></div>
+  <strong>Average based on <%= @dish.ratings.count %> ratings</strong>
+</p>
 <div class='sblock'>
 <p>
-  <strong>Description</strong>
+  <strong>Description: </strong>
   <%= @dish.desc %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Picture:</strong>
-  <%= @dish.picture %>
-</p>
+  <%# <%= @dish.picture %> %>
+</p> -->
 
 <p>
   <strong>Category:</strong>
   <%= @dish.category.name %>
-</p>
-
-<p>
+&emsp;
   <strong>Stall:</strong>
   <%= @dish.stall.name %>
 </p>
-
 <p>
-  <strong>User:</strong>
+  <strong>Created By:</strong>
   <%= @dish.user.email %>
 </p>
-
 <p>
-  <strong>Average Rating</strong>
-	<div class="average-rating-rate" data-score=<%= @average_rating %>></div>
-	<span class="number-of-ratings">Based on <%= @dish.ratings.count %> ratings</span>
+  <strong>Updated At:</strong>
+  <%= @dish.updated_at %>
 </p>
-<% if user_signed_in? && (current_user.admin?||current_user.id==@dish.user_id)%>
-  <td><%= link_to 'Edit', edit_dish_path(@dish) %></td>
-  <td><%= link_to 'Destroy', @dish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-
 </div>
-
-
-<div class="row">
-<div class="col-md-4">
-
-		<div class="review">
-
-      <!-- Where the reviews/ratings will go -->
-      <h1><%=image_tag('review.png', size: "60x40")%> Ratings&Reviews</h1>
-      <%= render @dish.ratings %>
-
-<% if user_signed_in? %>
-			<div>
-				<h4><%= link_to "Add Rating", new_dish_rating_path(@dish), class: "btn-custom" %></h4>
-			</div>
+<p>
+<% if user_signed_in? && (current_user.admin? || current_user.id==@dish.user_id)%>
+      <p class='center'>
+          <%= link_to image_tag("edit.ico", size: "20x20", :alt => "Edit")+' Edit Dish', edit_dish_path(@dish) %>
+          <%= link_to 'X Destroy', @dish, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
   <% end %>
-		</div>
-    </div>
-	</div>
+</p>
+      <!-- Where the reviews/ratings will go -->
+      <h1><%=image_tag('review.png', size: "60x60")%> Ratings&Reviews</h1>
+      <% if user_signed_in? %>
+      			<div>
+      				<h4>
+                <%if @myrating[0]%>
+                  <%= link_to "Edit My Rate", edit_dish_rating_path(@dish.id, @myrating[0])%> <%=image_tag("review2.png", size: "20x20", :alt => "Rate")%>
+                <%else%>
+                  <%= link_to 'Rate it', new_dish_rating_path(@dish)%> <%=image_tag("review2.png", size: "20x20", :alt => "Rate")%>
+                <%end%>
+              </h4>
+      			</div>
+        <% end %>
 
+          <div class='ahead'>
+          <div class="review">
+            <!-- Where the reviews/ratings will go -->
+            <%= render @dish.ratings %>
+            <div>
+          <%# <%= will_paginate @dish.ratings %>
+          </div>
+        </div>
+
+        <%# <%= render @dish.ratings %>
 
 <br>
 
